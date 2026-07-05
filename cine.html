@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>El Cine · El Camino Grande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cobalt:#2456a6;--saffron:#e8a33d;--plaster:#faf3ea;--card:#fffdf7;--ink:#33202e;--ink2:#5c4a55;--mut:#9b8a93;--line:#e8dccb;--green:#2f8a5b;--plum:#54306b}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:var(--plaster);color:var(--ink);min-height:100vh}
+#app{max-width:560px;margin:0 auto;padding:14px 14px 90px}
+.nav{display:flex;gap:14px;padding:6px 2px 14px;font-size:13px;font-weight:800;color:var(--mut)}
+.nav a{cursor:pointer;color:var(--cobalt);text-decoration:none}
+h1,h2{font-family:'Fraunces',serif}
+.hero{background:linear-gradient(150deg,#1a1220,#33202e);border-radius:22px;padding:24px 20px;color:#fff8ef;margin-bottom:16px;position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;left:0;right:0;top:0;height:10px;background:repeating-linear-gradient(90deg,var(--saffron) 0 14px,transparent 14px 28px)}
+.hero .htop{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.75;text-transform:uppercase;margin-top:6px}
+.hero h1{font-size:26px;margin:4px 0 6px}
+.hero p{font-size:14px;opacity:.92;line-height:1.55}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 15px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px -5px rgba(51,32,46,.15)}
+.card:active{transform:scale(.98)}
+.card .em{font-size:26px}
+.card b{font-family:'Fraunces',serif;font-size:15.5px}
+.cmeta{font-size:12px;color:var(--mut);font-weight:700;margin-top:2px}
+.badge{display:inline-block;background:#e4ecf9;color:var(--cobalt);border-radius:99px;padding:2px 9px;font-size:11px;font-weight:800;margin-right:5px}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px -6px rgba(51,32,46,.18)}
+.famhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.famhead h1{font-size:20px;flex:1}
+.quit{background:none;border:1.5px solid var(--line);border-radius:99px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2);font-family:'Nunito Sans',sans-serif}
+.spot{background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#5c4a22;margin-bottom:12px}
+.spot b{color:#8a6d1f}
+.chan{background:#f6f1e7;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:9px}
+.chan b{font-family:'Fraunces',serif;font-size:14.5px}
+.chan p{font-size:13px;line-height:1.55;color:var(--ink2);margin:4px 0 8px}
+.chan a{display:inline-block;background:var(--cobalt);color:#fff;border-radius:99px;padding:5px 13px;font-size:12px;font-weight:800;text-decoration:none}
+.pend{background:#f2ead9;border:1.5px dashed #cbb98f;border-radius:14px;padding:14px;font-size:13px;color:#8a6d1f;font-weight:700;margin-bottom:9px}
+.task{background:#e9f3ee;border:1.5px solid #c8e2d3;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#25573e;margin-top:4px}
+.legal{font-size:11.5px;color:var(--mut);line-height:1.6;margin:22px 4px;text-align:center}
+.vidwrap{position:relative;width:100%;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#1a1220;margin-bottom:10px}
+.vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* La Sobremesa tokens */
+:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ================================================================
+   EL CINE · El Camino Grande — the tenth door
+   RULES:
+   - Channel cards link OUT to real, verified channels (safe, live).
+   - Specific embeds use youtube-nocookie and only verified IDs;
+     vids with id:'' are queued pending device verification.
+   - We never reproduce video content — we program the theatre
+     and hand out viewing guides.
+   ================================================================ */
+var SALAS=[
+{id:'serestar',e:'🎭',t:'Sala 3 · Ser y Estar',when:'Watch after Stage 3 · Teotihuacán',
+ guide:'You\'ve learned the ID card vs. the weather report. Now hear OTHER teachers explain the same mountain — different metaphors, same truth. If two explanations of ser/estar both make sense, the concept is yours.',
+ chans:[
+ {n:'Butterfly Spanish',why:'Ana\'s whiteboard classics — her ser vs. estar videos are long, warm, and thorough. A Mexican teacher, a marker, and zero rush.',q:'butterfly spanish ser estar'},
+ {n:'Why Not Spanish?',why:'Cody and María (a Colombian teacher) — clear short grammar videos with real-couple charm. Search their ser vs. estar.',q:'why not spanish ser vs estar'},
+ {n:'Español con Juan',why:'Juan explains grammar IN Spanish, hilariously, at a speed learners can survive — watching him is a lesson and immersion at once.',q:'español con juan ser estar'}],
+ vids:[{id:'',t:'Anchor pick: the best ser/estar explainer',note:'Queued — we\'ll verify one flagship video per sala on device.'}],
+ task:'🎯 After watching one: close the video and draw the two pyramids from Stage 3 on the whiteboard — Sol (ser) and Luna (estar) — and file the video\'s best example under each. A borrowed metaphor you can re-teach is knowledge that stays.'},
+{id:'pasado',e:'🎞️',t:'Sala 8 · El Pasado — pretérito vs imperfecto',when:'Watch after Stage 7–8 · the camera model',
+ guide:'The famous two-past problem — a.k.a. "Frederito Imperfecto," as one traveler\'s phone insists on calling it. You own the camera model: snapshots (preterite) vs. rolling film (imperfect). These videos hand you three MORE models. Collect metaphors like tools; different sentences need different grips.',
+ chans:[
+ {n:'Why Not Spanish?',why:'María\'s preterite vs. imperfect explanations are among YouTube\'s clearest — short, structured, Colombian-accented bonus.',q:'why not spanish preterite vs imperfect'},
+ {n:'Butterfly Spanish',why:'Ana\'s long-form past-tense lessons let the difference sink in with dozens of examples.',q:'butterfly spanish preterite imperfect'},
+ {n:'Spanish After Hours',why:'Laura tells slow stories IN Spanish where both past tenses do their jobs live — grammar in the wild, not on the board.',q:'spanish after hours past tense story'}],
+ vids:[{id:'',t:'Anchor pick: the best two-pasts explainer',note:'Queued for device verification.'}],
+ task:'🎯 The graduation move: watch a story video and every time you catch a past verb, whisper "foto" (preterite) or "película" (imperfect). When you\'re right 8 of 10 times, Stage 8\'s gate will feel like a formality.'},
+{id:'subj',e:'🌀',t:'Sala 10 · El Subjuntivo',when:'Watch after Stage 10 · the mirror of Uyuni',
+ guide:'The mood of wishes, doubts, and maybes. You\'ve stood on the salt-flat mirror; now hear it explained three more ways. Fair warning: every teacher confesses the subjunctive takes time. That\'s not you failing — that\'s the topography.',
+ chans:[
+ {n:'Español con Juan',why:'Juan RANTS about the subjunctive in Spanish, which is somehow the best way to absorb it — you learn the mood while he\'s in one.',q:'español con juan subjuntivo'},
+ {n:'Why Not Spanish?',why:'Structured subjunctive triggers (WEIRDO and friends) in clear, short doses.',q:'why not spanish subjunctive'},
+ {n:'Butterfly Spanish',why:'The full-length subjunctive treatment for when you want everything in one sitting.',q:'butterfly spanish subjunctive'}],
+ vids:[{id:'',t:'Anchor pick: the best subjunctive explainer',note:'Queued for device verification.'}],
+ task:'🎯 Post-video mission: your jukebox is full of subjunctive — replay A Dios le Pido and Ojalá Que Llueva Café and name the mood every time it surfaces. Explainer + music = the two-sided drill nothing else beats.'},
+{id:'inmersion',e:'🌊',t:'La Sala de Inmersión',when:'Any stage · start day one',
+ guide:'THE most important room in the theatre. Our apps speak with a device voice; real Spanish has faces, hands, coffee cups, and interruptions. Comprehensible input — video you mostly understand from context — is how your brain learns to hear. The rules: (1) pick video at or slightly below your level, (2) NO pausing to translate — ride the wave, (3) rewatch beats new-watch, (4) 15 minutes daily outranks 2 hours on Sunday.',
+ chans:[
+ {n:'Dreaming Spanish',why:'The comprehensible-input mothership: hundreds of videos sorted Superbeginner → Advanced, spoken slowly with drawings and gestures. Superbeginner videos are watchable from your FIRST week on the Camino.',q:'dreaming spanish superbeginner'},
+ {n:'Easy Spanish',why:'Street interviews with real people, dual subtitles, every accent from Mexico City to Buenos Aires. This is where the Acento pages come alive.',q:'easy spanish street interviews'},
+ {n:'Español con Juan',why:'When intermediate arrives: Juan\'s stories and rants, 100% in Spanish, funny enough that you forget you\'re studying.',q:'español con juan'}],
+ vids:[{id:'',t:'Anchor pick: a Superbeginner starter',note:'Queued for device verification.'}],
+ task:'🎯 The habit mission: after every Camino lesson, one immersion video as dessert. Track it like the trail — a video a day for a week and you\'ll notice the strangest thing: Spanish starting to sound like sentences instead of soup.'},
+{id:'matine',e:'🍿',t:'La Matiné Infantil',when:'For the little ones — and honestly, for you too',
+ guide:'Kids\' Spanish TV is a secret weapon at every age: slow, visual, repetitive, joyful. For children it\'s just cartoons; for adults it\'s comprehensible input with zero ego risk. The watch-along games below turn any episode into a lesson without ever feeling like one.',
+ chans:[
+ {n:'Pocoyó – Español Latino (Canal Oficial)',why:'The gold standard: a curious boy, a narrator who speaks slowly and ASKS QUESTIONS, and Latin American Spanish. Full official episodes, free.',url:'https://www.youtube.com/channel/UCsgF-BQ-ZotYbLA6QeJuRVw'},
+ {n:'Super Simple Español',why:'The beloved children\'s song channel in Spanish — colors, numbers, animals, all melodies kids (and parents) can\'t escape.',q:'super simple español canciones'},
+ {n:'Plaza Sésamo',why:'Sesame Street\'s Latin American sibling — decades of official clips teaching letters, numbers, and feelings.',q:'plaza sésamo oficial'}],
+ vids:[{id:'',t:'Anchor pick: a Pocoyó episode',note:'Queued — we\'ll pin one official episode after device verification.'}],
+ task:'🎯 Watch-along games (any episode): <b>Veo veo</b> — pause and say what you see: veo un pato, veo una pelota. <b>El grito de colores</b> — shout every color the moment it appears. <b>El contador</b> — count everything countable: ¡tres flores! <b>La profecía</b> — before the narrator asks "¿qué es esto?", answer first. Same episode, four games, endless reps.'}
+];
+var app=document.getElementById('app');
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function nav(){return '<div class="nav"><a onclick="home()">🎬 El Cine</a><a href="/">🗺️ El Camino</a><a href="musica.html">🎵 La Música</a></div>';}
+function chanLink(c){return c.url?c.url:'https://www.youtube.com/results?search_query='+encodeURIComponent(c.q);}
+function home(){
+ var h=nav();
+ h+='<div class="hero"><div class="htop">EL CAMINO GRANDE · LA DÉCIMA PUERTA</div><h1>El Cine</h1><p>Short videos, big topics. Grammar salas for the famous hard parts, an immersion hall where Spanish has real faces, and a Saturday-morning matiné for the little ones. We program the theatre; YouTube\'s creators run the projectors.</p></div>';
+ SALAS.forEach(function(s,i){
+  h+='<div class="card" onclick="salaView('+i+')"><span class="em">'+s.e+'</span><div style="flex:1"><b>'+esc(s.t)+'</b><div class="cmeta">'+esc(s.when)+'</div></div><span style="color:var(--mut)">›</span></div>';
+ });
+ h+='<div class="legal">El Cine links to and embeds videos from their creators\' own YouTube channels; all content belongs to its creators — support them with a subscribe. Free, outside any paywall, always.</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function salaView(i){
+ var s=SALAS[i];
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← El Cine</button><h1>'+s.e+' '+esc(s.t)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="margin-bottom:8px"><span class="badge">'+esc(s.when)+'</span></div>';
+ h+='<div class="spot">'+s.guide+'</div>';
+ s.vids.forEach(function(v){
+  if(v.id){h+='<div class="vidwrap"><iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'" title="'+esc(v.t)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';}
+  else{h+='<div class="pend">🎬 '+esc(v.t)+' — '+esc(v.note)+'</div>';}
+ });
+ h+='<div style="font-weight:800;font-size:13px;margin:12px 0 8px;color:var(--ink2)">THE PROGRAMMING · trusted projectors</div>';
+ s.chans.forEach(function(c){
+  h+='<div class="chan"><b>'+esc(c.n)+'</b><p>'+esc(c.why)+'</p><a href="'+chanLink(c)+'" target="_blank" rel="noopener">▶ Open on YouTube</a></div>';
+ });
+ h+='<div class="task">'+s.task+'</div>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>

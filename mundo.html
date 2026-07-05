@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>El Mundo · El Camino Grande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cobalt:#2456a6;--cobalt2:#1c4488;--saffron:#e8a33d;--saffron2:#d18f2a;--plaster:#faf3ea;--card:#fffdf7;--ink:#33202e;--ink2:#5c4a55;--mut:#9b8a93;--line:#e8dccb;--green:#2f8a5b;--red:#c0392b;--plum:#54306b;--sea:#3d7ea6}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:var(--plaster);color:var(--ink);min-height:100vh}
+#app{max-width:560px;margin:0 auto;padding:14px 14px 90px}
+.nav{display:flex;gap:14px;padding:6px 2px 14px;font-size:13px;font-weight:800;color:var(--mut)}
+.nav a{cursor:pointer;color:var(--cobalt);text-decoration:none}
+h1,h2{font-family:'Fraunces',serif}
+.hero{background:linear-gradient(140deg,var(--sea),#2a5f7f);border-radius:22px;padding:22px 20px;color:#fff8ef;margin-bottom:16px}
+.hero .htop{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.78;text-transform:uppercase}
+.hero h1{font-size:26px;margin:4px 0 6px}
+.hero p{font-size:14px;opacity:.94;line-height:1.5}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 15px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px -5px rgba(51,32,46,.15)}
+.card:active{transform:scale(.98)}
+.card .em{font-size:26px}
+.card b{font-family:'Fraunces',serif;font-size:15.5px}
+.cmeta{font-size:12px;color:var(--mut);font-weight:700;margin-top:2px}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px -6px rgba(51,32,46,.18)}
+.famhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.famhead h1{font-size:20px;flex:1}
+.quit{background:none;border:1.5px solid var(--line);border-radius:99px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2);font-family:'Nunito Sans',sans-serif}
+.spot{background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#5c4a22;margin-bottom:12px}
+.spot b{color:#8a6d1f}
+.crow{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px dashed var(--line)}
+.crow .fl{font-size:24px}
+.crow .cn{flex:1}
+.crow .cn b{font-size:15px}
+.crow .cn .cap{font-size:12.5px;color:var(--mut);font-weight:700}
+.say{background:none;border:1.5px solid var(--line);border-radius:99px;padding:3px 9px;cursor:pointer;font-size:13px}
+.gbtn{display:block;width:100%;background:linear-gradient(140deg,var(--cobalt),var(--cobalt2));color:#fff;border:none;border-radius:14px;padding:12px;font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;margin-top:10px}
+.gbtn.ghost{background:none;border:1.5px solid var(--line);color:var(--ink2)}
+.opt{display:block;width:100%;background:#f6f1e7;border:1.5px solid var(--line);border-radius:14px;padding:13px;margin-top:9px;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:16px;cursor:pointer;text-align:center;color:var(--ink)}
+.opt.ok{background:#e2f2e9;border-color:var(--green)}
+.opt.no{background:#fbe9e7;border-color:var(--red)}
+.qbig{font-family:'Fraunces',serif;font-size:23px;text-align:center;margin:10px 0}
+.qflag{font-size:60px;text-align:center;margin:6px 0}
+.cog{display:inline-block;background:#e2f2e9;color:#25573e;border-radius:99px;padding:1px 8px;font-size:11px;font-weight:800;margin-left:6px}
+.tnote{margin-top:10px;background:#f3eef8;border:1.5px solid #ddcfe9;border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.6;color:#4a3a56}
+.pill{display:inline-block;background:#e4ecf9;color:var(--cobalt);border-radius:99px;padding:2px 10px;font-size:11.5px;font-weight:800;margin:0 4px 6px 0}
+
+/* La Sobremesa tokens */
+:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* EL MUNDO · the world wing of El Atlas — a pueblo tool of El Camino Grande.
+   Continents → countries → capitals, all in Spanish. Geography is the
+   friendliest vocabulary there is: most of it is cognates, and "¿de dónde
+   eres?" is a day-one question. */
+
+var CONTINENTES=[
+ {es:'América del Norte y Central',en:'North & Central America',em:'🌎',paises:[
+  ['México','Ciudad de México','🇲🇽',1],
+  ['Estados Unidos','Washington D. C.','🇺🇸',1],
+  ['Canadá','Ottawa','🇨🇦',1],
+  ['Guatemala','Ciudad de Guatemala','🇬🇹',1],
+  ['Belice','Belmopán','🇧🇿',1],
+  ['El Salvador','San Salvador','🇸🇻',1],
+  ['Honduras','Tegucigalpa','🇭🇳',0],
+  ['Nicaragua','Managua','🇳🇮',0],
+  ['Costa Rica','San José','🇨🇷',1],
+  ['Panamá','Ciudad de Panamá','🇵🇦',1]
+ ]},
+ {es:'El Caribe',en:'The Caribbean',em:'🏝️',paises:[
+  ['Cuba','La Habana','🇨🇺',1],
+  ['República Dominicana','Santo Domingo','🇩🇴',1],
+  ['Haití','Puerto Príncipe','🇭🇹',1],
+  ['Jamaica','Kingston','🇯🇲',1],
+  ['Bahamas','Nasáu','🇧🇸',1],
+  ['Barbados','Bridgetown','🇧🇧',1],
+  ['Trinidad y Tobago','Puerto España','🇹🇹',1],
+  ['Granada','Saint George','🇬🇩',0],
+  ['San Cristóbal y Nieves','Basseterre','🇰🇳',0],
+  ['Santa Lucía','Castries','🇱🇨',1],
+  ['San Vicente y las Granadinas','Kingstown','🇻🇨',0],
+  ['Antigua y Barbuda','Saint John','🇦🇬',1],
+  ['Dominica','Roseau','🇩🇲',1]
+ ]},
+ {es:'América del Sur',en:'South America',em:'🌎',paises:[
+  ['Colombia','Bogotá','🇨🇴',1],
+  ['Venezuela','Caracas','🇻🇪',1],
+  ['Ecuador','Quito','🇪🇨',1],
+  ['Perú','Lima','🇵🇪',1],
+  ['Bolivia','Sucre','🇧🇴',1],
+  ['Chile','Santiago','🇨🇱',1],
+  ['Argentina','Buenos Aires','🇦🇷',1],
+  ['Paraguay','Asunción','🇵🇾',0],
+  ['Uruguay','Montevideo','🇺🇾',1],
+  ['Brasil','Brasilia','🇧🇷',1],
+  ['Guyana','Georgetown','🇬🇾',1],
+  ['Surinam','Paramaribo','🇸🇷',0]
+ ]},
+ {es:'Europa',en:'Europe',em:'🌍',paises:[
+  ['España','Madrid','🇪🇸',1],
+  ['Portugal','Lisboa','🇵🇹',1],
+  ['Francia','París','🇫🇷',1],
+  ['Italia','Roma','🇮🇹',1],
+  ['Alemania','Berlín','🇩🇪',0],
+  ['Reino Unido','Londres','🇬🇧',0],
+  ['Irlanda','Dublín','🇮🇪',1],
+  ['Países Bajos','Ámsterdam','🇳🇱',0],
+  ['Bélgica','Bruselas','🇧🇪',1],
+  ['Luxemburgo','Luxemburgo','🇱🇺',1],
+  ['Suiza','Berna','🇨🇭',0],
+  ['Austria','Viena','🇦🇹',1],
+  ['Grecia','Atenas','🇬🇷',1],
+  ['Dinamarca','Copenhague','🇩🇰',0],
+  ['Suecia','Estocolmo','🇸🇪',0],
+  ['Noruega','Oslo','🇳🇴',0],
+  ['Finlandia','Helsinki','🇫🇮',1],
+  ['Islandia','Reikiavik','🇮🇸',1],
+  ['Polonia','Varsovia','🇵🇱',1],
+  ['República Checa','Praga','🇨🇿',1],
+  ['Eslovaquia','Bratislava','🇸🇰',1],
+  ['Hungría','Budapest','🇭🇺',1],
+  ['Rumania','Bucarest','🇷🇴',1],
+  ['Bulgaria','Sofía','🇧🇬',1],
+  ['Rusia','Moscú','🇷🇺',1],
+  ['Ucrania','Kiev','🇺🇦',1],
+  ['Bielorrusia','Minsk','🇧🇾',0],
+  ['Lituania','Vilna','🇱🇹',1],
+  ['Letonia','Riga','🇱🇻',1],
+  ['Estonia','Tallin','🇪🇪',1],
+  ['Croacia','Zagreb','🇭🇷',1],
+  ['Eslovenia','Liubliana','🇸🇮',1],
+  ['Serbia','Belgrado','🇷🇸',1],
+  ['Bosnia y Herzegovina','Sarajevo','🇧🇦',1],
+  ['Montenegro','Podgorica','🇲🇪',1],
+  ['Macedonia del Norte','Skopie','🇲🇰',1],
+  ['Albania','Tirana','🇦🇱',1],
+  ['Kosovo','Pristina','🇽🇰',1],
+  ['Moldavia','Chisináu','🇲🇩',0],
+  ['Malta','La Valeta','🇲🇹',1],
+  ['Chipre','Nicosia','🇨🇾',0],
+  ['Andorra','Andorra la Vieja','🇦🇩',1],
+  ['Mónaco','Mónaco','🇲🇨',1],
+  ['Liechtenstein','Vaduz','🇱🇮',1],
+  ['San Marino','San Marino','🇸🇲',1],
+  ['Ciudad del Vaticano','Ciudad del Vaticano','🇻🇦',0]
+ ]},
+ {es:'África',en:'Africa',em:'🌍',paises:[
+  ['Egipto','El Cairo','🇪🇬',1],
+  ['Libia','Trípoli','🇱🇾',1],
+  ['Túnez','Túnez','🇹🇳',1],
+  ['Argelia','Argel','🇩🇿',0],
+  ['Marruecos','Rabat','🇲🇦',0],
+  ['Mauritania','Nuakchot','🇲🇷',0],
+  ['Malí','Bamako','🇲🇱',1],
+  ['Níger','Niamey','🇳🇪',1],
+  ['Chad','Yamena','🇹🇩',1],
+  ['Sudán','Jartum','🇸🇩',1],
+  ['Sudán del Sur','Yuba','🇸🇸',1],
+  ['Etiopía','Adís Abeba','🇪🇹',1],
+  ['Eritrea','Asmara','🇪🇷',1],
+  ['Yibuti','Yibuti','🇩🇯',0],
+  ['Somalia','Mogadiscio','🇸🇴',1],
+  ['Kenia','Nairobi','🇰🇪',1],
+  ['Uganda','Kampala','🇺🇬',1],
+  ['Ruanda','Kigali','🇷🇼',0],
+  ['Burundi','Buyumbura','🇧🇮',1],
+  ['Tanzania','Dodoma','🇹🇿',1],
+  ['Senegal','Dakar','🇸🇳',1],
+  ['Gambia','Banjul','🇬🇲',1],
+  ['Guinea-Bisáu','Bisáu','🇬🇼',0],
+  ['Guinea','Conakri','🇬🇳',1],
+  ['Sierra Leona','Freetown','🇸🇱',1],
+  ['Liberia','Monrovia','🇱🇷',1],
+  ['Costa de Marfil','Yamusukro','🇨🇮',0],
+  ['Ghana','Acra','🇬🇭',1],
+  ['Togo','Lomé','🇹🇬',1],
+  ['Benín','Portonovo','🇧🇯',1],
+  ['Nigeria','Abuya','🇳🇬',1],
+  ['Camerún','Yaundé','🇨🇲',1],
+  ['Guinea Ecuatorial','Malabo','🇬🇶',1],
+  ['Gabón','Libreville','🇬🇦',1],
+  ['Congo','Brazzaville','🇨🇬',1],
+  ['República Democrática del Congo','Kinsasa','🇨🇩',1],
+  ['República Centroafricana','Bangui','🇨🇫',1],
+  ['Santo Tomé y Príncipe','Santo Tomé','🇸🇹',0],
+  ['Cabo Verde','Praia','🇨🇻',1],
+  ['Burkina Faso','Uagadugú','🇧🇫',1],
+  ['Angola','Luanda','🇦🇴',1],
+  ['Zambia','Lusaka','🇿🇲',1],
+  ['Malaui','Lilongüe','🇲🇼',0],
+  ['Mozambique','Maputo','🇲🇿',1],
+  ['Zimbabue','Harare','🇿🇼',0],
+  ['Botsuana','Gaborone','🇧🇼',0],
+  ['Namibia','Windhoek','🇳🇦',1],
+  ['Sudáfrica','Pretoria','🇿🇦',0],
+  ['Lesoto','Maseru','🇱🇸',0],
+  ['Suazilandia','Mbabane','🇸🇿',0],
+  ['Madagascar','Antananarivo','🇲🇬',1],
+  ['Comoras','Moroni','🇰🇲',0],
+  ['Mauricio','Port Louis','🇲🇺',0],
+  ['Seychelles','Victoria','🇸🇨',1]
+ ]},
+ {es:'Asia',en:'Asia',em:'🌏',paises:[
+  ['China','Pekín','🇨🇳',1],
+  ['Japón','Tokio','🇯🇵',1],
+  ['Corea del Sur','Seúl','🇰🇷',0],
+  ['Corea del Norte','Pionyang','🇰🇵',0],
+  ['Mongolia','Ulán Bator','🇲🇳',1],
+  ['India','Nueva Delhi','🇮🇳',1],
+  ['Pakistán','Islamabad','🇵🇰',1],
+  ['Bangladés','Daca','🇧🇩',0],
+  ['Nepal','Katmandú','🇳🇵',1],
+  ['Bután','Timbu','🇧🇹',0],
+  ['Sri Lanka','Colombo','🇱🇰',1],
+  ['Maldivas','Malé','🇲🇻',0],
+  ['Afganistán','Kabul','🇦🇫',1],
+  ['Irán','Teherán','🇮🇷',1],
+  ['Irak','Bagdad','🇮🇶',1],
+  ['Siria','Damasco','🇸🇾',1],
+  ['Líbano','Beirut','🇱🇧',1],
+  ['Jordania','Amán','🇯🇴',1],
+  ['Israel','Jerusalén','🇮🇱',1],
+  ['Arabia Saudita','Riad','🇸🇦',0],
+  ['Yemen','Saná','🇾🇪',1],
+  ['Omán','Mascate','🇴🇲',1],
+  ['Emiratos Árabes Unidos','Abu Dabi','🇦🇪',0],
+  ['Catar','Doha','🇶🇦',0],
+  ['Baréin','Manama','🇧🇭',0],
+  ['Kuwait','Kuwait','🇰🇼',1],
+  ['Turquía','Ankara','🇹🇷',0],
+  ['Kazajistán','Astaná','🇰🇿',0],
+  ['Uzbekistán','Taskent','🇺🇿',0],
+  ['Turkmenistán','Asjabad','🇹🇲',0],
+  ['Kirguistán','Biskek','🇰🇬',0],
+  ['Tayikistán','Dusambé','🇹🇯',0],
+  ['Azerbaiyán','Bakú','🇦🇿',0],
+  ['Armenia','Ereván','🇦🇲',1],
+  ['Georgia','Tiflis','🇬🇪',1],
+  ['Tailandia','Bangkok','🇹🇭',1],
+  ['Vietnam','Hanói','🇻🇳',1],
+  ['Camboya','Nom Pen','🇰🇭',0],
+  ['Laos','Vientián','🇱🇦',1],
+  ['Birmania','Naipyidó','🇲🇲',0],
+  ['Malasia','Kuala Lumpur','🇲🇾',1],
+  ['Singapur','Singapur','🇸🇬',1],
+  ['Indonesia','Yakarta','🇮🇩',1],
+  ['Filipinas','Manila','🇵🇭',1],
+  ['Brunéi','Bandar Seri Begawan','🇧🇳',0],
+  ['Timor Oriental','Dili','🇹🇱',0]
+ ]},
+ {es:'Oceanía',en:'Oceania',em:'🌏',paises:[
+  ['Australia','Canberra','🇦🇺',1],
+  ['Nueva Zelanda','Wellington','🇳🇿',0],
+  ['Papúa Nueva Guinea','Port Moresby','🇵🇬',0],
+  ['Fiyi','Suva','🇫🇯',0],
+  ['Islas Salomón','Honiara','🇸🇧',0],
+  ['Vanuatu','Port Vila','🇻🇺',1],
+  ['Samoa','Apia','🇼🇸',1],
+  ['Tonga','Nukualofa','🇹🇴',1],
+  ['Kiribati','Tarawa','🇰🇮',0],
+  ['Micronesia','Palikir','🇫🇲',1],
+  ['Islas Marshall','Majuro','🇲🇭',0],
+  ['Palaos','Ngerulmud','🇵🇼',0],
+  ['Nauru','Yaren','🇳🇷',1],
+  ['Tuvalu','Funafuti','🇹🇻',0]
+ ]},
+];
+
+/* ---------- voice ---------- */
+var VOICE=null;
+function esVoices(){try{return speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});}catch(e){return [];}}
+function vScore(v){var s=0;if(/enhanced|premium|natural/i.test(v.name))s+=40;if(/es[-_](ES|MX|US|419)/i.test(v.lang))s+=8;return s;}
+function spk(t,rate){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);if(!VOICE){var vs=esVoices();vs.sort(function(a,b){return vScore(b)-vScore(a);});VOICE=vs[0]||null;}if(VOICE)u.voice=VOICE;u.lang=(VOICE&&VOICE.lang)||'es-ES';u.rate=rate||0.9;speechSynthesis.speak(u);}catch(e){}}
+try{speechSynthesis.onvoiceschanged=function(){VOICE=null;}}catch(e){}
+function cls(){try{return localStorage.getItem('cg_mode')==='class';}catch(e){return false;}}
+function mochFeed(q,a,why){
+ try{var o=JSON.parse(localStorage.getItem('cg_moch'))||{};var k=(q||'').slice(0,60);if(!k)return;
+  o[k]={q:q,a:a,why:why||'',src:'mundo',due:Math.floor(Date.now()/864e5),iv:0};localStorage.setItem('cg_moch',JSON.stringify(o));}catch(e){}
+}
+function bestLoad(){try{return JSON.parse(localStorage.getItem('mundo_best'))||{};}catch(e){return {};}}
+function bestSave(o){try{localStorage.setItem('mundo_best',JSON.stringify(o));}catch(e){}}
+
+var app=document.getElementById('app'),Q=null;
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
+function allPaises(){var out=[];CONTINENTES.forEach(function(c){c.paises.forEach(function(p){out.push({n:p[0],cap:p[1],fl:p[2],cog:p[3],cont:c.es});});});return out;}
+function nav(){return '<div class="nav"><a onclick="home()">🌍 El Mundo</a><a href="countries.html">🌎 El Atlas</a><a href="/">🗺️ El Camino</a></div>';}
+function home(){
+ var B=bestLoad(),np=allPaises().length;
+ var h=nav();
+ h+='<div class="hero"><div class="htop">EL CAMINO GRANDE · EL ATLAS</div><h1>El Mundo</h1><p>The whole world, in Spanish. '+np+' countries across the seven world regions, their capitals, and the happy secret that most country names are cognates you already know.</p></div>';
+ h+='<div class="spot"><b>Geography is the friendliest vocabulary there is.</b> Francia, Brasil, Egipto, Australia — you can already read half the map. And "<b>¿de dónde eres?</b>" (where are you from?) is one of the very first questions you\'ll ever ask in Spanish. Learn the world, and you can answer it about anyone.</div>';
+ h+='<div style="margin:0 2px 12px">';
+ CONTINENTES.forEach(function(c,i){
+  h+='<div class="card" onclick="contView('+i+')"><span class="em">'+c.em+'</span><div style="flex:1"><b>'+esc(c.es)+'</b><div class="cmeta">'+esc(c.en)+' · '+c.paises.length+' países</div></div><span style="color:var(--mut)">›</span></div>';
+ });
+ h+='</div>';
+ h+='<div class="gcard" style="border:2px solid var(--saffron);background:#fffaf0"><b style="font-family:Fraunces,serif;font-size:15.5px">🎯 Los juegos del mundo</b><div style="font-size:13px;color:var(--ink2);margin:4px 0 4px">Three ways to test the map:</div>';
+ h+='<div class="card" style="margin-top:8px" onclick="quizStart(\'flag\')"><span class="em">🚩</span><div style="flex:1"><b>¿Qué país?</b><div class="cmeta">See the flag, name the country'+(B.flag!=null?' · best '+B.flag+'/10':'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="quizStart(\'cap\')"><span class="em">🏛️</span><div style="flex:1"><b>¿Cuál es la capital?</b><div class="cmeta">Country to capital'+(B.cap!=null?' · best '+B.cap+'/10':'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="quizStart(\'cont\')"><span class="em">🌐</span><div style="flex:1"><b>¿En qué continente?</b><div class="cmeta">Place the country on the globe'+(B.cont!=null?' · best '+B.cont+'/10':'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='</div>';
+ if(cls())h+='<div class="tnote">🧭 <b>Guide note:</b> "¿De dónde eres? ¿De dónde es tu familia?" opens a real conversation on day one — then chase it around the map. The cognate countries (🟢) are free confidence; the non-cognates (Alemania=Germany, Inglaterra=England) are the fun surprises. Point them out.</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function contView(i){
+ var c=CONTINENTES[i];
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← El Mundo</button><h1>'+c.em+' '+esc(c.es)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="margin-bottom:4px">'+esc(c.en)+' · tap any country or capital to hear it. <span class="cog">🟢 = cognate</span></div>';
+ c.paises.forEach(function(p,j){
+  h+='<div class="crow"><span class="fl">'+p[2]+'</span><div class="cn"><b>'+esc(p[0])+'</b>'+(p[3]?'<span class="cog">🟢</span>':'')+' <button class="say" onclick="spk(\''+p[0].replace(/'/g,'')+'\',0.85)">🔊</button><div class="cap">capital: '+esc(p[1])+' <button class="say" onclick="spk(\''+p[1].replace(/'/g,'')+'\',0.85)">🔊</button></div></div></div>';
+ });
+ h+='</div>';
+ h+='<button class="gbtn" onclick="quizStart(\'cap\','+i+')">🏛️ Drill '+esc(c.es)+' capitals →</button>';
+ h+='<div class="spot" style="margin-top:12px">Most of these are cognates (🟢) — read them aloud and hear how close they are to English. The few that aren\'t are worth a smile: they\'re the map\'s little jokes.</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+/* ---------- games ---------- */
+function quizStart(mode,ci){
+ var pool=ci!==undefined?CONTINENTES[ci].paises.map(function(p){return {n:p[0],cap:p[1],fl:p[2],cog:p[3],cont:CONTINENTES[ci].es};}):allPaises();
+ Q={mode:mode,pool:pool,items:shuffle(pool).slice(0,Math.min(10,pool.length)),i:0,score:0,ci:ci};
+ qRound();
+}
+function qRound(){
+ if(Q.i>=Q.items.length)return qEnd();
+ var it=Q.items[Q.i],h=nav();
+ h+='<div class="famhead"><button class="quit" onclick="'+(Q.ci!==undefined?'contView('+Q.ci+')':'home()')+'">✕ Exit</button><h1>🌐 '+(Q.i+1)+' / '+Q.items.length+'</h1></div><div class="gcard"><div style="text-align:right;font-weight:800;color:var(--mut);font-size:12.5px">✓ '+Q.score+'</div>';
+ var opts,prompt;
+ if(Q.mode==='flag'){
+  prompt='¿Qué país es?';
+  h+='<div class="qflag">'+it.fl+'</div>';
+  var wr=shuffle(Q.pool.filter(function(p){return p.n!==it.n;})).slice(0,2);
+  opts=shuffle([{t:it.n,ok:true},{t:wr[0].n,ok:false},{t:wr[1].n,ok:false}]);
+ } else if(Q.mode==='cap'){
+  prompt='¿Cuál es la capital de '+it.n+'?';
+  h+='<div class="qbig">'+it.fl+' '+esc(it.n)+' <button class="say" onclick="spk(\''+it.n.replace(/'/g,'')+'\',0.85)">🔊</button></div>';
+  var wr2=shuffle(Q.pool.filter(function(p){return p.cap!==it.cap;})).slice(0,2);
+  opts=shuffle([{t:it.cap,ok:true},{t:wr2[0].cap,ok:false},{t:wr2[1].cap,ok:false}]);
+ } else {
+  prompt='¿En qué continente está '+it.n+'?';
+  h+='<div class="qbig">'+it.fl+' '+esc(it.n)+'</div>';
+  var conts=shuffle(CONTINENTES.filter(function(c){return c.es!==it.cont;})).slice(0,2);
+  opts=shuffle([{t:it.cont,ok:true},{t:conts[0].es,ok:false},{t:conts[1].es,ok:false}]);
+ }
+ Q.opts=opts;
+ h+='<div class="cmeta" style="text-align:center;margin-bottom:4px">'+esc(prompt)+'</div>';
+ opts.forEach(function(o,j){h+='<button class="opt" id="qo'+j+'" onclick="qPick('+j+')">'+esc(o.t)+'</button>';});
+ h+='<div id="qfb"></div></div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function qPick(j){
+ var it=Q.items[Q.i],ok=Q.opts[j].ok;
+ Q.opts.forEach(function(o,k){var e=document.getElementById('qo'+k);if(e){e.disabled=true;if(o.ok)e.classList.add('ok');else if(k===j)e.classList.add('no');}});
+ if(ok){Q.score++;if(Q.mode==='cap'||Q.mode==='flag')spk(Q.mode==='cap'?it.cap:it.n,0.9);}
+ else{
+  if(Q.mode==='flag')mochFeed('¿Qué país? '+it.fl,it.n,'Continent: '+it.cont);
+  else if(Q.mode==='cap')mochFeed('Capital de '+it.n+'?',it.cap,it.fl+' '+it.cont);
+  else mochFeed('¿Continente de '+it.n+'?',it.cont,it.fl);
+ }
+ var fb=document.getElementById('qfb');
+ if(fb)fb.innerHTML='<button class="gbtn" onclick="Q.i++;qRound()">'+(Q.i+1>=Q.items.length?'Resultados →':'Siguiente →')+'</button>';
+}
+function qEnd(){
+ var B=bestLoad(),key=Q.mode,nb=Q.score>(B[key]||0);
+ if(nb&&Q.ci===undefined){B[key]=Q.score;bestSave(B);}
+ var h=nav()+'<div class="gcard" style="text-align:center"><h2>'+(Q.score>=Q.items.length-1?'🏆':'🌍')+' '+Q.score+' / '+Q.items.length+'</h2>';
+ h+='<p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin:8px 0">'+(nb&&Q.ci===undefined?'¡Nuevo récord! ':'')+(Q.score>=Q.items.length-1?'You know your world — in Spanish.':'Misses joined your 🎒 Mochila. The map rewards a second lap.')+'</p>';
+ h+='<button class="gbtn" onclick="quizStart(Q.mode'+(Q.ci!==undefined?','+Q.ci:'')+')">Otra vez →</button><button class="gbtn ghost" onclick="home()">El Mundo</button></div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>La Música · El Camino Grande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cobalt:#2456a6;--cobalt2:#1c4488;--saffron:#e8a33d;--saffron2:#d18f2a;--plaster:#faf3ea;--card:#fffdf7;--ink:#33202e;--ink2:#5c4a55;--mut:#9b8a93;--line:#e8dccb;--green:#2f8a5b;--plum:#54306b;--sunhi:#ffd27a}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:var(--plaster);background-image:radial-gradient(ellipse 90% 50% at 50% -10%,#fdedd2 0%,transparent 60%);color:var(--ink);min-height:100vh}
+#app{max-width:560px;margin:0 auto;padding:14px 14px 90px}
+.nav{display:flex;gap:14px;padding:6px 2px 14px;font-size:13px;font-weight:800;color:var(--mut)}
+.nav a{cursor:pointer;color:var(--cobalt)}
+h1,h2,h3{font-family:'Fraunces',serif}
+.hero{background:linear-gradient(140deg,var(--plum),#3a2440);border-radius:22px;padding:22px 20px;color:#fff8ef;margin-bottom:16px}
+.hero .htop{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.75;text-transform:uppercase}
+.hero h1{font-size:26px;margin:4px 0 6px}
+.hero p{font-size:14px;opacity:.92;line-height:1.5}
+.sec{font-family:'Fraunces',serif;font-weight:800;font-size:17px;margin:20px 4px 10px}
+.secsub{font-size:12.5px;color:var(--mut);margin:-7px 4px 10px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px -5px rgba(51,32,46,.15);transition:transform .12s}
+.card:active{transform:scale(.98)}
+.card .em{font-size:26px}
+.card b{font-family:'Fraunces',serif;font-size:15.5px}
+.cmeta{font-size:12px;color:var(--mut);font-weight:700;margin-top:2px}
+.badge{display:inline-block;background:#eee6f4;color:var(--plum);border-radius:99px;padding:2px 9px;font-size:11px;font-weight:800;margin-right:5px}
+.badge.lv{background:#e4ecf9;color:var(--cobalt)}
+.badge.done{background:#e2f2e9;color:var(--green)}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px -6px rgba(51,32,46,.18)}
+.famhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.famhead h1{font-size:20px;flex:1}
+.quit{background:none;border:1.5px solid var(--line);border-radius:99px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2);font-family:'Nunito Sans',sans-serif}
+.spot{background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.6;color:#5c4a22;margin-bottom:12px}
+.spot b{color:#8a6d1f}
+.lyr{margin:2px 0}
+.lline{display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px dashed var(--line);cursor:pointer}
+.lline .es{flex:1;font-size:15.5px;font-weight:700;line-height:1.45}
+.lgl{display:none;font-size:12.5px;color:var(--mut);padding:0 4px 8px;font-style:italic}
+.lgl.on{display:block}
+.say{background:none;border:1.5px solid var(--line);border-radius:99px;padding:3px 9px;cursor:pointer;font-size:13px}
+.chips{margin:10px 0 4px}
+.chip{display:inline-block;background:#f2ead9;border-radius:99px;padding:4px 11px;margin:0 5px 7px 0;font-size:12.5px;font-weight:700}
+.chip b{color:var(--cobalt)}
+.factc{margin-top:10px;background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;overflow:hidden}
+.facthdr{padding:9px 14px;font-weight:800;font-size:12.5px;color:#8a6d1f;cursor:pointer}
+.factbody{padding:2px 14px 12px;font-size:13.5px;line-height:1.65;color:#5c4a22;display:none}
+.tnote{margin-top:10px;background:#f3eef8;border:1.5px solid #ddcfe9;border-radius:14px;overflow:hidden}
+.tnhdr{padding:9px 14px;font-weight:800;font-size:12.5px;color:var(--plum);cursor:pointer}
+.tnbody{padding:2px 14px 12px;font-size:13.5px;line-height:1.65;color:#4a3a56;display:none}
+.gbtn{display:block;width:100%;background:linear-gradient(140deg,var(--cobalt),var(--cobalt2));color:#fff;border:none;border-radius:14px;padding:12px;font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;margin-top:10px}
+.gbtn.ghost{background:none;border:1.5px solid var(--line);color:var(--ink2)}
+.vidwrap{position:relative;width:100%;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#1a1220;margin-bottom:12px}
+.vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytlink{display:inline-block;font-size:12px;font-weight:800;color:var(--cobalt);text-decoration:none;margin:6px 0 2px;background:#e4ecf9;border-radius:99px;padding:4px 12px}
+.pend{background:#f2ead9;border:1.5px dashed #cbb98f;border-radius:16px;padding:22px;text-align:center;font-size:13.5px;color:#8a6d1f;font-weight:700;margin-bottom:12px}
+.task{background:#e9f3ee;border:1.5px solid #c8e2d3;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.6;color:#25573e;margin-top:10px}
+.legal{font-size:11.5px;color:var(--mut);line-height:1.6;margin:22px 4px;text-align:center}
+.donebtn{margin-top:12px}
+
+/* La Sobremesa tokens */
+:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ================================================================
+   LA MÚSICA · El Camino Grande — songbook + official video wing
+   RULES (do not break):
+   - El Cancionero: traditional/public-domain compositions only.
+     Full lyrics + our own glosses are legal for PD works.
+   - La Rocola: OFFICIAL YouTube embeds only (artist/label/VEVO).
+     NEVER print lyrics or translations for these. Teaching layer only.
+   - Media stays outside any future paywall.
+   - VIDEOS with id:'' are queued pending verification — Kyle
+     verifies embeds on real devices, then fills the id.
+   ================================================================ */
+
+var SONGS=[
+{id:'cabeza',yt:'CJDb9B8mC-w',t:'Cabeza, Hombros, Rodillas, Pies',flag:'🌎',country:'Traditional (Head, Shoulders, Knees & Toes)',lv:'A0',
+ spot:'<b>The body map, set to music — and to motion.</b> This is "Head, Shoulders, Knees and Toes" in Spanish. Don\'t just watch it: TOUCH each part as you sing, faster and faster. Music + movement + meaning in one — the most powerful way a body word ever gets learned. Pairs perfectly with the 🫀 El Cuerpo atlas.',
+ lines:[
+  ['Cabeza, hombros, rodillas, pies,','Head, shoulders, knees, feet,'],
+  ['rodillas y pies.','knees and feet.'],
+  ['Cabeza, hombros, rodillas, pies,','Head, shoulders, knees, feet,'],
+  ['rodillas y pies.','knees and feet.'],
+  ['Ojos, orejas, boca y nariz.','Eyes, ears, mouth and nose.'],
+  ['Cabeza, hombros, rodillas, pies,','Head, shoulders, knees, feet,'],
+  ['rodillas y pies.','knees and feet.']],
+ vocab:[['la cabeza','head'],['los hombros','shoulders'],['las rodillas','knees'],['los pies','feet'],['los ojos','eyes'],['las orejas','ears'],['la boca','mouth'],['la nariz','nose']],
+ game:true},
+{id:'pollitos',yt:'qcOiqtMsjes',t:'Los Pollitos Dicen',flag:'🌎',country:'Traditional (all of Latin America)',lv:'A0',
+ spot:'<b>Tener idioms, live from Stage 3:</b> the chicks HAVE hunger and HAVE cold — tienen hambre, tienen frío. The whole song is your tener lesson with feathers.',
+ lines:[
+  ['Los pollitos dicen pío, pío, pío','The little chicks say cheep, cheep, cheep'],
+  ['cuando tienen hambre,','when they are hungry (they HAVE hunger),'],
+  ['cuando tienen frío.','when they are cold (they HAVE cold).'],
+  ['La gallina busca el maíz y el trigo,','The hen looks for corn and wheat,'],
+  ['les da la comida','she gives them food'],
+  ['y les presta abrigo.','and lends them shelter.'],
+  ['Bajo sus dos alas, acurrucaditos,','Under her two wings, snuggled up,'],
+  ['duermen los pollitos','the little chicks sleep'],
+  ['hasta el otro día.','until the next day.']],
+ vocab:[['los pollitos','the little chicks'],['tienen hambre','they are hungry'],['tienen frío','they are cold'],['busca','she looks for'],['duermen','they sleep']],
+ fact:'The first song nearly every Spanish-speaking child learns, from Mexico to Argentina. The -ito ending (pollitos, acurrucaditos) is the affectionate diminutive — the same one in El Caminito. Spanish sprinkles it on anything small or beloved.',
+ note:'Sing it — badly is fine, badly is better. Mime the whole thing: hungry, cold, wings. Then quiz: yawn and ask what the pollitos have when they act like this. This song IS the tener lesson for kids and adults alike.'},
+{id:'colores',yt:'GFxt8oiWN9Y',t:'De Colores',flag:'🇲🇽',country:'Traditional · Mexico/Spain',lv:'A1',
+ spot:'<b>Colors + gustar\'s cousin:</b> the fields dress in colors (se visten — a reflexive preview), and the chorus runs on "me gustan" — the plural gustan from Stage 4, in the wild.',
+ lines:[
+  ['De colores, de colores se visten los campos','In colors, in colors the fields dress themselves'],
+  ['en la primavera.','in the springtime.'],
+  ['De colores, de colores son los pajaritos','In colors, in colors are the little birds'],
+  ['que vienen de afuera.','that come from outside.'],
+  ['De colores, de colores es el arco iris','In colors, in colors is the rainbow'],
+  ['que vemos lucir.','that we see shining.'],
+  ['Y por eso los grandes amores','And that is why the great loves'],
+  ['de muchos colores me gustan a mí.','of many colors please me (I like them).']],
+ vocab:[['los campos','the fields'],['la primavera','spring'],['los pajaritos','the little birds'],['el arco iris','the rainbow'],['me gustan','I like (plural things)']],
+ fact:'Sung for centuries on both sides of the Atlantic and beloved across Mexico. Notice the song agrees with your grammar: me gustaN los amores — plural things, plural verb, exactly the Stage 4 rule.',
+ note:'Assign after the gustar lesson as proof the grammar is real. One game: pause before each color-carrying noun and let the student supply any color that agrees — los pajaritos… ¿azules? ¡Perfecto!'},
+{id:'mananitas',yt:'nNQv1PAApPg',t:'Las Mañanitas',flag:'🇲🇽',country:'Mexico',lv:'A1',
+ spot:'<b>The birthday song</b> — and a calendar-lesson encore: día, mañanitas, despierta. Learn it once, be the hero at every Mexican birthday forever.',
+ lines:[
+  ['Estas son las mañanitas','These are the little morning songs'],
+  ['que cantaba el rey David.','that King David used to sing.'],
+  ['Hoy por ser día de tu santo','Today, being your saint\'s day,'],
+  ['te las cantamos a ti.','we sing them to you.'],
+  ['Despierta, mi bien, despierta,','Wake up, my dear, wake up,'],
+  ['mira que ya amaneció,','look — dawn has already come,'],
+  ['ya los pajarillos cantan,','the little birds are already singing,'],
+  ['la luna ya se metió.','the moon has already set.']],
+ vocab:[['hoy','today'],['el día de tu santo','your saint\'s day'],['despierta','wake up!'],['cantamos','we sing'],['la luna','the moon']],
+ fact:'In Mexico this replaces "Happy Birthday" — sung at dawn serenades, at midnight, over cakes everywhere. Día de tu santo refers to the saint\'s-day tradition: many people celebrate the feast day of the saint they\'re named for, a second birthday.',
+ note:'Teach it right before any student\'s birthday and conspire with the family. Grammar payoffs to point at: hoy from the calendar lesson, cantamos as a clean nosotros form, despierta as a command they\'ll formally meet later — plant it as a mystery.'},
+{id:'cielito',yt:'n1S-1XCrSnM',t:'Cielito Lindo',flag:'🇲🇽',country:'Mexico',lv:'A1',
+ spot:'<b>The most famous "ay ay ay ay" in the world</b> — plus canta y no llores: sing and don\'t cry. Two commands walking in from a future stage, carried by a melody everyone on Earth already knows.',
+ lines:[
+  ['De la Sierra Morena,','From the Sierra Morena,'],
+  ['cielito lindo, vienen bajando','pretty little heaven, they come descending'],
+  ['un par de ojitos negros,','a pair of little dark eyes,'],
+  ['cielito lindo, de contrabando.','pretty little heaven, smuggled in.'],
+  ['¡Ay, ay, ay, ay!','Ay, ay, ay, ay!'],
+  ['Canta y no llores,','Sing and don\'t cry,'],
+  ['porque cantando se alegran,','because singing, they gladden,'],
+  ['cielito lindo, los corazones.','pretty little heaven, the hearts.']],
+ vocab:[['cielito lindo','pretty little heaven (a term of endearment)'],['los ojitos','little eyes'],['canta','sing!'],['no llores','don\'t cry'],['los corazones','the hearts']],
+ fact:'Written down in 1882 by Quirino Mendoza y Cortés and long since folklore — sung in stadiums whenever Mexico plays. Cielito and ojitos are the -ito diminutive again: Spanish makes even heaven little and beloved.',
+ note:'The stadium anthem: if your student watches any fútbol, they\'ve heard the ay-ay-ay-ay. Teach the chorus only for singing; use the verse for reading. "Porque cantando se alegran los corazones" is also a stealth gerundio callback.'},
+{id:'coqui',yt:'OsCWKV1LDRg',t:'El Coquí',flag:'🇵🇷',country:'Puerto Rico',lv:'A1',
+ spot:'<b>Me encanta — gustar\'s enthusiastic big sibling.</b> Same backwards machine: the coquí enchants me. If you can say me gusta, you can say me encanta.',
+ lines:[
+  ['El coquí, el coquí siempre canta.','The coquí, the coquí always sings.'],
+  ['Es muy suave el cantar del coquí.','Very soft is the song of the coquí.'],
+  ['Por las noches al ir a acostarme,','At night, when I go to bed,'],
+  ['me adormece cantando así:','it lulls me to sleep singing like this:'],
+  ['Coquí, coquí, coquí, quí, quí, quí.','Coquí, coquí, coquí, quí, quí, quí.']],
+ vocab:[['el coquí','Puerto Rico\'s tiny singing frog'],['siempre','always'],['suave','soft, gentle'],['por las noches','at night'],['cantando','singing']],
+ fact:'The coquí is a thumbnail-sized tree frog that sings its own name all night across Puerto Rico — the island\'s beloved sound and symbol. Puerto Ricans say "soy de aquí como el coquí" — I\'m from here like the coquí.',
+ note:'Play a recording of real coquís first (they\'re everywhere online) — the song makes no sense until you\'ve heard the frog. Then the routine tie-in: por las noches + siempre, straight from the daily-routine lesson.'},
+{id:'arroz',yt:'LuH75Ir1rXc',t:'Arroz con Leche',flag:'🌎',country:'Traditional (all of Latin America)',lv:'A1',
+ spot:'<b>Quiero + reflexive preview:</b> me quiero casar — I want to marry. Your ordering verb quiero, promoted from tacos to life decisions.',
+ lines:[
+  ['Arroz con leche, me quiero casar','Rice pudding, I want to get married'],
+  ['con una señorita de la capital,','to a young lady from the capital,'],
+  ['que sepa coser, que sepa bordar,','who knows how to sew, who knows how to embroider,'],
+  ['que sepa abrir la puerta para ir a jugar.','who knows how to open the door to go out and play.']],
+ vocab:[['arroz con leche','rice pudding'],['me quiero casar','I want to get married'],['coser','to sew'],['la puerta','the door'],['jugar','to play']],
+ fact:'A children\'s circle-game song sung across the whole Spanish-speaking world, with dozens of regional versions — in some, the señorita does the choosing. "Que sepa…" is the subjunctive hiding in a nursery rhyme; children sing grammar that textbooks save for chapter twenty.',
+ note:'Point at "que sepa" and say only: "that\'s a mood we visit at the salt flats, stage ten — children sing it before anyone teaches it to them." Mystery is a retention strategy.'},
+{id:'nanita',yt:'U00-74vbcBI',t:'A la Nanita Nana',flag:'🇪🇸',country:'Traditional · Spain',lv:'A1',
+ spot:'<b>Tiene sueño</b> — the lullaby proof of your tener idioms: the baby HAS sleepiness. Plus fuente and ruiseñor for your growing noun families.',
+ lines:[
+  ['A la nanita nana, nanita ea, nanita ea,','Lullaby, lullaby, hushabye,'],
+  ['mi niña tiene sueño,','my little girl is sleepy (HAS sleepiness),'],
+  ['bendito sea, bendito sea.','blessed be, blessed be.'],
+  ['Fuentecita que corre clara y sonora,','Little fountain that runs clear and sweet-sounding,'],
+  ['ruiseñor que en la selva cantando llora,','nightingale that in the forest, singing, weeps,'],
+  ['calla mientras la cuna se balancea.','hush while the cradle rocks.']],
+ vocab:[['tiene sueño','she is sleepy'],['la fuentecita','the little fountain'],['el ruiseñor','the nightingale'],['calla','hush'],['la cuna','the cradle']],
+ fact:'A centuries-old Spanish lullaby, now sung as a Christmas carol across Spain and Latin America. Nana means lullaby — one of the oldest kinds of song humans have, and among the gentlest Spanish you\'ll ever hear.',
+ note:'The 🐢 turtle button was made for this song. Use it for pure pronunciation work: every vowel long and clean, zero pressure. Lullabies are secretly the best accent trainers in any language.'},
+{id:'cucaracha',yt:'950PrDR36GI',t:'La Cucaracha',flag:'🇲🇽',country:'Traditional · Mexico',lv:'A1',
+ spot:'<b>Poder in the negative:</b> ya no puede caminar — it can no longer walk. Plus porque and ya, two small words that carry big weight.',
+ lines:[
+  ['La cucaracha, la cucaracha,','The cockroach, the cockroach,'],
+  ['ya no puede caminar,','can no longer walk,'],
+  ['porque no tiene, porque le falta','because it doesn\'t have, because it lacks'],
+  ['las dos patitas de atrás.','its two little back legs.']],
+ vocab:[['la cucaracha','the cockroach'],['ya no','no longer'],['puede','it can'],['caminar','to walk'],['le falta','it lacks / is missing']],
+ fact:'A traditional song with hundreds of improvised verses — during the Mexican Revolution, soldiers on every side invented new ones to tease their rivals. The verse form is a joke machine: keep the chorus, change the reason the poor roach can\'t walk.',
+ note:'Use the song as it was always used: improvisation. Keep "ya no puede caminar" and have the student invent new porque-reasons with vocabulary they own: porque no tiene café, porque tiene sueño. First laughs, then grammar, forever memory.'}
+];
+
+var VIDEOS=[
+{id:'b22wgo919FM',t:'Me Gustas Tú',artist:'Manu Chao',flag:'🇫🇷🇪🇸',lv:'A2',stage:'Stage 4 · gustar',
+ spot:'<b>The gustar anthem.</b> An entire hit song built from one pattern: me gusta + thing, over and over — planes, travel, mornings, the sea, and one recurring tú.',
+ vocab:[['me gustas tú','I like YOU (you please me)'],['viajar','to travel'],['la mañana','the morning'],['el viento','the wind'],['soñar','to dream'],['¿qué horas son?','what time is it? (heard in the song)']],
+ task:'Listening mission: count the me gusta lines in one chorus. Then the exam question: why is it "me gustas tú" and not "me gusta tú"? (Because YOU are doing the pleasing — the verb agrees with you: gustas.) If a student explains that, gustar is theirs forever.'},
+{id:'YXnjy5YlDwk',t:'Vivir Mi Vida',artist:'Marc Anthony',flag:'🇵🇷🇺🇸',lv:'A2',stage:'Stage 5 · plans & futures',
+ spot:'<b>The ir + a future, with horns.</b> Voy a reír, voy a bailar, voy a gozar — I\'m going to laugh, dance, enjoy. The Stage 5 grammar as a stadium chorus.',
+ vocab:[['voy a reír','I\'m going to laugh'],['voy a bailar','I\'m going to dance'],['gozar','to enjoy'],['la vida','life'],['a veces','sometimes'],['la lluvia','the rain']],
+ task:'Listening mission: every time you hear "voy a," say the verb that follows before the next line lands. Then write your own three-line chorus: voy a ___, voy a ___, vivir mi vida.'},
+{id:'VMp55KH_3wo',t:'La Gozadera',artist:'Gente de Zona ft. Marc Anthony',flag:'🇨🇺',lv:'A2',stage:'Stage 5 · La Habana',
+ spot:'<b>Cuba calling the whole continent.</b> The song is a roll call of Latin America — country after country joins the party. Your world route, as a chorus.',
+ vocab:[['la gozadera','the big party / good time'],['se formó','it broke out / got started'],['el mundo','the world'],['la candela','the fire / the heat'],['sabroso','delicious, full of flavor']],
+ task:'Listening mission with your map open: tick off every country you hear named. How many of our eleven legs get a shout-out? Bonus: this is the sound of modern Havana — the exact leg where the Camino lands in Stage 5.'},
+{id:'kMIaYXxLnUA',t:'A Dios le Pido',artist:'Juanes',flag:'🇨🇴',lv:'B1',stage:'Stage 10 · the subjunctive',
+ spot:'<b>An entire song in the subjunctive.</b> Que mis ojos se despierten, que mi madre no se muera… — every wish flows through the mood you meet at the salt flats. File this one away; it will bloom in Stage 10.',
+ vocab:[['pedir','to ask for'],['que se despierten','that they may wake'],['la vida','life'],['quedarse','to remain, to stay'],['el alma','the soul']],
+ task:'Early listening mission (any stage): just count the "que…" wishes. Post-Stage-10 mission: pause after each wish and name the subjunctive verb. One song, an entire unit\'s worth of reps — from Colombia, the leg of the-way-things-were.'},
+{id:'',t:'Bailando',artist:'Enrique Iglesias ft. Gente de Zona & Descemer Bueno',flag:'🇪🇸🇨🇺',lv:'A2',stage:'Stage 3 · gerundio',
+ spot:'<b>The gerundio on repeat:</b> bailando, bailando — dancing, dancing. Your -ando ending, several hundred times, with a beat.',
+ vocab:[['bailando','dancing'],['tu cuerpo y el mío','your body and mine'],['llenando','filling'],['el vacío','the emptiness'],['contigo','with you']],
+ task:'Listening mission: shout (or whisper) every gerundio you catch — bailando, llenando… How many different -ando/-iendo words can you collect in one play?'},
+{id:'',t:'Limón y Sal',artist:'Julieta Venegas',flag:'🇲🇽',lv:'A2',stage:'Stage 4 · likes, as you are',
+ spot:'<b>Te quiero tal como eres</b> — I love you just as you are: ser, querer, and daily-life present tense in one warm chorus from Tijuana\'s finest.',
+ vocab:[['te quiero','I love you'],['tal como eres','just as you are'],['el limón','the lime/lemon'],['la sal','the salt'],['si te digo','if I tell you']],
+ task:'Listening mission: catch the chorus\'s three-part recipe (what goes with what, limón y sal style). Then say one true "me gusta tal como es" sentence about something imperfect you love anyway.'},
+{id:'',t:'Ojalá Que Llueva Café',artist:'Juan Luis Guerra',flag:'🇩🇴',lv:'B1',stage:'Stage 10 · ojalá + subjunctive',
+ spot:'<b>Ojalá — the Arabic word from the Albaicín — powering a whole song of wishes:</b> may it rain coffee in the countryside. Subjunctive, poetry, and the Dominican countryside in one.',
+ vocab:[['ojalá','may it be so / hopefully (from Arabic)'],['que llueva','that it may rain'],['el café','coffee'],['el campo','the countryside'],['la cosecha','the harvest']],
+ task:'Listening mission: every wish starts with "ojalá que" — collect the impossible beautiful things the song wishes would rain. Bonus etymology: ojalá comes from Arabic — law šā\' allah, “may God will it” — one of some 4,000 Arabic words Spanish carries from eight centuries of shared life in Iberia.'},
+{id:'',t:'Color Esperanza',artist:'Diego Torres',flag:'🇦🇷',lv:'A2',stage:'Stage 5 · saber, poder, future hope',
+ spot:'<b>Saber que se puede, querer que se pueda</b> — to know it\'s possible, to want it to be possible. Argentina\'s anthem of hope, built on the verbs of ability and desire.',
+ vocab:[['la esperanza','hope'],['saber','to know'],['se puede','it can be done'],['quitarse el miedo','to shed one\'s fear'],['pintarse la cara','to paint one\'s face']],
+ task:'Listening mission: the chorus pairs saber and querer with "se puede/se pueda" — one indicative, one subjunctive, side by side. Early stages: just sing it. Stage 10: explain the difference and take a bow.'},
+{id:'',t:'La Bicicleta',artist:'Carlos Vives & Shakira',flag:'🇨🇴',lv:'B1',stage:'Stage 6 · Colombia',
+ spot:'<b>The Colombia leg\'s home song:</b> two of Colombia\'s biggest voices, a vallenato-pop ride through the Caribbean coast — place names, nostalgia, and the-way-things-were energy.',
+ vocab:[['la bicicleta','the bicycle'],['la orilla','the shore'],['el acordeón','the accordion (vallenato\'s heart)'],['ven conmigo','come with me'],['el barrio','the neighborhood']],
+ task:'Listening mission: this song is a map — collect every Colombian place name you hear. Then find them near our Stage 6 leg. Vallenato\'s accordion is the sound of Colombia\'s Caribbean coast.'},
+{id:'',t:'Eres Tú',artist:'Mocedades',flag:'🇪🇸',lv:'A2',stage:'Stage 3 · ser',
+ spot:'<b>Ser, sung slowly and beautifully:</b> eres tú — it is you. A 1973 Spanish classic gentle enough to catch every word, built on the verb of identity.',
+ vocab:[['eres tú','it is you / you are'],['como el agua','like the water'],['la promesa','the promise'],['el fuego','the fire'],['mi guitarra','my guitar']],
+ task:'Listening mission: count the "eres" — each one is ser\'s tú form doing identity work: you ARE the promise, the fire, the water. The gentlest ser drill ever recorded.'},
+{id:'7AzimrAgWbA',t:'Clandestino',artist:'Manu Chao',flag:'🇫🇷🇪🇸',lv:'B1',stage:'Stage 6+ · llamarse & real stories',
+ spot:'<b>The other Manu Chao essential.</b> Slow, clear, and heavy: a song sung in the voice of an undocumented migrant — me llaman clandestino, they call me clandestine. Llamarse doing serious work.',
+ vocab:[['me llaman','they call me'],['la frontera','the border'],['perdido','lost'],['el corazón','the heart'],['la ley','the law']],
+ task:'Listening mission: collect every "me llaman ___" — each one is a name the world puts on the singer. Then the discussion question that makes this song a classic lesson: who gets to name whom?'},
+{id:'ca48oMV59LU',t:'Provenza',artist:'Karol G',flag:'🇨🇴',lv:'A2',stage:'Stage 4–5 · invitations',
+ spot:'<b>The gentlest mega-hit in reggaetón</b> — laid-back, clearly sung, and built on invitation Spanish: ¿qué tal si…? (what if we…?). Named for a neighborhood in her Medellín. La Bichota makes the dembow friendly.',
+ vocab:[['¿qué más?','what\'s up? (pure Colombian)'],['¿qué tal si…?','what if we…?'],['hace rato','a while ago / for a while'],['libre','free'],['el barrio','the neighborhood']],
+ task:'Listening mission: the opener is "Baby, ¿qué más?" — Colombia\'s own hello (check Colombia\'s Acento page!). Count the invitations: every ¿qué tal si…? is the suggestion machine you can reuse tomorrow: ¿qué tal si tomamos un café?'},
+{id:'',t:'Soy Yo',artist:'Bomba Estéreo',flag:'🇨🇴',lv:'A2',stage:'Stage 3 · ser, with swagger',
+ spot:'<b>The SER anthem.</b> Soy yo — it\'s me, I am me — an entire confidence manifesto on the verb of identity, with one of the most joyful videos ever made.',
+ vocab:[['soy yo','it\'s me / I am me'],['sigo','I keep going'],['bailando','dancing'],['no te preocupes','don\'t worry'],['así','like this']],
+ task:'Listening mission: count the soy\'s. Then the assignment: watch the video and steal the girl\'s attitude — then write your own three-line soy manifesto: soy ___, soy ___, y así soy yo.'},
+{id:'',t:'Eres',artist:'Café Tacvba',flag:'🇲🇽',lv:'A2',stage:'Stage 3 · ser, in love',
+ spot:'<b>Mexico\'s great ser love song:</b> eres lo que más quiero — you are what I love most. Slow, sincere, every word audible. Rock nacional at its warmest.',
+ vocab:[['eres','you are'],['lo que más quiero','what I love most'],['lo que sueño','what I dream'],['cada minuto','every minute'],['pienso en ti','I think of you']],
+ task:'Listening mission: this song answers one question over and over — ¿qué eres tú? Collect five of its answers. Then borrow the frame: eres lo que ___ — finish it three ways about someone you love.'},
+{id:'',t:'Hasta la Raíz',artist:'Natalia Lafourcade',flag:'🇲🇽',lv:'A2',stage:'Stage 4+ · the clarity queen',
+ spot:'<b>The clearest voice in Latin music.</b> Lafourcade enunciates like she\'s teaching you personally — present tense, poetry about roots and memory, and a melody Mexico has adopted as a modern classic.',
+ vocab:[['la raíz','the root'],['te llevo','I carry you'],['cada vez','each time'],['recordar','to remember'],['el corazón','the heart']],
+ task:'Listening mission: transcription training wheels — pick ONE verse and write down every word you catch, then replay until the gaps fill. No song in this rocola rewards that exercise better.'},
+{id:'',t:'Como La Flor',artist:'Selena',flag:'🇲🇽🇺🇸',lv:'A2',stage:'Stage 4 · cumbia classic',
+ spot:'<b>The queen of cumbia tejana.</b> Simple, aching, sung by the most beloved voice of the Mexican-American borderlands. The chorus teaches itself in one listen.',
+ vocab:[['la flor','the flower'],['el amor','the love'],['me marcho','I\'m leaving'],['cómo duele','how it hurts'],['ay, cómo me duele','oh, how it hurts me']],
+ task:'Listening mission: learn the chorus by heart — it\'s four lines and half the Spanish-speaking world can sing it with you. Bonus culture: Selena\'s first language was English; she learned Spanish to sing. Every learner is in good company.'},
+{id:'',t:'La Vida Es Un Carnaval',artist:'Celia Cruz',flag:'🇨🇺',lv:'B1',stage:'Los Gigantes · salsa',
+ spot:'<b>Salsa\'s reigning anthem of joy</b> from the Queen herself: anyone who thinks life is unfair needs to know life is a carnival. The horns alone are a history lesson. ¡Azúcar!',
+ vocab:[['el carnaval','the carnival'],['no hay que llorar','no need to cry'],['cantando','singing'],['las penas','sorrows'],['se van','they go away']],
+ task:'Listening mission for the salsa chapter: find the coro (the answering chorus) and join it by play three. Then the Gigantes exercise: clap the clave underneath — Celia will not let you lose it.'},
+{id:'',t:'Gracias a la Vida',artist:'Mercedes Sosa (by Violeta Parra)',flag:'🇨🇱🇦🇷',lv:'B1',stage:'Nueva canción · a continent\'s hymn',
+ spot:'<b>Written by Chile\'s Violeta Parra, immortalized by Argentina\'s Mercedes Sosa</b> — thanks to life, which has given me so much. The most covered Spanish song of its century, and the heart of nueva canción.',
+ vocab:[['gracias a la vida','thanks to life'],['que me ha dado tanto','which has given me so much'],['los ojos','the eyes'],['el sonido','the sound'],['distinguir','to distinguish']],
+ task:'Listening mission: every verse thanks life for one gift (eyes, hearing, words, feet…) — list them in order. Grammar seed: "me ha dado" is the present perfect — a tense from the road ahead, planted here in the most beautiful sentence available.'},
+{id:'',t:'Latinoamérica',artist:'Calle 13',flag:'🇵🇷',lv:'B2',stage:'The whole route in one song',
+ spot:'<b>The continent\'s anthem</b> — a litany of soy: I am what they left behind, I am a smoking town, I am the teeth in your smile. It names the mountains, rivers, and peoples your Camino crosses. Advanced, essential, unforgettable.',
+ vocab:[['soy','I am (a hundred times)'],['el pueblo','the people / the town'],['la espina dorsal','the spine (the Andes!)'],['no puedes comprar','you cannot buy'],['la tierra','the land']],
+ task:'Listening mission WITH YOUR MAP OPEN: the chorus lists what cannot be bought — el viento, el sol, la lluvia, el calor… Collect the list. Then match every place the verses name to a leg of your route. This is the Camino Grande with a beat.'},
+{id:'',t:'Antología',artist:'Shakira',flag:'🇨🇴',lv:'B1',stage:'Stage 8 · preterite & imperfect gold',
+ spot:'<b>Young Shakira, before the world tours:</b> a slow ballad that is one long past-tense inventory of what a love taught her — aprendí, conocí, era. The Storyteller stage\'s perfect soundtrack.',
+ vocab:[['aprendí','I learned'],['conocí','I met / discovered'],['gracias a ti','thanks to you'],['el tiempo','the time'],['más de lo que','more than what']],
+ task:'Post-Stage-8 mission: this song runs on the camera model — snapshots (aprendí, conocí) against background (era). Sort ten verbs you hear into the two piles. Pre-Stage-8: just enjoy the most sung-along ballad in Colombia.'},
+{id:'',t:'Burbujas de Amor',artist:'Juan Luis Guerra',flag:'🇩🇴',lv:'B1',stage:'Stage 10 · quisiera',
+ spot:'<b>The most elegant wish in bachata:</b> quisiera ser un pez — I would like to be a fish. Juan Luis Guerra makes the polite-wish form quisiera into three minutes of poetry.',
+ vocab:[['quisiera ser','I would like to be'],['un pez','a fish'],['la pecera','the fishbowl'],['toda la noche','all night'],['el corazón','the heart']],
+ task:'Listening mission: quisiera is the gentlest door into the subjunctive\'s neighborhood — collect every quisiera wish in the song. File next to Ojalá Que Llueva Café: Guerra owns the wish department.'},
+{id:'',t:'Ojitos Lindos',artist:'Bad Bunny & Bomba Estéreo',flag:'🇵🇷🇨🇴',lv:'B1',stage:'Reggaetón summit · diminutives',
+ spot:'<b>The biggest artist on Earth meets Colombia\'s Bomba Estéreo</b> — and the title is a Stage-1 lesson: ojitos, little eyes, the -ito of affection. Gentler than most Bad Bunny; a fair first summit attempt.',
+ vocab:[['ojitos lindos','pretty little eyes'],['mirar','to look at'],['bonito','pretty'],['conmigo','with me'],['el mundo','the world']],
+ task:'Listening mission: hunt the diminutives — ojitos and friends. Then the acento exercise: this is boricua Spanish at full speed; catch three examples of the breathed s from Puerto Rico\'s Acento page. Decode one chorus line per week — summit pace.'},
+{id:'_ruEj-XK1lA',t:'Disfruto',artist:'Carla Morrison',flag:'🇲🇽',lv:'A2',stage:'Stage 4 · gustar\'s forward cousin',
+ spot:'<b>The slowest, clearest vocals in Mexican indie</b> — and a grammar gift: disfrutar (to enjoy) is gustar\'s FORWARD cousin. No backwards machinery: yo disfruto + the thing. One song, two ways to love something.',
+ vocab:[['disfruto','I enjoy'],['disfrutar','to enjoy'],['tu amor','your love'],['sentir','to feel'],['contigo','with you']],
+ task:'Listening mission: this song moves slowly enough to catch nearly everything — collect three "disfruto + ___" lines. Then the grammar payoff: rewrite each as a me gusta sentence and feel the difference — disfruto el café (I enjoy) vs me gusta el café (it pleases me). Two verbs, one feeling, opposite directions.'},
+{id:'AP5Y4Q4ZdUE',t:'99,99%',artist:'El Riqué',flag:'🌌',lv:'B1',stage:'Stage 2 · numbers, cognates & the decimal coma',
+ spot:'<b>A quantum-physics love song.</b> The atom is 99.99% “empty” space — except it isn\'t — and the chorus decides that\'s what love is: el amor es ese nueve nueve, coma, nueve nueve. Yes, the chorus literally counts, and yes, Spanish writes decimals with a COMA: 99,99.',
+ vocab:[['nueve','nine'],['coma','comma (Spanish decimals: 99,99)'],['el átomo','the atom'],['vacío','empty'],['las posibilidades','the possibilities']],
+ task:'Two missions in one. Numbers: sing the chorus back — nueve nueve, coma, nueve nueve — and remember forever that Spanish decimals use the comma (a price tag of 9,99 € is nine ninety-nine!). Cognates: the spoken intro is a Stage-1 flashback — collect six science cognates (átomo, protones, frecuencias…) and read them aloud with your vowel rules.'},
+{id:'8jtfXHadYIE',t:'La Tierra del Olvido (2015)',artist:'Carlos Vives & friends',flag:'🇨🇴',lv:'A2',stage:'Stage 6 · Colombia · como = like',
+ spot:'<b>Vives\' 1995 vallenato-pop landmark, reborn as a national choir:</b> a dozen Colombian artists sing it across the country\'s landscapes. The song itself is a chain of como-similes — like the moon, like the wind, like the sea that waits for the river — every one built from nouns you already own.',
+ vocab:[['como','like, as'],['la luna','the moon'],['el viento','the wind'],['la lluvia','the rain'],['el mar y el río','the sea and the river'],['espero tu regreso','I await your return']],
+ task:'Listening mission: collect the como-chain — como la luna…, como el sol…, como el mar… — and notice every simile is an A1 noun doing poetry. Then watch as geography: this video is a tour of Colombia; pair it with the atlas (Colombia → Leg 6). Bonus: this is the same Carlos Vives from La Bicicleta — twenty years apart, same accordion heart.'},
+{id:'',t:'Yo… El Aventurero',artist:'Pedro Fernández',flag:'🇲🇽',lv:'B1',stage:'Stage 4 · the gustan machine gun',
+ spot:'<b>A ranchera institution — and secretly the greatest gustar drill ever recorded.</b> The famous verse is one long me-gustan list with full adjective agreement, delivered as a picaresque charro boast from another era (sing it with the wink it\'s sung with today). Mariachi at full gallop.',
+ vocab:[['el aventurero','the adventurer'],['me gustan','I like (plural!)'],['me encantan','I love (plural!)'],['alto/a · flaco/a','tall · thin'],['el trovador','the troubadour']],
+ task:'Listening mission: the legendary verse is a machine-gun list of me gustan + plural adjectives — every ending agreeing at full speed. Round one: count how many types the aventurero likes. Round two, the Pedro challenge: he famously sings the whole list in ONE breath. Read your own me-gustan list (foods, not sweethearts) and see how far one breath takes you.'},
+{id:'ULxcmMgsxf4',t:'La Chona',artist:'Los Tucanes de Tijuana',flag:'🇲🇽',lv:'A2',stage:'Stage 4 · norteño · le gusta bailar',
+ spot:'<b>The norteño party anthem</b> — thirty years old and still the song that empties chairs at every quinceañera, plus a certified internet legend (the La Chona Challenge). It\'s a story-song about a woman who simply MUST dance: le gusta with a beat you cannot refuse. Note the accordion: that\'s norteño, mariachi\'s northern cousin.',
+ vocab:[['le gusta bailar','she likes to dance'],['todos la conocen','everyone knows her'],['el baile','the dance / the party'],['no se cansa','she doesn\'t get tired'],['el acordeón','the accordion']],
+ task:'Listening mission: track La Chona through the story — what does everyone know about her, and what happens the moment the music starts? Ear-training bonus: this accordion is norteño; compare it with a mariachi trumpet (Cielito Lindo) — Mexico\'s two party engines, now both in your jukebox.'},
+{id:'1_zgKRBrT0Y',t:'Calma (Remix)',artist:'Pedro Capó & Farruko',flag:'🇵🇷',lv:'A2',stage:'Stage 5 · vamos pa\' la playa',
+ spot:'<b>The gentlest giant in Puerto Rican pop:</b> vamos pa\' la playa, pa\' curarte el alma — let\'s go to the beach, to heal your soul. Slow, sunny, endlessly repeated chorus — and a real-Spanish lesson: pa\' is how para actually sounds on the street.',
+ vocab:[['vamos','let\'s go'],['pa\' (= para)','to / for (spoken Spanish!)'],['la playa','the beach'],['el alma','the soul'],['curar','to heal'],['despacio','slowly']],
+ task:'Listening mission: count the vamos pa\'s — then decode the contraction: pa\' la playa = para la playa. You\'ll hear pa\' from Tijuana to Buenos Aires; this chorus is your flashcard. Then make it yours, Stage 5 style: write tonight\'s plan as vamos pa\' ___. (Yes — the same vamos that runs your plans-and-dreams stage.)'}
+];
+
+var GIGANTES=[
+{id:'salsa',e:'🥁',t:'Salsa',sub:'Born in Havana, raised in New York, crowned in Cali',
+ story:[
+ 'Salsa\'s engine is Cuban — son, mambo, and the clave, the 3–2 heartbeat that everything else obeys. But salsa as a NAME and a movement was born in the 1960s–70s barrios of New York, where Puerto Rican and Cuban musicians — Celia Cruz, Héctor Lavoe, Willie Colón, the whole Fania Records family — fused the island sounds into something harder, faster, and unmistakably urban.',
+ 'Then it went home and multiplied: Puerto Rico\'s El Gran Combo became "the university of salsa," Venezuela raised Oscar D\'León, and Cali, Colombia danced it faster than anyone until the city simply took the title — la capital mundial de la salsa, where salsa schools outnumber gyms.',
+ 'For your Spanish: salsa lyrics are sung clearly, repeat their choruses (coros), and run on call-and-response — the friendliest advanced listening in Latin music.'],
+ vocab:[['la clave','the 3–2 key rhythm everything follows'],['el coro','the chorus / response singers'],['el montuno','the piano\'s hypnotic riff section'],['la salsa dura','hard salsa (the raw 70s sound)'],['¡azúcar!','Celia Cruz\'s famous shout — “sugar!”']],
+ trail:[['🇨🇺','cu','Cuba — the roots: son & clave'],['🇵🇷','pr','Puerto Rico — the golden age'],['🇻🇪','ve','Venezuela — Oscar D\'León'],['🇨🇴','co','Colombia — Cali, world capital']],
+ mission:'🎯 Open <b>Vivir Mi Vida</b> in La Rocola — it\'s modern salsa. Listen once for the coro (how many times does it return?), then once for the piano montuno underneath, then once just clapping the clave: 1-2-3 … 1-2. When you can hold the clave through the whole song, you\'ve learned salsa\'s skeleton.'},
+{id:'reggaeton',e:'🔊',t:'Reggaetón',sub:'Panama lit the fuse, Puerto Rico built the bomb, the world dances',
+ story:[
+ 'The origin story crosses three countries: Jamaican dancehall gave the dembow riddim (from Shabba Ranks\' “Dem Bow”), Panama\'s El General and company put Spanish on reggae in the late 80s — reggae en español — and San Juan\'s underground scene of the 90s forged it into reggaetón: rawer, faster, and rapped in boricua slang.',
+ 'Then the detonations: Daddy Yankee\'s “Gasolina” (2004) broke it worldwide, “Despacito” (2017) became one of the most-viewed videos in the history of the internet, and Bad Bunny spent multiple years as the most-streamed artist on Earth — in Spanish, refusing to cross over. The language came to the world instead.',
+ 'For your Spanish: reggaetón is honest about being HARD listening — fast, slang-dense, and proudly Puerto Rican in accent (remember El Acento: the s that breathes, the r that shifts). Treat it as a summit to climb, not a starting trail: every chorus you finally decode is a real trophy.'],
+ vocab:[['el dembow','the boom-ch-boom-chick beat under everything'],['el perreo','the dance style — reggaetón\'s dance floor'],['la disquera','the record label'],['el flow','the flow (yes, Spanish adopted it)'],['la letra','the lyrics']],
+ trail:[['🇵🇦','pa','Panama — reggae learns Spanish'],['🇵🇷','pr','Puerto Rico — the birthplace'],['🇨🇺','cu','Cuba — cubatón: the Havana branch'],['🇨🇴','co','Colombia — the Medellín wave']],
+ mission:'🎯 Open <b>La Gozadera</b> in La Rocola — Gente de Zona is cubatón, reggaetón\'s Havana branch fused with salsa horns. First play: just find the dembow (boom-ch-boom-chick) and tap it. Second play: catch the country roll-call. That beat you\'re tapping is the same one under practically every reggaetón hit since 1991.'}
+];
+function gigView(i){
+ var g=GIGANTES[i];
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← La Música</button><h1>'+g.e+' '+esc(g.t)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="margin-bottom:8px">'+esc(g.sub)+'</div>';
+ g.story.forEach(function(p){h+='<p style="line-height:1.7;font-size:14.5px;margin:0 0 12px">'+p+'</p>';});
+ h+='<div class="chips">';
+ g.vocab.forEach(function(v){h+='<span class="chip"><b>'+esc(v[0])+'</b> · '+esc(v[1])+'</span>';});
+ h+='</div>';
+ h+='<div class="spot" style="margin-top:10px"><b>The trail:</b><br>'+g.trail.map(function(t){return '<a class="chip" style="text-decoration:none;display:inline-block;margin-top:6px" href="countries.html#'+t[1]+'">'+t[0]+' '+esc(t[2])+'</a>';}).join(' ')+'</div>';
+ h+='<div class="task">'+g.mission+'</div>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+/* ---------- state ---------- */
+function fileWarn(){
+ try{
+  if(location.protocol==='file:')return '<div class="spot" style="background:#fbe9e7;border-color:#e5b7b0;color:#8c3126"><b>⚠️ Testing the raw file?</b> Video players stay blank on file:// pages — YouTube only allows embeds on hosted sites. Deploy to Netlify (or run any local server) and they light up. Meanwhile, every song has a ▶ Open on YouTube link that works right now.</div>';
+ }catch(e){}
+ return '';
+}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
+function mochFeed(q,a,why){
+ try{
+  var o=JSON.parse(localStorage.getItem('cg_moch'))||{};
+  var k=(q||'').slice(0,60);if(!k)return;
+  o[k]={q:q,a:a,why:why||'',src:'musica',due:Math.floor(Date.now()/864e5),iv:0};
+  localStorage.setItem('cg_moch',JSON.stringify(o));
+ }catch(e){}
+}
+var app=document.getElementById('app');
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function dLoad(){try{return JSON.parse(localStorage.getItem('mus_done')||'{}');}catch(e){return {};}}
+function dSave(d){localStorage.setItem('mus_done',JSON.stringify(d));}
+function modeCls(){try{return localStorage.getItem('cg_mode')==='class';}catch(e){return false;}}
+
+/* ---------- voice (compact port) ---------- */
+var VOICE=null;
+function esVoices(){try{return speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});}catch(e){return [];}}
+function voiceScore(v){var s=0;if(/enhanced|premium|natural/i.test(v.name))s+=40;if(/mónica|monica|paulina|marisol|angelica|jorge|juan|diego|luciana|penélope|penelope|mia|elvira/i.test(v.name))s+=18;if(/es[-_](MX|ES|US|419)/i.test(v.lang))s+=8;return s;}
+function pickVoice(){var vs=esVoices();if(!vs.length)return null;vs.sort(function(a,b){return voiceScore(b)-voiceScore(a);});return vs[0];}
+function spk(t,rate){
+ try{
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(t);
+  if(!VOICE)VOICE=pickVoice();
+  if(VOICE)u.voice=VOICE;
+  u.lang=(VOICE&&VOICE.lang)||'es-MX';u.rate=rate||0.92;
+  speechSynthesis.speak(u);
+ }catch(e){}
+}
+try{speechSynthesis.onvoiceschanged=function(){VOICE=pickVoice();};}catch(e){}
+
+/* ---------- views ---------- */
+function nav(){return '<div class="nav"><a onclick="home()">🎵 La Música</a><a href="/">🗺️ El Camino</a></div>';}
+function home(){
+ var d=dLoad();
+ var h=nav();
+ h+=fileWarn();
+ h+='<div class="hero"><div class="htop">EL CAMINO GRANDE · LA NOVENA PUERTA</div><h1>La Música</h1><p>Songs are the fastest road into a language\'s heart. Downstairs: the songbook — traditional songs you can read word by word. Upstairs: the rocola — official videos wrapped in missions.</p></div>';
+ h+='<div class="sec">📖 El Cancionero · the songbook</div><div class="secsub">Traditional songs · full lyrics, tap any line for English</div>';
+ SONGS.forEach(function(s,i){
+  h+='<div class="card" onclick="songView('+i+')"><span class="em">'+s.flag+'</span><div style="flex:1"><b>'+esc(s.t)+'</b><div class="cmeta"><span class="badge lv">'+s.lv+'</span>'+esc(s.country)+'</div></div>'+(d['s_'+s.id]?'<span class="badge done">✓ learned</span>':'<span style="color:var(--mut)">›</span>')+'</div>';
+ });
+ h+='<div class="sec">🌍 Los Gigantes · the sounds that conquered the world</div><div class="secsub">The cross-border giants — multi-country stories, missions included</div>';
+ GIGANTES.forEach(function(g,i){
+  h+='<div class="card" onclick="gigView('+i+')"><span class="em">'+g.e+'</span><div style="flex:1"><b>'+esc(g.t)+'</b><div class="cmeta">'+esc(g.sub)+'</div></div><span style="color:var(--mut)">›</span></div>';
+ });
+ h+='<div class="sec">📺 La Rocola · official videos</div><div class="secsub">Streamed from the artists\' official channels · missions, not lyrics</div>';
+ VIDEOS.forEach(function(v,i){
+  h+='<div class="card" onclick="vidView('+i+')"><span class="em">'+v.flag+'</span><div style="flex:1"><b>'+esc(v.t)+'</b><div class="cmeta"><span class="badge lv">'+v.lv+'</span><span class="badge">'+esc(v.stage)+'</span>'+esc(v.artist)+'</div></div>'+(v.id?(d['v_'+v.id]?'<span class="badge done">✓</span>':'<span style="color:var(--mut)">›</span>'):'<span class="badge">soon</span>')+'</div>';
+ });
+ h+='<div class="legal">Videos play via YouTube\'s official embeds from artist and label channels; all rights remain with the rights holders. The songbook contains traditional, public-domain compositions. La Música is free and always will be.</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function songView(i){
+ var s=SONGS[i],d=dLoad();
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← Songbook</button><h1>'+s.flag+' '+esc(s.t)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="margin-bottom:8px"><span class="badge lv">'+s.lv+'</span>'+esc(s.country)+'</div>';
+ if(s.yt){
+  h+='<div class="vidwrap"><iframe src="https://www.youtube-nocookie.com/embed/'+s.yt+'" title="'+esc(s.t)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
+  h+='<a class="ytlink" href="https://www.youtube.com/watch?v='+s.yt+'" target="_blank" rel="noopener">▶ Open on YouTube ↗</a>';
+ }
+ h+='<div class="spot">'+s.spot+'</div>';
+ h+='<div class="cmeta" style="margin:2px 0 6px">🎵 The video sings. The lyric sheet below is your STUDY layer — tap lines for meaning, and use the 🐢 robot to inspect words, never to carry the tune.</div>';
+ h+='<button class="gbtn ghost" onclick="spk(SONGS['+i+'].lines.map(function(l){return l[0];}).join(\'. \'),0.55)">🐢 Robot read-through · for the words, not the music</button>';
+ h+='<button class="gbtn" style="background:linear-gradient(140deg,#54306b,#3a2440)" onclick="gameHub('+i+')">🎮 Jugar con esta canción</button>';
+ h+='<div class="lyr">';
+ s.lines.forEach(function(l,j){
+  h+='<div class="lline" onclick="var g=document.getElementById(\'g'+j+'\');g.classList.toggle(\'on\')"><span class="es">'+esc(l[0])+'</span><button class="say" onclick="event.stopPropagation();spk(SONGS['+i+'].lines['+j+'][0],0.55)">🐢</button><button class="say" onclick="event.stopPropagation();spk(SONGS['+i+'].lines['+j+'][0])">🔊</button></div>';
+  h+='<div class="lgl" id="g'+j+'">'+esc(l[1])+'</div>';
+ });
+ h+='</div><div class="cmeta" style="margin-top:8px">Tap any line to reveal the English.</div>';
+ h+='<div class="chips">';
+ s.vocab.forEach(function(v){h+='<span class="chip"><b>'+esc(v[0])+'</b> · '+esc(v[1])+'</span>';});
+ h+='</div>';
+ h+='<div class="factc"><div class="facthdr" onclick="var b=document.getElementById(\'fc\');b.style.display=b.style.display===\'none\'||!b.style.display?\'block\':\'none\'">✨ About this song ▾</div><div class="factbody" id="fc">'+s.fact+'</div></div>';
+ if(modeCls())h+='<div class="tnote"><div class="tnhdr" onclick="var b=document.getElementById(\'tn\');b.style.display=b.style.display===\'none\'||!b.style.display?\'block\':\'none\'">🧭 Guide notes ▾</div><div class="tnbody" id="tn">'+s.note+'</div></div>';
+ h+='<button class="gbtn donebtn" onclick="var d=dLoad();d[\'s_'+s.id+'\']=!d[\'s_'+s.id+'\'];dSave(d);songView('+i+')">'+(d['s_'+s.id]?'✓ Learned — tap to unmark':'Mark as learned')+'</button>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function vidView(i){
+ var v=VIDEOS[i],d=dLoad();
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← Rocola</button><h1>'+v.flag+' '+esc(v.t)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="margin-bottom:8px"><span class="badge lv">'+v.lv+'</span><span class="badge">'+esc(v.stage)+'</span>'+esc(v.artist)+'</div>';
+ if(v.id){
+  h+='<div class="vidwrap"><iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'" title="'+esc(v.t)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>';
+  h+='<a class="ytlink" href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener">▶ Open on YouTube ↗</a>';
+ } else {
+  h+='<div class="pend">🎬 Coming soon — this pick is queued while we verify the official embed. The mission below already works with the song on any player.</div>';
+ }
+ h+='<div class="spot">'+v.spot+'</div>';
+ h+='<div class="task">🎯 '+v.task+'</div>';
+ h+='<div class="cmeta" style="margin-top:10px">Played from the artist\'s official channel. We never print these lyrics — your ears are the lesson.</div>';
+ if(v.id)h+='<button class="gbtn donebtn" onclick="var d=dLoad();d[\'v_'+v.id+'\']=!d[\'v_'+v.id+'\'];dSave(d);vidView('+i+')">'+(d['v_'+v.id]?'✓ Mission complete — tap to unmark':'Mark mission complete')+'</button>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+/* ---- 🎮 LOS JUEGOS DEL CANCIONERO — auto-generated from every song ---- */
+var GG=null;
+function muBest(){try{return JSON.parse(localStorage.getItem('mu_best'))||{};}catch(e){return {};}}
+function muBestSave(o){try{localStorage.setItem('mu_best',JSON.stringify(o));}catch(e){}}
+function norm(t){return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zn ]/g,'').replace(/\s+/g,' ').trim();}
+function ordLines(s){return s.lines.filter(function(l){var w=l[0].replace(/[.,;:!?¡¿"«»]/g,'').split(/\s+/);return w.length>=4&&w.length<=8;});}
+var NOUNSTOP={'que':1,'se':1,'no':1,'ya':1,'mi':1,'tu':1,'me':1,'te':1,'les':1,'los':1,'las':1,'mas':1,'más':1,'muy':1,'rey':1};
+function songNouns(s){
+ var out=[],seen={};
+ s.lines.forEach(function(l){
+  var m,rx=/\b(el|la)\s+([a-záéíóúñ]{3,})/gi;
+  while((m=rx.exec(l[0].toLowerCase()))){
+   var n=m[2];
+   if(NOUNSTOP[n]||seen[n])continue;
+   seen[n]=1;out.push([m[1],n]);
+  }
+ });
+ return out;
+}
+function gameHub(si){
+ var s=SONGS[si],B=muBest(),nn=songNouns(s);
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="songView('+si+')">← '+esc(s.t)+'</button><h1>🎮 Juegos</h1></div>';
+ h+='<div class="gcard"><div class="spot">Every game is built from the song itself — play them AFTER a couple of listens and the melody does half the remembering for you.</div>';
+ h+='<div class="card" onclick="gStart('+si+',\'ord\')"><span class="em">🧩</span><div style="flex:1"><b>Ordena la línea</b><div class="cmeta">Rebuild the lyric, word by word'+(B[s.id+'ord']!=null?' · best '+B[s.id+'ord']+'/5':'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="gStart('+si+',\'mc\')"><span class="em">🎯</span><div style="flex:1"><b>¿Qué significa?</b><div class="cmeta">Line to meaning — multiple choice'+(B[s.id+'mc']!=null?' · best '+B[s.id+'mc']+'/5':'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="gStart('+si+',\'type\')"><span class="em">⌨️</span><div style="flex:1"><b>Escribe lo que oyes</b><div class="cmeta">Hear the line, type it — accents forgiven'+(B[s.id+'type']!=null?' · best '+B[s.id+'type']+'/3':'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ if(nn.length>=4)h+='<div class="card" onclick="gStart('+si+',\'buk\')"><span class="em">🗃️</span><div style="flex:1"><b>¿El o la?</b><div class="cmeta">Sort the song\'s own nouns into their boxes'+(B[s.id+'buk']!=null?' · best '+B[s.id+'buk']+'/'+Math.min(8,nn.length):'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function gStart(si,mode){
+ var s=SONGS[si];
+ GG={si:si,mode:mode,r:0,score:0};
+ if(mode==='ord'){GG.items=shuffle(ordLines(s)).slice(0,5);}
+ if(mode==='mc'){GG.items=shuffle(s.lines.filter(function(l){return l[1]&&l[1].length>3;})).slice(0,5);}
+ if(mode==='type'){GG.items=shuffle(ordLines(s)).slice(0,3);}
+ if(mode==='buk'){GG.items=shuffle(songNouns(s)).slice(0,8);}
+ gRound();
+}
+function gRound(){
+ if(GG.r>=GG.items.length)return gEnd();
+ var s=SONGS[GG.si],it=GG.items[GG.r];
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="gameHub('+GG.si+')">✕ Exit</button><h1>🎮 '+(GG.r+1)+' / '+GG.items.length+'</h1></div><div class="gcard"><div class="rep-sc" style="text-align:right;font-weight:800;font-size:12.5px;color:var(--mut)">✓ '+GG.score+'</div>';
+ if(GG.mode==='ord'){
+  var words=it[0].replace(/[.,;:!?¡¿"«»]/g,'').split(/\s+/);
+  GG.target=words;GG.placed=[];GG.pool=shuffle(words.map(function(w,ix){return {w:w,ix:ix};}));
+  h+='<div class="cmeta" style="margin-bottom:6px">Rebuild the line — tap the words in order. <button class="say" onclick="spk(GG.items[GG.r][0],0.55)">🐢 hear it</button></div>';
+  h+='<div id="gslots" style="min-height:44px;background:#f6f1e7;border:1.5px dashed var(--line);border-radius:12px;padding:9px;font-weight:800;font-size:16px"></div>';
+  h+='<div id="gpool" style="margin-top:10px"></div><div id="gfb"></div>';
+  app.innerHTML=h+'</div>';ordPaint();return;
+ }
+ if(GG.mode==='mc'){
+  var others=shuffle(s.lines.filter(function(l){return l[1]!==it[1]&&l[1];})).slice(0,2);
+  GG.opts=shuffle([{t:it[1],ok:true},{t:others[0][1],ok:false},{t:others[1]?others[1][1]:'(something about the moon)',ok:false}]);
+  h+='<div class="cmeta">What does this line mean? <button class="say" onclick="spk(GG.items[GG.r][0],0.6)">🔊</button></div><div style="font-family:Fraunces,serif;font-size:19px;margin:8px 0 4px">'+esc(it[0])+'</div>';
+  GG.opts.forEach(function(o,j){h+='<button class="opt gbtn ghost" style="text-align:left;font-weight:700" id="go'+j+'" onclick="gPick('+j+')">'+esc(o.t)+'</button>';});
+  h+='<div id="gfb"></div>';
+ }
+ if(GG.mode==='type'){
+  h+='<div class="cmeta" style="margin-bottom:8px">Listen, then type what you heard. Accents and punctuation are forgiven.</div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:8px"><button class="gbtn ghost" style="flex:1;margin:0" onclick="spk(GG.items[GG.r][0],0.5)">🐢</button><button class="gbtn ghost" style="flex:1;margin:0" onclick="spk(GG.items[GG.r][0],0.85)">🔊</button></div>';
+  h+='<input class="tin" id="gtin" autocomplete="off" autocapitalize="off" placeholder="Escribe aquí…" style="width:100%;font-size:16px">';
+  h+='<button class="gbtn" onclick="gType()">Check →</button><div id="gfb"></div>';
+ }
+ if(GG.mode==='buk'){
+  h+='<div class="cmeta" style="margin-bottom:8px">This noun is from the song — which box does it live in?</div>';
+  h+='<div style="font-family:Fraunces,serif;font-size:26px;text-align:center;margin:10px 0">'+esc(it[1])+' <button class="say" onclick="spk(GG.items[GG.r][1],0.7)">🔊</button></div>';
+  h+='<div style="display:flex;gap:10px"><button class="gbtn" style="flex:1;margin:0" id="go0" onclick="gBuk(\'el\')">📦 EL</button><button class="gbtn" style="flex:1;margin:0;background:linear-gradient(140deg,#c2557c,#8a2f56)" id="go1" onclick="gBuk(\'la\')">📦 LA</button></div><div id="gfb"></div>';
+ }
+ app.innerHTML=h+'</div>';
+ if(GG.mode==='mc'||GG.mode==='type')setTimeout(function(){spk(it[0],GG.mode==='type'?0.5:0.6);},300);
+ window.scrollTo(0,0);
+}
+function ordPaint(){
+ var sl=document.getElementById('gslots'),pl=document.getElementById('gpool');
+ if(sl)sl.innerHTML=GG.placed.map(function(p,k){return '<span class="badge" style="font-size:14px;cursor:pointer;margin:2px" onclick="GG.pool.push(GG.placed.splice('+k+',1)[0]);ordPaint()">'+esc(p.w)+'</span>';}).join(' ')||'<span style="color:var(--mut);font-weight:700;font-size:13px">tap words below…</span>';
+ if(pl)pl.innerHTML=GG.pool.map(function(p,k){return '<button class="say" style="font-size:15px;font-weight:800;margin:3px;padding:7px 13px" onclick="GG.placed.push(GG.pool.splice('+k+',1)[0]);ordPaint();ordCheck()">'+esc(p.w)+'</button>';}).join('');
+}
+function ordCheck(){
+ if(GG.pool.length)return;
+ var ok=GG.placed.every(function(p,k){return p.w===GG.target[k];});
+ if(ok)GG.score++;
+ else mochFeed('Order the line: '+shuffle(GG.target).join(' / '),GG.items[GG.r][0],'From '+SONGS[GG.si].t+' — sing it to remember the order.');
+ var fb=document.getElementById('gfb');
+ if(fb)fb.innerHTML='<div class="spot" style="margin-top:10px;'+(ok?'':'background:#fbe9e7;border-color:#e5b7b0;color:#8c3126')+'">'+(ok?'✓ ¡Perfecto!':'✗ The line goes: <b>'+esc(GG.items[GG.r][0])+'</b>')+'</div><button class="gbtn" onclick="GG.r++;gRound()">'+(GG.r+1>=GG.items.length?'Results →':'Next →')+'</button>';
+}
+function gPick(j){
+ var ok=GG.opts[j].ok;
+ if(ok)GG.score++;else mochFeed('What does it mean: '+GG.items[GG.r][0],GG.items[GG.r][1],'From '+SONGS[GG.si].t+'.');
+ GG.opts.forEach(function(o,k){var e=document.getElementById('go'+k);if(e){e.disabled=true;if(o.ok)e.style.borderColor='var(--green)';else if(k===j)e.style.borderColor='#c0392b';}});
+ var fb=document.getElementById('gfb');
+ if(fb)fb.innerHTML='<button class="gbtn" onclick="GG.r++;gRound()">'+(GG.r+1>=GG.items.length?'Results →':'Next →')+'</button>';
+}
+function gType(){
+ var el=document.getElementById('gtin'),v=el?el.value:'';
+ var tgt=GG.items[GG.r][0];
+ var ok=norm(v)===norm(tgt);
+ var tw=norm(tgt).split(' '),vw=norm(v).split(' ');
+ var diff=tw.map(function(w,k){return '<span style="color:'+(vw[k]===w?'var(--green)':'#c0392b')+';font-weight:800">'+esc(tgt.replace(/[.,;:!?¡¿"«»]/g,'').split(/\s+/)[k]||w)+'</span>';}).join(' ');
+ if(ok)GG.score++;else mochFeed('Type what you hear: (from '+SONGS[GG.si].t+')',tgt,'Play it slow, whisper along, then write.');
+ var fb=document.getElementById('gfb');
+ if(fb)fb.innerHTML='<div class="spot" style="margin-top:10px;'+(ok?'':'background:#fbe9e7;border-color:#e5b7b0;color:#8c3126')+'">'+(ok?'✓ ¡Oído de oro!':'Word by word: ')+'<div style="margin-top:4px">'+diff+'</div></div><button class="gbtn" onclick="GG.r++;gRound()">'+(GG.r+1>=GG.items.length?'Results →':'Next →')+'</button>';
+}
+function gBuk(art){
+ var it=GG.items[GG.r],ok=art===it[0];
+ if(ok)GG.score++;else mochFeed('¿El o la? — '+it[1],it[0]+' '+it[1],'From '+SONGS[GG.si].t+' — the song already sang the answer.');
+ var fb=document.getElementById('gfb');
+ if(fb)fb.innerHTML='<div class="spot" style="margin-top:10px;'+(ok?'':'background:#fbe9e7;border-color:#e5b7b0;color:#8c3126')+'">'+(ok?'✓':'✗')+' <b>'+esc(it[0]+' '+it[1])+'</b></div><button class="gbtn" onclick="GG.r++;gRound()">'+(GG.r+1>=GG.items.length?'Results →':'Next →')+'</button>';
+}
+function gEnd(){
+ var s=SONGS[GG.si],B=muBest(),key=s.id+GG.mode,nb=GG.score>(B[key]||0);
+ if(nb){B[key]=GG.score;muBestSave(B);}
+ var h=nav()+'<div class="gcard" style="text-align:center"><h2>'+(GG.score>=GG.items.length-1?'🏆':'🎵')+' '+GG.score+' / '+GG.items.length+'</h2><p style="font-size:13.5px;color:var(--ink2);margin:8px 0">'+(nb?'New best! ':'')+'Misses joined your 🎒 Mochila. Play the song once more and run it again — the melody is the mnemonic.</p>';
+ h+='<button class="gbtn" onclick="gStart(GG.si,GG.mode)">Otra vez →</button><button class="gbtn ghost" onclick="gameHub(GG.si)">More games</button><button class="gbtn ghost" onclick="songView(GG.si)">Back to the song</button></div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>

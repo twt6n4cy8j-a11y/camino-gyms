@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="es"><head><link rel='preconnect' href='https://fonts.googleapis.com'><link href='https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap' rel='stylesheet'><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sentence Lab · El Camino Grande</title><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#faf3ea;color:#33202e;-webkit-font-smoothing:antialiased}
+#app{max-width:760px;margin:0 auto;padding:0 16px 60px}
+.topnav{position:sticky;top:0;z-index:5;background:#7c2d12;color:#fff;display:flex;align-items:center;gap:14px;padding:12px 16px;margin:0 -16px 18px}
+.topnav .brand{font-weight:800;font-size:17px;cursor:pointer}
+.topnav .nlinks{margin-left:auto;display:flex;gap:14px}
+.topnav a{color:#fed7aa;text-decoration:none;font-size:14px;cursor:pointer}.topnav a:hover{color:#fff}
+.hero{background:linear-gradient(135deg,#9a3412,#e8a33d);color:#fff;border-radius:18px;padding:24px 22px;margin-bottom:14px}
+.hero h1{margin:0 0 6px;font-size:28px}.hero p{margin:0;opacity:.95;line-height:1.45;font-size:15px}
+.lvbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border:1px solid #f3e6d7;border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.lvlab{font-weight:700;font-size:13px;color:#33202e;margin-right:4px}
+.lvbtn{border:2px solid #e7d9c8;background:#fffdf9;border-radius:8px;padding:5px 12px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;color:#33202e}
+.lvbtn.on{background:#d97706;border-color:#d97706;color:#fff}
+.lvhint{font-size:12px;color:#8a7386;margin-left:auto}
+.wgrid{display:grid;grid-template-columns:1fr;gap:11px}
+.wcard{background:#fff;border:1px solid #f3e6d7;border-radius:14px;padding:15px;cursor:pointer;transition:.15s;display:flex;gap:13px;align-items:center}
+.wcard:hover{border-color:#d97706;box-shadow:0 5px 16px rgba(217,119,6,.14);transform:translateY(-2px)}
+.wemoji{font-size:26px}.wname{font-weight:700;font-size:16px}.wdesc{font-size:13px;color:#5c4759;margin-top:2px}
+.gbtn{background:#d97706;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:10px}
+.gbtn:hover{background:#b45309}.gbtn.ghost{background:#f3e6d7;color:#33202e}.gbtn.ghost:hover{background:#e7d9c8}
+.gbtn.next{margin-left:0}.hintbtn{font-size:13px;padding:7px 12px}
+.ghead{margin-bottom:16px}
+.quit{background:none;border:0;color:#8a7386;font-size:13px;cursor:pointer;padding:0;font-family:inherit}
+.gmeta{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px}
+.gname{font-weight:700;font-size:15px}.gstat{font-size:13px;color:#5c4759}
+.gbar{height:7px;background:#f3e6d7;border-radius:99px;margin-top:8px;overflow:hidden}.gbarfill{height:100%;background:#d97706;border-radius:99px;transition:width .3s}
+.gcard{background:#fff;border:1px solid #f3e6d7;border-radius:16px;padding:24px}
+.big{font-size:23px;font-weight:800;color:#7c2d12;line-height:1.35}
+.sub{color:#5c4759;font-size:14px;margin:8px 0 14px}
+.vask2{font-size:14px;color:#92400e;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:6px 10px;display:inline-block;margin-bottom:12px}
+.vin{width:100%;font-size:20px;padding:13px 15px;border:2px solid #e7d9c8;border-radius:11px;font-family:inherit;outline:none}.vin:focus{border-color:#d97706}.vin:disabled{background:#fffdf9}
+.gfb{margin-top:16px;font-size:15px;line-height:1.5}.fbok{color:#15803d;font-weight:700}.fbno{color:#b91c1c;font-weight:700}
+.say{background:#ffedd5;border:0;border-radius:7px;padding:3px 8px;cursor:pointer;font-size:13px;vertical-align:middle}
+.muted{color:#8a7386}
+.trans{font-size:19px;font-weight:700;color:#7c2d12;margin-top:6px}
+.hintline{margin-top:9px;font-size:15px;color:#33202e;min-height:1px}
+.masked{letter-spacing:3px;font-weight:800;font-family:ui-monospace,Menlo,Consolas,monospace;color:#9a3412}
+.answ{min-height:44px;border:2px dashed #f3e6d7;border-radius:10px;padding:8px;margin:6px 0 12px;display:flex;flex-wrap:wrap;gap:6px}
+.bank{display:flex;flex-wrap:wrap;gap:7px}
+.wb{background:#faf3ea;border:2px solid #f3e6d7;border-radius:9px;padding:8px 13px;font-size:16px;cursor:pointer;font-family:inherit;color:#33202e}
+.wb:hover:enabled{background:#ffedd5}.wb:disabled{opacity:.35}
+.wb.wa{background:#ffedd5;border-color:#fdba74;cursor:default}
+.done{text-align:center}.bigemoji{font-size:54px}.done h2{margin:4px 0 10px;font-size:18px;color:#5c4759}
+.score{font-size:42px;font-weight:800;color:#d97706;line-height:1}.scsub{display:block;font-size:15px;color:#5c4759;font-weight:600;margin-top:4px}
+.brow{display:flex;gap:10px;justify-content:center;margin-top:16px}
+
+</style><style>:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}</style></head><body><div id="app"></div><script>window.SD={"verbs":[{"inf":"comer","b":"eat","s":"eats","p":"ate","type":"tr","cats":["food"],"PRES":["como","comes","come","comemos","comen"],"PRET":["comí","comiste","comió","comimos","comieron"],"IMP":["comía","comías","comía","comíamos","comían"],"FUT":["comeré","comerás","comerá","comeremos","comerán"],"COND":["comería","comerías","comería","comeríamos","comerían"]},{"inf":"beber","b":"drink","s":"drinks","p":"drank","type":"tr","cats":["drink"],"PRES":["bebo","bebes","bebe","bebemos","beben"],"PRET":["bebí","bebiste","bebió","bebimos","bebieron"],"IMP":["bebía","bebías","bebía","bebíamos","bebían"],"FUT":["beberé","beberás","beberá","beberemos","beberán"],"COND":["bebería","beberías","bebería","beberíamos","beberían"]},{"inf":"tomar","b":"have","s":"has","p":"had","type":"tr","cats":["drink","food"],"PRES":["tomo","tomas","toma","tomamos","toman"],"PRET":["tomé","tomaste","tomó","tomamos","tomaron"],"IMP":["tomaba","tomabas","tomaba","tomábamos","tomaban"],"FUT":["tomaré","tomarás","tomará","tomaremos","tomarán"],"COND":["tomaría","tomarías","tomaría","tomaríamos","tomarían"]},{"inf":"preparar","b":"prepare","s":"prepares","p":"prepared","type":"tr","cats":["food"],"PRES":["preparo","preparas","prepara","preparamos","preparan"],"PRET":["preparé","preparaste","preparó","preparamos","prepararon"],"IMP":["preparaba","preparabas","preparaba","preparábamos","preparaban"],"FUT":["prepararé","prepararás","preparará","prepararemos","prepararán"],"COND":["prepararía","prepararías","prepararía","prepararíamos","prepararían"]},{"inf":"comprar","b":"buy","s":"buys","p":"bought","type":"tr","cats":["food","thing","wear","read"],"PRES":["compro","compras","compra","compramos","compran"],"PRET":["compré","compraste","compró","compramos","compraron"],"IMP":["compraba","comprabas","compraba","comprábamos","compraban"],"FUT":["compraré","comprarás","comprará","compraremos","comprarán"],"COND":["compraría","comprarías","compraría","compraríamos","comprarían"]},{"inf":"vender","b":"sell","s":"sells","p":"sold","type":"tr","cats":["food","thing"],"PRES":["vendo","vendes","vende","vendemos","venden"],"PRET":["vendí","vendiste","vendió","vendimos","vendieron"],"IMP":["vendía","vendías","vendía","vendíamos","vendían"],"FUT":["venderé","venderás","venderá","venderemos","venderán"],"COND":["vendería","venderías","vendería","venderíamos","venderían"]},{"inf":"tener","b":"have","s":"has","p":"had","type":"tr","cats":["thing","food","read"],"PRES":["tengo","tienes","tiene","tenemos","tienen"],"PRET":["tuve","tuviste","tuvo","tuvimos","tuvieron"],"IMP":["tenía","tenías","tenía","teníamos","tenían"],"FUT":["tendré","tendrás","tendrá","tendremos","tendrán"],"COND":["tendría","tendrías","tendría","tendríamos","tendrían"]},{"inf":"querer","b":"want","s":"wants","p":"wanted","type":"tr","cats":["food","drink","thing","read"],"PRES":["quiero","quieres","quiere","queremos","quieren"],"PRET":["quise","quisiste","quiso","quisimos","quisieron"],"IMP":["quería","querías","quería","queríamos","querían"],"FUT":["querré","querrás","querrá","querremos","querrán"],"COND":["querría","querrías","querría","querríamos","querrían"]},{"inf":"necesitar","b":"need","s":"needs","p":"needed","type":"tr","cats":["thing","food"],"PRES":["necesito","necesitas","necesita","necesitamos","necesitan"],"PRET":["necesité","necesitaste","necesitó","necesitamos","necesitaron"],"IMP":["necesitaba","necesitabas","necesitaba","necesitábamos","necesitaban"],"FUT":["necesitaré","necesitarás","necesitará","necesitaremos","necesitarán"],"COND":["necesitaría","necesitarías","necesitaría","necesitaríamos","necesitarían"]},{"inf":"ver","b":"see","s":"sees","p":"saw","type":"tr","cats":["thing","read"],"PRES":["veo","ves","ve","vemos","ven"],"PRET":["vi","viste","vio","vimos","vieron"],"IMP":["veía","veías","veía","veíamos","veían"],"FUT":["veré","verás","verá","veremos","verán"],"COND":["vería","verías","vería","veríamos","verían"]},{"inf":"buscar","b":"look for","s":"looks for","p":"looked for","type":"tr","cats":["thing","read"],"PRES":["busco","buscas","busca","buscamos","buscan"],"PRET":["busqué","buscaste","buscó","buscamos","buscaron"],"IMP":["buscaba","buscabas","buscaba","buscábamos","buscaban"],"FUT":["buscaré","buscarás","buscará","buscaremos","buscarán"],"COND":["buscaría","buscarías","buscaría","buscaríamos","buscarían"]},{"inf":"traer","b":"bring","s":"brings","p":"brought","type":"tr","cats":["food","drink","thing"],"PRES":["traigo","traes","trae","traemos","traen"],"PRET":["traje","trajiste","trajo","trajimos","trajeron"],"IMP":["traía","traías","traía","traíamos","traían"],"FUT":["traeré","traerás","traerá","traeremos","traerán"],"COND":["traería","traerías","traería","traeríamos","traerían"]},{"inf":"leer","b":"read","s":"reads","p":"read","type":"tr","cats":["read"],"PRES":["leo","lees","lee","leemos","leen"],"PRET":["leí","leíste","leyó","leímos","leyeron"],"IMP":["leía","leías","leía","leíamos","leían"],"FUT":["leeré","leerás","leerá","leeremos","leerán"],"COND":["leería","leerías","leería","leeríamos","leerían"]},{"inf":"escribir","b":"write","s":"writes","p":"wrote","type":"tr","cats":["read"],"PRES":["escribo","escribes","escribe","escribimos","escriben"],"PRET":["escribí","escribiste","escribió","escribimos","escribieron"],"IMP":["escribía","escribías","escribía","escribíamos","escribían"],"FUT":["escribiré","escribirás","escribirá","escribiremos","escribirán"],"COND":["escribiría","escribirías","escribiría","escribiríamos","escribirían"]},{"inf":"usar","b":"use","s":"uses","p":"used","type":"tr","cats":["thing","wear"],"PRES":["uso","usas","usa","usamos","usan"],"PRET":["usé","usaste","usó","usamos","usaron"],"IMP":["usaba","usabas","usaba","usábamos","usaban"],"FUT":["usaré","usarás","usará","usaremos","usarán"],"COND":["usaría","usarías","usaría","usaríamos","usarían"]},{"inf":"llevar","b":"wear","s":"wears","p":"wore","type":"tr","cats":["wear"],"PRES":["llevo","llevas","lleva","llevamos","llevan"],"PRET":["llevé","llevaste","llevó","llevamos","llevaron"],"IMP":["llevaba","llevabas","llevaba","llevábamos","llevaban"],"FUT":["llevaré","llevarás","llevará","llevaremos","llevarán"],"COND":["llevaría","llevarías","llevaría","llevaríamos","llevarían"]},{"inf":"vivir","b":"live","s":"lives","p":"lived","type":"place","cats":[],"PRES":["vivo","vives","vive","vivimos","viven"],"PRET":["viví","viviste","vivió","vivimos","vivieron"],"IMP":["vivía","vivías","vivía","vivíamos","vivían"],"FUT":["viviré","vivirás","vivirá","viviremos","vivirán"],"COND":["viviría","vivirías","viviría","viviríamos","vivirían"]},{"inf":"trabajar","b":"work","s":"works","p":"worked","type":"place","cats":[],"PRES":["trabajo","trabajas","trabaja","trabajamos","trabajan"],"PRET":["trabajé","trabajaste","trabajó","trabajamos","trabajaron"],"IMP":["trabajaba","trabajabas","trabajaba","trabajábamos","trabajaban"],"FUT":["trabajaré","trabajarás","trabajará","trabajaremos","trabajarán"],"COND":["trabajaría","trabajarías","trabajaría","trabajaríamos","trabajarían"]},{"inf":"estudiar","b":"study","s":"studies","p":"studied","type":"place","cats":[],"PRES":["estudio","estudias","estudia","estudiamos","estudian"],"PRET":["estudié","estudiaste","estudió","estudiamos","estudiaron"],"IMP":["estudiaba","estudiabas","estudiaba","estudiábamos","estudiaban"],"FUT":["estudiaré","estudiarás","estudiará","estudiaremos","estudiarán"],"COND":["estudiaría","estudiarías","estudiaría","estudiaríamos","estudiarían"]},{"inf":"estar","b":"be","s":"is","p":"was","type":"place","cats":[],"PRES":["estoy","estás","está","estamos","están"],"PRET":["estuve","estuviste","estuvo","estuvimos","estuvieron"],"IMP":["estaba","estabas","estaba","estábamos","estaban"],"FUT":["estaré","estarás","estará","estaremos","estarán"],"COND":["estaría","estarías","estaría","estaríamos","estarían"]},{"inf":"descansar","b":"rest","s":"rests","p":"rested","type":"place","cats":[],"PRES":["descanso","descansas","descansa","descansamos","descansan"],"PRET":["descansé","descansaste","descansó","descansamos","descansaron"],"IMP":["descansaba","descansabas","descansaba","descansábamos","descansaban"],"FUT":["descansaré","descansarás","descansará","descansaremos","descansarán"],"COND":["descansaría","descansarías","descansaría","descansaríamos","descansarían"]}],"subj":[{"es":"yo","en":"I","pi":0,"sing3":false},{"es":"tú","en":"you","pi":1,"sing3":false},{"es":"él","en":"he","pi":2,"sing3":true},{"es":"ella","en":"she","pi":2,"sing3":true},{"es":"el hombre","en":"the man","pi":2,"sing3":true},{"es":"la mujer","en":"the woman","pi":2,"sing3":true},{"es":"mi amigo","en":"my friend","pi":2,"sing3":true},{"es":"nosotros","en":"we","pi":3,"sing3":false},{"es":"ellos","en":"they","pi":4,"sing3":false},{"es":"los niños","en":"the children","pi":4,"sing3":false}],"obj":[{"es":"manzana","art":"la","en":"the apple","cat":"food"},{"es":"pan","art":"el","en":"the bread","cat":"food"},{"es":"carne","art":"la","en":"the meat","cat":"food"},{"es":"pescado","art":"el","en":"the fish","cat":"food"},{"es":"queso","art":"el","en":"the cheese","cat":"food"},{"es":"comida","art":"la","en":"the food","cat":"food"},{"es":"café","art":"el","en":"the coffee","cat":"drink"},{"es":"agua","art":"el","en":"the water","cat":"drink"},{"es":"leche","art":"la","en":"the milk","cat":"drink"},{"es":"jugo","art":"el","en":"the juice","cat":"drink"},{"es":"libro","art":"el","en":"the book","cat":"read"},{"es":"periódico","art":"el","en":"the newspaper","cat":"read"},{"es":"carta","art":"la","en":"the letter","cat":"read"},{"es":"revista","art":"la","en":"the magazine","cat":"read"},{"es":"ropa","art":"la","en":"the clothes","cat":"wear"},{"es":"camisa","art":"la","en":"the shirt","cat":"wear"},{"es":"coche","art":"el","en":"the car","cat":"thing"},{"es":"dinero","art":"el","en":"the money","cat":"thing"},{"es":"teléfono","art":"el","en":"the phone","cat":"thing"},{"es":"película","art":"la","en":"the movie","cat":"thing"}],"place":[{"es":"casa","art":"la","en":"the house"},{"es":"oficina","art":"la","en":"the office"},{"es":"parque","art":"el","en":"the park"},{"es":"escuela","art":"la","en":"the school"},{"es":"restaurante","art":"el","en":"the restaurant"},{"es":"ciudad","art":"la","en":"the city"},{"es":"playa","art":"la","en":"the beach"},{"es":"hotel","art":"el","en":"the hotel"}],"time":{"PRES":[["","",""],["hoy","today"],["ahora","now"]],"PRET":[["ayer","yesterday"],["anoche","last night"],["el lunes","on Monday"]],"IMP":[["de niño","as a child"],["siempre","always"],["todos los días","every day"]],"FUT":[["mañana","tomorrow"],["la próxima semana","next week"],["",""]],"COND":[["",""],["algún día","someday"]]},"tenses":["PRES","PRET","IMP","FUT","COND"]};</script><script>function nav(){return '<div class="topnav"><span class="brand" onclick="home()">📝 Sentence Lab</span><span class="nlinks"><a href="/">🏠 All tools</a><a href="/">← Explore</a><a onclick="home()">Inicio</a></span></div>';}</script><script>
+/* ===================== SENTENCE LAB ===================== */
+var SD=window.SD, VERBS=SD.verbs, SUBJ=SD.subj, OBJ=SD.obj, PLACE=SD.place, TIME=SD.time;
+/* audio */
+var _voices=[];function _lv(){try{_voices=window.speechSynthesis.getVoices()||[];}catch(e){_voices=[];}}
+if('speechSynthesis' in window){_lv();window.speechSynthesis.onvoiceschanged=_lv;}
+function pickES(){var pref=['Paulina','Mónica','Monica','Juan','Jorge','Diego','Google español','es-MX','es-US','es-419','es-'];for(var p=0;p<pref.length;p++)for(var i=0;i<_voices.length;i++){var v=_voices[i];if((v.name&&v.name.indexOf(pref[p])>=0)||(v.lang&&v.lang.indexOf(pref[p])>=0))return v;}for(var j=0;j<_voices.length;j++)if(_voices[j].lang&&_voices[j].lang.toLowerCase().indexOf('es')===0)return _voices[j];return null;}
+function spk(t){if(!('speechSynthesis'in window))return;t=(t||'').replace(/\([^)]*\)/g,'').replace(/\[[^\]]*\]/g,'').replace(/[“”"]/g,'').replace(/\s+/g,' ').trim();if(!t)return;try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-MX';var v=pickES();if(v)u.voice=v;u.rate=.95;window.speechSynthesis.speak(u);}catch(e){}}
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function strip(s){return (''+s).toLowerCase().trim().replace(/[áàâä]/g,'a').replace(/[éèêë]/g,'e').replace(/[íìîï]/g,'i').replace(/[óòôö]/g,'o').replace(/[úùûü]/g,'u').replace(/ñ/g,'n').replace(/[.,¿?¡!]/g,'').replace(/\s+/g,' ').trim();}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function sayBtn(t){return '<button class="say" onclick="spk(\''+(''+t).replace(/'/g,'')+'\')">🔊</button>';}
+/* level */
+var VLEVELS=['A1','A2','B1','B2'];
+function lvLoad(){try{return localStorage.getItem('sent_lvl')||'A1';}catch(e){return 'A1';}}
+var LV=lvLoad();
+function lvIdx(l){var i=VLEVELS.indexOf(l);return i<0?0:i;}
+function lvlTenses(){var n=lvIdx(LV);return n<=0?['PRES']:(n===1?['PRES','PRET','IMP']:['PRES','PRET','IMP','FUT','COND']);}
+function setLevel(l){LV=l;try{localStorage.setItem('sent_lvl',l);}catch(e){}home();}
+function levelBar(){var h='<div class="lvbar"><span class="lvlab">Tu nivel:</span>';VLEVELS.forEach(function(l){h+='<button class="lvbtn'+(LV===l?' on':'')+'" onclick="setLevel(\''+l+'\')">'+l+'</button>';});h+='<span class="lvhint">'+lvlTenses().map(function(t){return TLAB(t);}).join(', ')+'</span></div>';return h;}
+function TLAB(t){return {PRES:'Presente',PRET:'Pretérito',IMP:'Imperfecto',FUT:'Futuro',COND:'Condicional'}[t];}
+/* english verb form */
+function enVerb(v,subj,tense){
+ if(v.inf==='estar'){var pr=['am','are','is','are','are'][subj.pi],pa=['was','were','was','were','were'][subj.pi];return {PRES:pr,PRET:pa,IMP:pa,FUT:'will be',COND:'would be'}[tense];}
+ if(tense==='PRES')return subj.sing3?v.s:v.b;
+ if(tense==='PRET')return v.p;
+ if(tense==='IMP')return 'used to '+v.b;
+ if(tense==='FUT')return 'will '+v.b;
+ return 'would '+v.b;
+}
+/* generate one sentence */
+function gen(){
+ var tense=rnd(lvlTenses());var v=rnd(VERBS);var subj=rnd(SUBJ);var vform=v[tense][subj.pi];
+ var tp=rnd(TIME[tense]);var tEs=tp[0],tEn=tp[1];
+ var es,en;
+ if(v.type==='place'){
+  var pl=rnd(PLACE);var prep=v.inf==='estar'?'at':'in';
+  es=subj.es+' '+vform+' en '+pl.art+' '+pl.es;
+  en=cap(subj.en)+' '+enVerb(v,subj,tense)+' '+prep+' '+pl.en;
+ } else {
+  var pool=OBJ.filter(function(o){return v.cats.indexOf(o.cat)>=0;});if(!pool.length)return gen();
+  var o=rnd(pool);
+  es=subj.es+' '+vform+' '+o.art+' '+o.es;
+  en=cap(subj.en)+' '+enVerb(v,subj,tense)+' '+o.en;
+ }
+ if(tEs){es+=' '+tEs;en+=' '+tEn;}
+ es=cap(es.trim());en=en.trim();
+ return {es:es,en:en,vform:vform,inf:v.inf,tense:tense,subj:subj};
+}
+/* ---- session ---- */
+var S=null;
+function startMode(m){S={mode:m,queue:[],i:0,correct:0,streak:0};for(var k=0;k<12;k++)S.queue.push(gen());S.name={fill:'Completa el verbo',tr:'Traduce la frase',build:'Ordena las palabras'}[m];nextItem();}
+function quitSession(){S=null;home();}
+function nextItem(){if(S.i>=S.queue.length)return finish();render();}
+function head(){var pct=Math.round(S.i/S.queue.length*100);return '<div class="ghead"><button class="quit" onclick="quitSession()">✕ Salir</button><div class="gmeta"><span class="gname">'+esc(S.name)+'</span><span class="gstat">'+(S.i+1)+' / '+S.queue.length+' · ✓ '+S.correct+' · 🔥 '+S.streak+'</span></div><div class="gbar"><div class="gbarfill" style="width:'+pct+'%"></div></div></div>';}
+
+function render(){var it=S.queue[S.i],m=S.mode;var h=head()+'<div class="gcard">';
+ if(m==='fill'){
+  var blanked=it.es.replace(it.vform,'_____');
+  h+='<div class="big">'+esc(blanked)+'</div><div class="sub">'+esc(it.en)+'</div>'
+   +'<div class="vask2">'+esc(it.inf)+' · <b>'+esc(it.subj.es)+'</b> · '+TLAB(it.tense)+'</div>'
+   +'<input id="vin" class="vin" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="el verbo…" onkeydown="if(event.key===\'Enter\')checkFill()">'
+   +'<div><button class="gbtn" onclick="checkFill()">Revisar</button> <button class="gbtn ghost hintbtn" onclick="hintFill()">💡 Pista</button></div><div class="hintline" id="hintline"></div>';
+ } else if(m==='tr'){
+  h+='<div class="big">'+esc(it.es)+'</div> '+sayBtn(it.es)
+   +'<div class="sub">¿Qué significa en inglés?</div><div id="trrev"></div>'
+   +'<div><button class="gbtn" onclick="revealTr()">Ver traducción</button></div>';
+ } else { /* build */
+  var words=shuffle(it.es.replace(/[.]/g,'').split(' ').slice());
+  h+='<div class="sub">Ordena para decir:</div><div class="big" style="font-size:18px">“'+esc(it.en)+'”</div>'
+   +'<div class="answ" id="answ"></div><div class="bank" id="bank">'+words.map(function(w,i){return '<button class="wb" data-i="'+i+'" onclick="bAdd(this)">'+esc(w)+'</button>';}).join('')+'</div>'
+   +'<div><button class="gbtn" onclick="checkBuild()">Revisar</button> <button class="gbtn ghost" onclick="bClear()">↺</button></div>';
+  BB=[];
+ }
+ h+='<div class="gfb" id="gfb"></div></div>';app.innerHTML=nav()+h;
+ var inp=document.getElementById('vin');if(inp)inp.focus();
+}
+function fb(ok,msg){var el=document.getElementById('gfb');el.innerHTML='<div class="'+(ok?'fbok':'fbno')+'">'+msg+'</div><button class="gbtn next" onclick="nextItem2()">'+(S.i+1>=S.queue.length?'Ver resultado →':'Siguiente →')+'</button>';if(ok){S.correct++;S.streak++;}else S.streak=0;}
+function nextItem2(){S.i++;nextItem();}
+function checkFill(){var it=S.queue[S.i],inp=document.getElementById('vin');if(!inp||inp.disabled)return;inp.disabled=true;var ok=strip(inp.value)===strip(it.vform);
+ fb(ok,(ok?'✓ ':'✗ ')+'<b>'+esc(it.es)+'</b> '+sayBtn(it.es)+'<br><span class="muted">'+esc(it.en)+'</span>'+(ok?'':'<br><span class="muted">forma: '+esc(it.vform)+'</span>'));}
+function hintFill(){var it=S.queue[S.i];var a=it.vform;var masked=a.split('').map(function(c,i){return i===0?c:'_';}).join('');var el=document.getElementById('hintline');if(el)el.innerHTML='💡 <span class="masked">'+masked+'</span> <span class="muted">('+a.length+' letras)</span>';}
+function revealTr(){var it=S.queue[S.i];document.getElementById('trrev').innerHTML='<div class="trans">'+esc(it.en)+'</div>';var el=document.getElementById('gfb');el.innerHTML='<button class="gbtn next" onclick="nextItem2()">'+(S.i+1>=S.queue.length?'Ver resultado →':'Siguiente →')+'</button> <button class="gbtn ghost" onclick="markTr(1)">✓ La sabía</button> <button class="gbtn ghost" onclick="markTr(0)">✗ No</button>';}
+function markTr(ok){if(ok){S.correct++;S.streak++;}else S.streak=0;nextItem2();}
+/* build */
+var BB=[];
+function bAdd(btn){var i=+btn.getAttribute('data-i');if(BB.indexOf(i)>=0)return;BB.push(i);btn.disabled=true;bRender();}
+function bClear(){BB=[];document.querySelectorAll('#bank .wb').forEach(function(b){b.disabled=false;});document.getElementById('answ').innerHTML='';}
+function bRender(){var bank=document.getElementById('bank');var answ=document.getElementById('answ');var words=Array.prototype.map.call(bank.querySelectorAll('.wb'),function(b){return b.textContent;});answ.innerHTML=BB.map(function(i){return '<span class="wb wa">'+esc(words[i])+'</span>';}).join('');}
+function checkBuild(){var it=S.queue[S.i];var bank=document.getElementById('bank');var words=Array.prototype.map.call(bank.querySelectorAll('.wb'),function(b){return b.textContent;});var built=BB.map(function(i){return words[i];}).join(' ');var ok=strip(built)===strip(it.es);
+ fb(ok,(ok?'✓ ':'✗ ')+'<b>'+esc(it.es)+'</b> '+sayBtn(it.es)+'<br><span class="muted">'+esc(it.en)+'</span>');}
+function finish(){var acc=Math.round(S.correct/S.queue.length*100);var msg=acc>=90?'🏆 ¡Excelente!':acc>=70?'💪 ¡Bien hecho!':acc>=50?'👍 Vas mejorando.':'🌱 Sigue practicando.';
+ app.innerHTML=nav()+'<div class="gcard done"><div class="bigemoji">'+msg.split(' ')[0]+'</div><h2>'+esc(S.name)+'</h2><div class="score">'+S.correct+' / '+S.queue.length+'<span class="scsub">'+acc+'%</span></div><div class="brow"><button class="gbtn" onclick="startMode(\''+S.mode+'\')">↻ Otra vez</button><button class="gbtn ghost" onclick="home()">🏠 Inicio</button></div></div>';}
+function home(){S=null;
+ var h='<div class="hero"><h1>📝 Sentence Lab</h1><p>Put it together — conjugate verbs inside real sentences, translate, and build word order. Correct grammar, every time.</p></div>';
+ h+=levelBar();
+ h+='<div class="wgrid">';
+ [['fill','✍️','Completa el verbo','Fill the missing verb in a full sentence.'],['tr','🔄','Traduce la frase','Read a Spanish sentence; reveal the English.'],['build','🧩','Ordena las palabras','Arrange the words into the right order.']].forEach(function(m){h+='<div class="wcard" onclick="startMode(\''+m[0]+'\')"><div class="wemoji">'+m[1]+'</div><div class="wbody"><div class="wname">'+m[2]+'</div><div class="wdesc">'+m[3]+'</div></div></div>';});
+ h+='</div>';
+ app.innerHTML=nav()+h;
+}
+var app=document.getElementById('app');
+home();
+
+</script></body></html>

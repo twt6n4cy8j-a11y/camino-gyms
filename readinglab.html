@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="es"><head><link rel='preconnect' href='https://fonts.googleapis.com'><link href='https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap' rel='stylesheet'><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reading Lab · El Camino Grande</title><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#faf3ea;color:#33202e;-webkit-font-smoothing:antialiased}
+#app{max-width:760px;margin:0 auto;padding:0 16px 90px}
+.topnav{position:sticky;top:0;z-index:5;background:#312e81;color:#fff;display:flex;align-items:center;gap:14px;padding:12px 16px;margin:0 -16px 18px}
+.topnav .brand{font-weight:800;font-size:17px;cursor:pointer}
+.topnav .nlinks{margin-left:auto;display:flex;gap:14px}
+.topnav a{color:#c7d2fe;text-decoration:none;font-size:14px;cursor:pointer}.topnav a:hover{color:#fff}
+.hero{background:linear-gradient(135deg,#3730a3,#6366f1);color:#fff;border-radius:18px;padding:24px 22px;margin-bottom:14px}
+.hero h1{margin:0 0 6px;font-size:28px}.hero p{margin:0;opacity:.95;line-height:1.45;font-size:15px}
+.lvbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border:1px solid #f3e6d7;border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.lvlab{font-weight:700;font-size:13px;color:#33202e;margin-right:4px}
+.lvbtn{border:2px solid #e7d9c8;background:#fffdf9;border-radius:8px;padding:5px 12px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;color:#33202e}
+.lvbtn.on{background:#4f46e5;border-color:#4f46e5;color:#fff}
+.muted{color:#8a7386}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:560px){.rgrid{grid-template-columns:1fr}}
+.rcard{background:#fff;border:1px solid #f3e6d7;border-radius:14px;padding:15px;cursor:pointer;transition:.15s}
+.rcard:hover{border-color:#4f46e5;box-shadow:0 5px 16px rgba(79,70,229,.14);transform:translateY(-2px)}
+.rtitle{font-weight:800;font-size:16px;color:#312e81}.rdone{color:#2f8a5b}
+.rsub{font-size:13px;color:#5c4759;margin:2px 0 9px}
+.rmeta{display:flex;align-items:center;gap:8px;font-size:12px}
+.rlv{background:#e0e7ff;color:#3730a3;font-weight:700;border-radius:6px;padding:2px 7px}
+.rhead{padding:6px 0 12px}.rhead h1{margin:8px 0 2px;font-size:24px}
+.rsub2{color:#5c4759;font-size:14px;margin-bottom:10px}
+.quit{background:none;border:0;color:#8a7386;font-size:13px;cursor:pointer;padding:0;font-family:inherit}
+.rtools{display:flex;gap:8px;flex-wrap:wrap}
+.gbtn{background:#4f46e5;color:#fff;border:0;border-radius:10px;padding:11px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:10px}
+.gbtn:hover{background:#4338ca}.gbtn.big{width:100%}.gbtn.ghost{background:#f3e6d7;color:#33202e}.gbtn.ghost:hover{background:#e7d9c8}.gbtn.next{margin-left:0}
+.gcard{background:#fff;border:1px solid #f3e6d7;border-radius:16px;padding:22px}
+.gcard.read{font-size:19px;line-height:1.9}
+.sline{margin-bottom:10px}
+.spk2{cursor:pointer;font-size:14px;opacity:.6;margin-right:2px}.spk2:hover{opacity:1}
+.rw{cursor:pointer;border-radius:4px;padding:0 1px}
+.rw:hover{background:#e0e7ff}.rw.hl{background:#c7d2fe;font-weight:600}
+.entxt{font-size:14.5px;color:#5c4759;font-style:italic;margin-top:3px;line-height:1.4}
+.glossbar{position:sticky;bottom:0;background:#312e81;color:#fff;border-radius:12px;padding:13px 16px;margin-top:14px;font-size:16px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.glossbar .say{background:rgba(255,255,255,.2);color:#fff}
+.say{background:#e0e7ff;border:0;border-radius:7px;padding:3px 9px;cursor:pointer;font-size:13px;vertical-align:middle}
+.qq{font-size:19px;font-weight:700;margin-bottom:14px;line-height:1.4}
+.gstat{font-size:13px;color:#5c4759;margin-top:6px}
+.mcwrap{display:flex;flex-direction:column;gap:9px}
+.mcopt{text-align:left;background:#faf3ea;border:2px solid transparent;border-radius:11px;padding:13px 15px;font-size:16px;cursor:pointer;font-family:inherit;color:#33202e}
+.mcopt:hover:enabled{background:#f3e6d7}.mcopt.ok{background:#dcfce7;border-color:#2f8a5b}.mcopt.no{background:#fcebe7;border-color:#c8503f}.mcopt:disabled{cursor:default}
+.gfb{margin-top:14px}
+.done{text-align:center}.bigemoji{font-size:54px}.done h2{margin:4px 0 10px;font-size:18px;color:#5c4759}
+.score{font-size:42px;font-weight:800;color:#4f46e5;line-height:1}.scsub{display:block;font-size:15px;color:#5c4759;font-weight:600;margin-top:4px}
+.dmsg{font-size:16px;margin:12px 0}.brow{display:flex;gap:10px;justify-content:center;margin-top:8px}
+
+.rsvpstage{position:relative;display:flex;align-items:center;justify-content:center;height:150px;margin:6px 0}
+.rsvpguide{position:absolute;left:50%;top:20px;bottom:20px;width:2px;background:#f3e6d7;transform:translateX(-50%)}
+.rsvpword{display:flex;width:100%;font-size:46px;font-weight:800;font-family:ui-monospace,Menlo,Consolas,monospace}
+.rz-l{flex:1;text-align:right;color:#33202e}.rz-p{color:#c8503f;padding:0 1px}.rz-r{flex:1;text-align:left;color:#33202e}
+.rsvpbar{height:7px;background:#f3e6d7;border-radius:99px;overflow:hidden;margin-top:6px}
+.rsvpfill{height:100%;background:#4f46e5;border-radius:99px;transition:width .05s linear}
+.rsvpmeta{font-size:13px;color:#5c4759;margin-top:8px;text-align:center}
+.rsvpctl{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.wpmrow{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:14px;flex-wrap:wrap;font-size:13px;color:#5c4759}
+.wpmchip{border:2px solid #e7d9c8;background:#fffdf9;border-radius:8px;padding:5px 11px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;color:#33202e}
+.wpmchip.on{background:#4f46e5;border-color:#4f46e5;color:#fff}
+
+</style><style>:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}</style></head><body><div id="app"></div><script>window.RD=[{"id":"a1_dia","level":"A1","title":"Mi día","titleEn":"My Day","s":[["Me llamo Ana y vivo en una ciudad pequeña.","My name is Ana and I live in a small city."],["Todos los días me levanto a las siete.","Every day I get up at seven."],["Desayuno pan con café en la cocina.","I have bread with coffee in the kitchen."],["Después camino al trabajo.","Then I walk to work."],["Trabajo en una oficina con mis amigos.","I work in an office with my friends."],["Por la noche, leo un libro y duermo.","At night, I read a book and sleep."]],"q":[["¿Dónde vive Ana?",["en una ciudad pequeña","en un pueblo grande","en la capital"],0],["¿Qué desayuna Ana?",["pan con café","fruta","huevos"],0],["¿A qué hora se levanta?",["a las siete","a las ocho","a las seis"],0]],"gloss":{"me":"me / myself","llamo":"llamar — call by phone","ana":"(name)","y":"and","vivo":"vivir — live","en":"in / on","una":"unir — unite","ciudad":"city","pequeña":"small","todos":"all","los":"the","días":"day","levanto":"levantarse — I get up","a":"to","las":"the","siete":"seven (7)","desayuno":"desayunar — have breakfast","pan":"bread","con":"with","café":"coffee","la":"the","cocina":"cocinar — cook","después":"after","camino":"caminar — walk on foot","al":"to the","trabajo":"trabajar — work","oficina":"office","mis":"my","amigos":"friend (m)","por":"for / by","noche":"night","leo":"leer — read","un":"a","libro":"book","duermo":"dormir — sleep"}},{"id":"a1_cafe","level":"A1","title":"En el café","titleEn":"At the Café","s":[["—Buenos días. ¿Qué desea?","Good morning. What would you like?"],["—Quiero un café con leche, por favor.","I want a coffee with milk, please."],["—¿Algo más?","Anything else?"],["—Sí, también quiero un pan dulce.","Yes, I also want a sweet roll."],["—Son tres dólares.","That's three dollars."],["—Aquí tiene. Muchas gracias.","Here you go. Thank you very much."]],"q":[["¿Qué quiere beber el cliente?",["un café con leche","un té","agua"],0],["¿Cuánto cuesta todo?",["tres dólares","cinco dólares","dos dólares"],0]],"gloss":{"buenos":"good","días":"day","qué":"what","desea":"desear — wish","quiero":"querer — want","un":"a","café":"coffee","con":"with","leche":"milk","por":"for / by","favor":"favor (por favor = please)","algo":"something","más":"more / most","sí":"yes","también":"also","pan":"bread","dulce":"sweet","son":"ser — are","tres":"three (3)","dólares":"dollars","aquí":"here","tiene":"tener — have","muchas":"many","gracias":"thank you"}},{"id":"a2_finde","level":"A2","title":"El fin de semana","titleEn":"The Weekend","s":[["El sábado pasado fui a la playa con mi familia.","Last Saturday I went to the beach with my family."],["Hizo mucho calor y el cielo estaba azul.","It was very hot and the sky was blue."],["Nadamos en el mar y comimos pescado fresco.","We swam in the sea and ate fresh fish."],["Por la tarde, mi hermano jugó al fútbol en la arena.","In the afternoon, my brother played soccer on the sand."],["Volvimos a casa muy cansados pero felices.","We returned home very tired but happy."]],"q":[["¿Adónde fue la familia?",["a la playa","a la montaña","a la ciudad"],0],["¿Qué comieron?",["pescado","carne","pollo"],0],["¿Cómo volvieron a casa?",["cansados pero felices","tristes","aburridos"],0]],"gloss":{"el":"the","sábado":"Saturday","pasado":"pasar — pass","fui":"ser/ir — was / went","a":"to","la":"the","playa":"beach","con":"with","mi":"my","familia":"family","hizo":"hacer — did / made","mucho":"a lot","calor":"heat","y":"and","cielo":"sky","estaba":"estar — was","azul":"blue","nadamos":"nadar — swim","en":"in / on","mar":"sea","comimos":"comer — eat","pescado":"pescar — fish","fresco":"fresh / cool","por":"for / by","tarde":"afternoon","hermano":"brother","jugó":"jugar — play a game","al":"to the","fútbol":"soccer","arena":"sand","volvimos":"volver — return","casa":"casar — marry","muy":"very","cansados":"tired","pero":"but","felices":"happy"}},{"id":"a2_familia","level":"A2","title":"La familia de Ana","titleEn":"Ana's Family","s":[["Ana tiene una familia grande y unida.","Ana has a big, close family."],["Su padre es médico y su madre es maestra.","Her father is a doctor and her mother is a teacher."],["Tiene dos hermanos y una hermana menor.","She has two brothers and a younger sister."],["Los domingos comen juntos en casa de los abuelos.","On Sundays they eat together at the grandparents' house."],["A Ana le gusta mucho pasar tiempo con ellos.","Ana really likes spending time with them."]],"q":[["¿Qué hace el padre de Ana?",["es médico","es maestro","es abogado"],0],["¿Cuándo comen juntos?",["los domingos","los sábados","los lunes"],0]],"gloss":{"ana":"(name)","tiene":"tener — have","una":"unir — unite","familia":"family","grande":"big","y":"and","unida":"close-knit","su":"his / her / their","padre":"father","es":"ser — is","médico":"doctor","madre":"mother","maestra":"teacher (f)","dos":"two (2)","hermanos":"brother","hermana":"sister","menor":"younger / smaller","los":"the","domingos":"Sunday","comen":"comer — eat","juntos":"together","en":"in / on","casa":"casar — marry","de":"of / from","abuelos":"grandfather","a":"to","le":"to him/her","gusta":"gustar — like","mucho":"a lot","pasar":"pasar — pass","tiempo":"weather","con":"with","ellos":"they"}},{"id":"b1_mexico","level":"B1","title":"Un viaje a México","titleEn":"A Trip to Mexico","s":[["El año pasado, mi amiga y yo viajamos a México por dos semanas.","Last year, my friend and I traveled to Mexico for two weeks."],["Visitamos la Ciudad de México, que es enorme y está llena de vida.","We visited Mexico City, which is huge and full of life."],["Probamos tacos, mole y muchos platos típicos.","We tried tacos, mole, and many typical dishes."],["Aunque hacía calor, caminamos por el centro histórico todos los días.","Although it was hot, we walked through the historic center every day."],["Lo que más me gustó fue la amabilidad de la gente.","What I liked most was the kindness of the people."],["Espero volver algún día.","I hope to return someday."]],"q":[["¿Cuánto tiempo estuvieron en México?",["dos semanas","un mes","una semana"],0],["¿Qué le gustó más a la narradora?",["la amabilidad de la gente","la comida","el clima"],0],["¿Qué quiere hacer en el futuro?",["volver algún día","vivir allí","no regresar"],0]],"gloss":{"el":"the","año":"year","pasado":"pasar — pass","mi":"my","amiga":"friend (f)","y":"and","yo":"I","viajamos":"viajar — travel","a":"to","méxico":"(name)","por":"for / by","dos":"two (2)","semanas":"week","visitamos":"visitar — we visited","la":"the","ciudad":"city","de":"of / from","que":"that / which","es":"ser — is","enorme":"huge","está":"estar — is","llena":"full","vida":"life","probamos":"probar — try","tacos":"tacos","mole":"mole (Mexican sauce)","muchos":"many","platos":"plate / dish","típicos":"typical","aunque":"although","hacía":"hacer — was (weather) / used to do","calor":"heat","caminamos":"caminar — walk on foot","centro":"downtown","histórico":"historic","todos":"all","los":"the","días":"day","lo":"it / the","más":"more / most","me":"me / myself","gustó":"gustar — like","fue":"ser/ir — was / went","amabilidad":"kindness","gente":"people","espero":"esperar — wait for","volver":"volver — return","algún":"some","día":"day"}},{"id":"b1_apto","level":"B1","title":"Buscando apartamento","titleEn":"Apartment Hunting","s":[["Carlos quiere mudarse a un apartamento más grande.","Carlos wants to move to a bigger apartment."],["Busca uno cerca del centro, con dos habitaciones.","He's looking for one near downtown, with two bedrooms."],["El alquiler no puede ser muy caro porque su sueldo es limitado.","The rent can't be too expensive because his salary is limited."],["Ayer visitó tres apartamentos, pero ninguno le gustó.","Yesterday he visited three apartments, but he didn't like any of them."],["Por fin, encontró uno perfecto con mucha luz y un balcón.","Finally, he found a perfect one with lots of light and a balcony."]],"q":[["¿Qué busca Carlos?",["un apartamento más grande","una casa","una oficina"],0],["¿Por qué el alquiler no puede ser caro?",["su sueldo es limitado","no trabaja","no le gusta"],0],["¿Cómo es el apartamento que encontró?",["con mucha luz y un balcón","pequeño y oscuro","sin ventanas"],0]],"gloss":{"carlos":"(name)","quiere":"querer — want","mudarse":"to move (house)","a":"to","un":"a","apartamento":"apartment","más":"more / most","grande":"big","busca":"buscar — look for","uno":"unir — unite","cerca":"near","del":"of the","centro":"downtown","con":"with","dos":"two (2)","habitaciones":"room / bedroom","el":"the","alquiler":"rent","no":"ser — be","puede":"poder — be able to","ser":"ser — be","muy":"very","caro":"expensive","porque":"because","su":"his / her / their","sueldo":"salary","es":"ser — is","limitado":"limited","ayer":"yesterday","visitó":"visitar — visited","tres":"three (3)","apartamentos":"apartment","pero":"but","ninguno":"none / not any","le":"to him/her","gustó":"gustar — like","por":"for / by","fin":"end","encontró":"encontrar — find","perfecto":"perfect","mucha":"a lot","luz":"light","y":"and","balcón":"balcony"}},{"id":"b2_entrevista","level":"B2","title":"La entrevista de trabajo","titleEn":"The Job Interview","s":[["María se preparó durante semanas para la entrevista en una empresa importante.","María prepared for weeks for the interview at an important company."],["Aunque estaba nerviosa, respondió todas las preguntas con confianza.","Although she was nervous, she answered all the questions with confidence."],["El gerente le preguntó sobre su experiencia y sus metas profesionales.","The manager asked her about her experience and her professional goals."],["María explicó que buscaba un trabajo donde pudiera crecer y aprender.","María explained that she was looking for a job where she could grow and learn."],["Una semana después, recibió una llamada con una oferta excelente.","A week later, she received a call with an excellent offer."]],"q":[["¿Cómo se sentía María durante la entrevista?",["nerviosa pero con confianza","tranquila","aburrida"],0],["¿Qué buscaba María en un trabajo?",["crecer y aprender","ganar mucho dinero","trabajar poco"],0],["¿Qué pasó una semana después?",["recibió una oferta","no la llamaron","rechazó el trabajo"],0]],"gloss":{"maría":"(name)","se":"oneself (reflexive)","preparó":"preparar — prepare","durante":"during","semanas":"week","para":"for / to","la":"the","entrevista":"entrevistar — interview","en":"in / on","una":"unir — unite","empresa":"company","importante":"important","aunque":"although","estaba":"estar — was","nerviosa":"nervous","respondió":"responder — answer","todas":"all","las":"the","preguntas":"preguntar — ask a question","con":"with","confianza":"confidence / trust","el":"the","gerente":"manager","le":"to him/her","preguntó":"preguntar — ask a question","sobre":"about / on","su":"his / her / their","experiencia":"experience","y":"and","sus":"his / her / their","metas":"meter — put in","profesionales":"professional","explicó":"explicar — explain something","que":"that / which","buscaba":"buscar — look for","un":"a","trabajo":"trabajar — work","donde":"where","pudiera":"poder — be able to","crecer":"crecer — grow","aprender":"aprender — learn","semana":"week","después":"after","recibió":"recibir — receive","llamada":"call (phone)","oferta":"deal","excelente":"excellent"}},{"id":"b2_ambiente","level":"B2","title":"El medio ambiente","titleEn":"The Environment","s":[["El cambio climático es uno de los mayores desafíos de nuestra época.","Climate change is one of the greatest challenges of our time."],["Cada año, las temperaturas suben y los desastres naturales son más frecuentes.","Each year, temperatures rise and natural disasters become more frequent."],["Muchos expertos creen que debemos reducir el uso de combustibles fósiles.","Many experts believe that we must reduce the use of fossil fuels."],["Sin embargo, los cambios individuales también importan: reciclar, ahorrar energía y consumir menos.","However, individual changes also matter: recycling, saving energy, and consuming less."],["Si todos colaboramos, podemos construir un futuro más sostenible.","If we all work together, we can build a more sustainable future."]],"q":[["Según el texto, ¿qué debemos reducir?",["los combustibles fósiles","el reciclaje","la energía solar"],0],["¿Qué cambios individuales se mencionan?",["reciclar y ahorrar energía","comprar más","viajar más"],0],["¿Qué podemos construir si colaboramos?",["un futuro más sostenible","más fábricas","más autos"],0]],"gloss":{"el":"the","cambio":"cambiar — change","climático":"climate (adj)","es":"ser — is","uno":"unir — unite","de":"of / from","los":"the","mayores":"greatest / biggest","desafíos":"challenges","nuestra":"our","época":"era / time","cada":"each / every","año":"year","las":"the","temperaturas":"temperature","suben":"subir — go up","y":"and","desastres":"disaster","naturales":"natural","son":"ser — are","más":"more / most","frecuentes":"frequent","muchos":"many","expertos":"experts","creen":"creer — believe","que":"that / which","debemos":"deber — we must","reducir":"reducir — reduce","uso":"usar — use","combustibles":"fuel","fósiles":"fossil","sin":"without","embargo":"embargo","cambios":"cambiar — change","individuales":"individual","también":"also","importan":"importar — matter","reciclar":"to recycle","ahorrar":"to save","energía":"energy","consumir":"to consume","menos":"less","si":"if","todos":"all","colaboramos":"colaborar — collaborate","podemos":"poder — be able to","construir":"construir — build","un":"a","futuro":"future","sostenible":"sustainable"}}];</script><script>function nav(){return '<div class="topnav"><span class="brand" onclick="home()">📖 Reading Lab</span><span class="nlinks"><a href="/">🏠 All tools</a><a href="/">← Explore</a><a onclick="home()">Inicio</a></span></div>';}</script><script>
+/* ===================== READING LAB ===================== */
+var RD=window.RD;
+var _voices=[];function _lv(){try{_voices=window.speechSynthesis.getVoices()||[];}catch(e){_voices=[];}}
+if('speechSynthesis' in window){_lv();window.speechSynthesis.onvoiceschanged=_lv;}
+function pickES(){var pref=['Paulina','Mónica','Monica','Juan','Jorge','Diego','Google español','es-MX','es-US','es-419','es-'];for(var p=0;p<pref.length;p++)for(var i=0;i<_voices.length;i++){var v=_voices[i];if((v.name&&v.name.indexOf(pref[p])>=0)||(v.lang&&v.lang.indexOf(pref[p])>=0))return v;}for(var j=0;j<_voices.length;j++)if(_voices[j].lang&&_voices[j].lang.toLowerCase().indexOf('es')===0)return _voices[j];return null;}
+function spk(t){if(!('speechSynthesis'in window))return;t=(t||'').replace(/\([^)]*\)/g,'').replace(/\[[^\]]*\]/g,'').replace(/[“”"]/g,'').replace(/\s+/g,' ').trim();if(!t)return;try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='es-MX';var v=pickES();if(v)u.voice=v;u.rate=.92;window.speechSynthesis.speak(u);}catch(e){}}
+function esc(s){return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+/* level filter */
+var VLEVELS=['A1','A2','B1','B2'];
+function lvLoad(){try{return localStorage.getItem('read_lvl')||'A1';}catch(e){return 'A1';}}
+var LV=lvLoad();
+function setLevel(l){LV=l;try{localStorage.setItem('read_lvl',l);}catch(e){}home();}
+function levelBar(){var h='<div class="lvbar"><span class="lvlab">Nivel:</span>';VLEVELS.forEach(function(l){var n=RD.filter(function(r){return r.level===l;}).length;h+='<button class="lvbtn'+(LV===l?' on':'')+'" onclick="setLevel(\''+l+'\')">'+l+' <span class="muted">('+n+')</span></button>';});h+='</div>';return h;}
+
+var CUR=null,CURGLOSS=null,SHOWEN=false;
+function readDone(id){try{return (JSON.parse(localStorage.getItem('read_done'))||{})[id];}catch(e){return false;}}
+function markDone(id){try{var o=JSON.parse(localStorage.getItem('read_done'))||{};o[id]=true;localStorage.setItem('read_done',JSON.stringify(o));}catch(e){}}
+
+function home(){CUR=null;
+ var h='<div class="hero"><h1>📖 Reading Lab</h1><p>Short stories and dialogues at your level. Tap any word to translate it, hear it read aloud, then check your comprehension.</p></div>';
+ h+=levelBar();
+ var list=RD.filter(function(r){return r.level===LV;});
+ h+='<div class="rgrid">';
+ list.forEach(function(r){h+='<div class="rcard" onclick="openReading(\''+r.id+'\')"><div class="rtitle">'+esc(r.title)+(readDone(r.id)?' <span class="rdone">✓</span>':'')+'</div><div class="rsub">'+esc(r.titleEn)+'</div><div class="rmeta"><span class="rlv">'+r.level+'</span> <span class="muted">'+r.s.length+' sentences · '+r.q.length+' questions</span></div></div>';});
+ h+='</div>';
+ app.innerHTML=nav()+h;window.scrollTo&&window.scrollTo(0,0);
+}
+function wordize(sent){return sent.replace(/([A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)/g,function(m){return '<span class="rw" onclick="gw(this)">'+m+'</span>';});}
+function openReading(id){CUR=RD.filter(function(r){return r.id===id;})[0];if(!CUR)return;CURGLOSS=CUR.gloss;SHOWEN=false;renderReader();}
+function renderReader(){
+ var h='<div class="rhead"><button class="quit" onclick="home()">← Lecturas</button><h1>'+esc(CUR.title)+'</h1><div class="rsub2">'+esc(CUR.titleEn)+' · '+CUR.level+'</div>'
+ +'<div class="rtools"><button class="gbtn" onclick="playAll()">🔊 Escuchar todo</button> <button class="gbtn ghost" onclick="toggleEn()">'+(SHOWEN?'Ocultar inglés':'🔤 Mostrar inglés')+'</button> <button class="gbtn ghost" onclick="openRSVP()">⚡ Lectura rápida</button></div></div>';
+ h+='<div class="gcard read">';
+ CUR.s.forEach(function(p,i){h+='<div class="sline"><span class="spk2" onclick="spk(\''+p[0].replace(/'/g,'')+'\')">🔊</span> <span class="estxt">'+wordize(p[0])+'</span>'+(SHOWEN?'<div class="entxt">'+esc(p[1])+'</div>':'')+'</div>';});
+ h+='</div>';
+ h+='<div class="glossbar" id="glossbar">👆 Tap any word to see its meaning</div>';
+ h+='<button class="gbtn big" onclick="startQuiz()">Comprensión ('+CUR.q.length+' preguntas) →</button>';
+ app.innerHTML=nav()+h;window.scrollTo&&window.scrollTo(0,0);
+}
+function gw(el){var w=el.textContent.toLowerCase();var g=CURGLOSS[w]||'—';
+ document.querySelectorAll('.rw.hl').forEach(function(x){x.classList.remove('hl');});el.classList.add('hl');
+ var gb=document.getElementById('glossbar');if(gb)gb.innerHTML='<b>'+esc(el.textContent)+'</b> — '+esc(g)+' <button class="say" onclick="spk(\''+w.replace(/'/g,'')+'\')">🔊</button>';}
+function toggleEn(){SHOWEN=!SHOWEN;renderReader();}
+function playAll(){spk(CUR.s.map(function(p){return p[0];}).join(' '));}
+
+var QZ=null;
+function startQuiz(){QZ={i:0,correct:0,q:CUR.q.slice()};quizRender();}
+function quizRender(){if(QZ.i>=QZ.q.length)return quizDone();var it=QZ.q[QZ.i];
+ var opts=it[1].map(function(o,i){return '<button class="mcopt" onclick="quizAns('+i+','+it[2]+',this)">'+esc(o)+'</button>';}).join('');
+ app.innerHTML=nav()+'<div class="rhead"><button class="quit" onclick="renderReader()">← Texto</button><div class="gstat">Pregunta '+(QZ.i+1)+' / '+QZ.q.length+'</div></div><div class="gcard"><div class="qq">'+esc(it[0])+'</div><div class="mcwrap">'+opts+'</div><div class="gfb" id="gfb"></div></div>';
+}
+function quizAns(i,ans,btn){var btns=document.querySelectorAll('.mcopt');btns.forEach(function(b,j){b.disabled=true;if(j===ans)b.classList.add('ok');});if(i!==ans)btn.classList.add('no');else QZ.correct++;
+ document.getElementById('gfb').innerHTML='<button class="gbtn next" onclick="quizNext()">'+(QZ.i+1>=QZ.q.length?'Resultado →':'Siguiente →')+'</button>';}
+function quizNext(){QZ.i++;quizRender();}
+function quizDone(){var acc=Math.round(QZ.correct/QZ.q.length*100);if(acc>=60)markDone(CUR.id);
+ var msg=acc>=80?'🏆 ¡Muy bien!':acc>=60?'👍 ¡Aprobado!':'🌱 Vuelve a leer y reintenta.';
+ app.innerHTML=nav()+'<div class="gcard done"><div class="bigemoji">'+msg.split(' ')[0]+'</div><h2>'+esc(CUR.title)+'</h2><div class="score">'+QZ.correct+' / '+QZ.q.length+'<span class="scsub">'+acc+'%</span></div><p class="dmsg">'+msg.substring(msg.indexOf(' ')+1)+'</p><div class="brow"><button class="gbtn" onclick="renderReader()">↺ Releer</button><button class="gbtn ghost" onclick="home()">📚 Más lecturas</button></div></div>';
+}
+/* ===== RSVP speed-reading ===== */
+var RS=null;
+function rsvpWord(t){t=t||'';var n=t.length;var p=n<=1?0:(n<=5?1:(n<=9?2:(n<=13?3:4)));return '<span class="rz-l">'+esc(t.slice(0,p))+'</span><span class="rz-p">'+esc(t.charAt(p)||'')+'</span><span class="rz-r">'+esc(t.slice(p+1))+'</span>';}
+function openRSVP(){var words=CUR.s.map(function(p){return p[0];}).join(' ').split(/\s+/).filter(Boolean);var wpm=300;try{wpm=parseInt(localStorage.getItem('read_wpm'))||300;}catch(e){}RS={words:words,i:0,wpm:wpm,playing:false,timer:null};rsvpFrame();}
+function rsvpFrame(){
+ var h='<div class="rhead"><button class="quit" onclick="rsvpExit()">← Texto</button><h1>⚡ '+esc(CUR.title)+'</h1><div class="rsub2">Lectura rápida · una palabra a la vez</div></div>';
+ h+='<div class="gcard"><div class="rsvpstage"><div class="rsvpguide"></div><div class="rsvpword" id="rsvpw">'+rsvpWord(RS.words[RS.i]||'')+'</div></div>';
+ h+='<div class="rsvpbar"><div class="rsvpfill" id="rsvpprog" style="width:0%"></div></div>';
+ h+='<div class="rsvpmeta" id="rsvpmeta">'+Math.min(RS.i+1,RS.words.length)+' / '+RS.words.length+' · '+RS.wpm+' wpm</div>';
+ h+='<div class="rsvpctl"><button class="gbtn" id="rsvpbtn" onclick="rsvpToggle()">▶ Play</button> <button class="gbtn ghost" onclick="rsvpRestart()">↺ Reiniciar</button></div>';
+ h+='<div class="wpmrow">Velocidad: '+[150,250,350,450,600].map(function(w){return '<button class="wpmchip'+(RS.wpm===w?' on':'')+'" onclick="rsvpSetWpm('+w+')">'+w+'</button>';}).join('')+' <span class="muted">palabras/min</span></div>';
+ h+='</div>';
+ app.innerHTML=nav()+h;
+}
+function rsvpExit(){if(RS&&RS.timer)clearTimeout(RS.timer);if(RS)RS.playing=false;renderReader();}
+function rsvpShow(){var w=document.getElementById('rsvpw');if(w)w.innerHTML=rsvpWord(RS.words[RS.i]||'');var pr=document.getElementById('rsvpprog');if(pr)pr.style.width=Math.round(RS.i/RS.words.length*100)+'%';var m=document.getElementById('rsvpmeta');if(m)m.textContent=Math.min(RS.i+1,RS.words.length)+' / '+RS.words.length+' · '+RS.wpm+' wpm';}
+function rsvpToggle(){if(RS.playing)rsvpPause();else rsvpPlay();}
+function rsvpPlay(){if(RS.i>=RS.words.length)RS.i=0;RS.playing=true;var b=document.getElementById('rsvpbtn');if(b)b.textContent='⏸ Pausa';rsvpTick();}
+function rsvpPause(){RS.playing=false;if(RS.timer)clearTimeout(RS.timer);var b=document.getElementById('rsvpbtn');if(b)b.textContent='▶ Play';}
+function rsvpTick(){if(!RS.playing)return;if(RS.i>=RS.words.length){rsvpPause();rsvpShow();return;}rsvpShow();var t=RS.words[RS.i];var base=60000/RS.wpm;var extra=/[.,;:!?…»)]$/.test(t)?base*0.9:0;var lng=t.length>8?base*0.4:0;RS.i++;RS.timer=setTimeout(rsvpTick,base+extra+lng);}
+function rsvpRestart(){rsvpPause();RS.i=0;rsvpShow();}
+function rsvpSetWpm(w){RS.wpm=w;try{localStorage.setItem('read_wpm',w);}catch(e){}var was=RS.playing;if(RS.timer)clearTimeout(RS.timer);rsvpFrame();if(was){RS.playing=true;var b=document.getElementById('rsvpbtn');if(b)b.textContent='⏸ Pausa';rsvpTick();}}
+
+var app=document.getElementById('app');
+home();
+
+</script></body></html>

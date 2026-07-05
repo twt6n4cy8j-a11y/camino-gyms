@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>El Cuerpo · El Camino Grande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cobalt:#2456a6;--cobalt2:#1c4488;--saffron:#e8a33d;--saffron2:#d18f2a;--plaster:#faf3ea;--card:#fffdf7;--ink:#33202e;--ink2:#5c4a55;--mut:#9b8a93;--line:#e8dccb;--green:#2f8a5b;--red:#c0392b;--plum:#54306b;--muscle:#b5462f;--bone:#e6ddc8}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:var(--plaster);color:var(--ink);min-height:100vh}
+#app{max-width:560px;margin:0 auto;padding:14px 14px 90px}
+.nav{display:flex;gap:14px;padding:6px 2px 14px;font-size:13px;font-weight:800;color:var(--mut)}
+.nav a{cursor:pointer;color:var(--cobalt);text-decoration:none}
+h1,h2{font-family:'Fraunces',serif}
+.hero{background:linear-gradient(140deg,var(--plum),#3a2440);border-radius:22px;padding:22px 20px;color:#fff8ef;margin-bottom:16px}
+.hero .htop{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.78;text-transform:uppercase}
+.hero h1{font-size:26px;margin:4px 0 6px}
+.hero p{font-size:14px;opacity:.94;line-height:1.5}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px -6px rgba(51,32,46,.18)}
+.famhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.famhead h1{font-size:20px;flex:1}
+.quit{background:none;border:1.5px solid var(--line);border-radius:99px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2);font-family:'Nunito Sans',sans-serif}
+.spot{background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#5c4a22;margin-bottom:12px}
+.spot b{color:#8a6d1f}
+.layerbar{display:flex;gap:7px;margin-bottom:12px}
+.lb{flex:1;text-align:center;padding:8px 4px;border-radius:12px;border:1.5px solid var(--line);background:#f6f1e7;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2)}
+.lb.on{background:#fdedd2;border-color:var(--saffron);color:var(--saffron2)}
+.mapwrap{position:relative;width:100%;max-width:330px;margin:0 auto;aspect-ratio:3/4;background:#fffdf7;border-radius:14px;overflow:hidden}
+.mapwrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;background:repeating-linear-gradient(45deg,#f6f1e7,#f6f1e7 12px,#f1e9d8 12px,#f1e9d8 24px);color:var(--mut)}
+.ph .pem{font-size:44px;margin-bottom:8px;opacity:.6}
+.ph b{font-family:'Fraunces',serif;font-size:15px;color:var(--ink2)}
+.ph code{background:var(--ink);color:#fff8ef;border-radius:6px;padding:1px 7px;font-size:12px;font-weight:700}
+.dot{position:absolute;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:99px;border:2.5px solid #fff;background:var(--saffron);cursor:pointer;box-shadow:0 2px 8px rgba(51,32,46,.4);animation:pul 2.2s infinite}
+@keyframes pul{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.dot.mus{background:var(--muscle)}.dot.bon{background:#a99668}
+.dot.ok{background:var(--green)!important;animation:none}
+.dot.no{background:var(--red)!important;animation:shk .3s}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.lbl{position:absolute;transform:translate(-50%,-150%);background:var(--ink);color:#fff8ef;font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px;white-space:nowrap;pointer-events:none;z-index:5}
+.chip{display:inline-block;background:#f2ead9;border-radius:99px;padding:5px 12px;margin:0 5px 8px 0;font-size:13px;font-weight:700}
+.chip b{color:var(--cobalt)}
+.chip.mus b{color:var(--muscle)}.chip.bon b{color:#7a6a3f}
+.say{background:none;border:1.5px solid var(--line);border-radius:99px;padding:2px 8px;cursor:pointer;font-size:12px}
+.gbtn{display:block;width:100%;background:linear-gradient(140deg,var(--cobalt),var(--cobalt2));color:#fff;border:none;border-radius:14px;padding:12px;font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;margin-top:10px}
+.gbtn.ghost{background:none;border:1.5px solid var(--line);color:var(--ink2)}
+.tnote{margin-top:10px;background:#f3eef8;border:1.5px solid #ddcfe9;border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.6;color:#4a3a56}
+.qbig{font-family:'Fraunces',serif;font-size:20px;text-align:center;margin:8px 0}
+.creditln{font-size:10.5px;color:var(--mut);text-align:center;margin-top:6px;line-height:1.5}
+
+/* La Sobremesa tokens */
+:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* EL CUERPO · the tappable body atlas — a desvío of El Camino Grande.
+   Three layers (piel / músculos / huesos), each a swappable image with
+   percentage-positioned hotspot dots floating on top. Images are dropped
+   into the folder by Kyle; a placeholder shows until each arrives.
+   Art: Wikimedia Commons (Gray's Anatomy = public domain). */
+
+var BODYSVG='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgNTIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjUyMCI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InNrIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2YwYzlhMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2UzYjE4NCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InNoIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMCI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2RiYTg3NiIvPjxzdG9wIG9mZnNldD0iMC41IiBzdG9wLWNvbG9yPSIjZTNiMTg0Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZGJhODc2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSI1MjAiIHJ4PSIyMiIgZmlsbD0iI2ZhZjNlYSIvPgo8IS0tIHNvZnQgZ3JvdW5kIHNoYWRvdyAtLT4KPGVsbGlwc2UgY3g9IjE1MCIgY3k9IjUwMCIgcng9IjcwIiByeT0iMTAiIGZpbGw9IiNlOGRjY2IiLz4KPCEtLSBIQUlSIGJhY2sgLS0+CjxwYXRoIGQ9Ik0xMTQgNjYgcTM2IC00NiA3MiAwIHE2IDI2IC02IDQwIHEtMzAgLTE4IC02MCAwIHEtMTIgLTE0IC02IC00MHoiIGZpbGw9IiM1YTNhMmEiLz4KPCEtLSBORUNLIC0tPgo8cGF0aCBkPSJNMTM4IDk2IGgyNCB2MjYgcS0xMiA4IC0yNCAweiIgZmlsbD0idXJsKCNzaCkiLz4KPCEtLSBIRUFEIC0tPgo8ZWxsaXBzZSBjeD0iMTUwIiBjeT0iNzIiIHJ4PSIzNCIgcnk9IjM4IiBmaWxsPSJ1cmwoI3NrKSIvPgo8IS0tIGVhcnMgLS0+CjxlbGxpcHNlIGN4PSIxMTciIGN5PSI3NCIgcng9IjciIHJ5PSIxMSIgZmlsbD0iI2UzYjE4NCIvPjxlbGxpcHNlIGN4PSIxODMiIGN5PSI3NCIgcng9IjciIHJ5PSIxMSIgZmlsbD0iI2UzYjE4NCIvPgo8IS0tIEhBSVIgZnJvbnQgLS0+CjxwYXRoIGQ9Ik0xMTYgNjAgcTM0IC00MCA2OCAwIHEtMTQgLTE0IC0zNCAtMTQgcS0yMCAwIC0zNCAxNHoiIGZpbGw9IiM2YjQ2MzIiLz4KPHBhdGggZD0iTTExNiA2MCBxNiAtNiA2IDYgTTE4NCA2MCBxLTYgLTYgLTYgNiIgc3Ryb2tlPSIjNmI0NjMyIiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8IS0tIGZhY2UgZmVhdHVyZXMgKHNvZnQpIC0tPgo8Y2lyY2xlIGN4PSIxMzciIGN5PSI3MiIgcj0iMy4yIiBmaWxsPSIjNGEzMjI2Ii8+PGNpcmNsZSBjeD0iMTYzIiBjeT0iNzIiIHI9IjMuMiIgZmlsbD0iIzRhMzIyNiIvPgo8cGF0aCBkPSJNMTQ3IDc4IHEzIDYgNiAwIiBzdHJva2U9IiNjOThhNWEiIHN0cm9rZS13aWR0aD0iMi40IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTE0MCA5MCBxMTAgOCAyMCAwIiBzdHJva2U9IiNiNTZhNGEiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjEyOSIgY3k9IjgyIiByPSI0IiBmaWxsPSIjZWFiODlhIiBvcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNzEiIGN5PSI4MiIgcj0iNCIgZmlsbD0iI2VhYjg5YSIgb3BhY2l0eT0iMC42Ii8+CjwhLS0gVE9SU08gKHNoaXJ0KSAtLT4KPHBhdGggZD0iTTEyNiAxMjIgcTI0IC0xMiA0OCAwIHExNiA4IDE4IDM0IGwtNiA3OCBxLTM2IDEyIC03MiAwIGwtNiAtNzggcTIgLTI2IDE4IC0zNHoiIGZpbGw9IiMyZjZmYjAiLz4KPHBhdGggZD0iTTEyNiAxMjIgcTI0IDE0IDQ4IDAgbC02IDE2IHEtMTggMTAgLTM2IDB6IiBmaWxsPSIjMjg2MWEwIi8+CjwhLS0gQVJNUyAtLT4KPHBhdGggZD0iTTEyOCAxMzIgcS0yNiA2IC0zNCA0MCBsLTE0IDY2IHEtMiAxMiAxMCAxNCBxMTAgMCAxMiAtMTIgbDEyIC02MCBxNCAtMjAgMTYgLTMweiIgZmlsbD0idXJsKCNzaCkiLz4KPHBhdGggZD0iTTE3MiAxMzIgcTI2IDYgMzQgNDAgbDE0IDY2IHEyIDEyIC0xMCAxNCBxLTEwIDAgLTEyIC0xMiBsLTEyIC02MCBxLTQgLTIwIC0xNiAtMzB6IiBmaWxsPSJ1cmwoI3NoKSIvPgo8IS0tIGhhbmRzIC0tPgo8ZWxsaXBzZSBjeD0iODgiIGN5PSIyNTYiIHJ4PSIxMyIgcnk9IjE2IiBmaWxsPSJ1cmwoI3NrKSIvPgo8ZWxsaXBzZSBjeD0iMjEyIiBjeT0iMjU2IiByeD0iMTMiIHJ5PSIxNiIgZmlsbD0idXJsKCNzaykiLz4KPHBhdGggZD0iTTgwIDI1MCB2MTggTTg2IDI1MCB2MjAgTTkyIDI1MCB2MTggTTk4IDI1MiB2MTUiIHN0cm9rZT0iI2Q3YTI3MyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTIyMCAyNTAgdjE4IE0yMTQgMjUwIHYyMCBNMjA4IDI1MCB2MTggTTIwMiAyNTIgdjE1IiBzdHJva2U9IiNkN2EyNzMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjwhLS0gTEVHUyAocGFudHMpIC0tPgo8cGF0aCBkPSJNMTMyIDIzMiBxMTggOCAzNiAwIGwxMCA2IHE0IDQwIC0yIDkwIGwtMTAgOTYgcS0yIDEwIC0xMiAxMCBxLTEwIDAgLTExIC0xMCBsLTkgLTkyIGwtOSA5MiBxLTEgMTAgLTExIDEwIHEtMTAgMCAtMTIgLTEwIGwtMTAgLTk2IHEtNiAtNTAgLTIgLTkweiIgZmlsbD0iIzU0MzA2YiIvPgo8cGF0aCBkPSJNMTUwIDI0NCB2MTg2IiBzdHJva2U9IiM0MzI2NTciIHN0cm9rZS13aWR0aD0iMi41Ii8+CjwhLS0gZmVldCAoc2hvZXMpIC0tPgo8cGF0aCBkPSJNMTEzIDQzMCBxLTQgMTggMiAyNiBxMTYgNiAzMCAyIGwwIC0yNiBxLTE2IDYgLTMyIC0yeiIgZmlsbD0iIzhhNWEzYiIvPgo8cGF0aCBkPSJNMTg3IDQzMCBxNCAxOCAtMiAyNiBxLTE2IDYgLTMwIDIgbDAgLTI2IHExNiA2IDMyIC0yeiIgZmlsbD0iIzhhNWEzYiIvPgo8L3N2Zz4K';
+var LAYERS=[
+{id:'piel',emoji:'🧴',n:'El cuerpo',sub:'the body',img:BODYSVG,cls:'',
+ regions:[
+ {id:'cara',n:'la cabeza',en:'the head',dx:50,dy:14,
+  parts:[['el pelo','hair',50,9],['los ojos','eyes',45,14],['la nariz','nose',50,17],['las orejas','ears',39,14],['la boca','mouth',50,17.5],['los dientes','teeth',54,17],['la lengua','tongue',50,19],['el cuello','neck',50,21]]},
+ {id:'brazo',n:'el brazo',en:'the arm',dx:33,dy:34,
+  parts:[['el hombro','shoulder',38,26],['el brazo','upper arm',33,31],['el codo','elbow',31,38],['el antebrazo','forearm',31,44],['la muñeca','wrist',30,48],['la mano','hand',29,49]]},
+ {id:'mano',n:'la mano',en:'the hand',dx:29,dy:49,
+  parts:[['los dedos','fingers',28,52],['el pulgar','thumb',33,49],['las uñas','nails',27,50],['la palma','palm',29,49.5]]},
+ {id:'torso',n:'el torso',en:'the torso',dx:50,dy:32,
+  parts:[['el pecho','chest',50,27],['el corazón','heart',45,29],['el estómago','stomach',50,38],['la cintura','waist',50,43],['la espalda','back',60,31]]},
+ {id:'pierna',n:'la pierna',en:'the leg',dx:44,dy:66,
+  parts:[['el muslo','thigh',45,54],['la rodilla','knee',45,65],['la pantorrilla','calf',43,74],['el tobillo','ankle',45,82],['el pie','foot',43,86]]}]}
+];
+
+/* ---------- voice ---------- */
+var VOICE=null;
+function esVoices(){try{return speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});}catch(e){return [];}}
+function vScore(v){var s=0;if(/enhanced|premium|natural/i.test(v.name))s+=40;if(/es[-_](MX|US|419)/i.test(v.lang))s+=8;return s;}
+function spk(t,rate){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);if(!VOICE){var vs=esVoices();vs.sort(function(a,b){return vScore(b)-vScore(a);});VOICE=vs[0]||null;}if(VOICE)u.voice=VOICE;u.lang=(VOICE&&VOICE.lang)||'es-MX';u.rate=rate||0.85;speechSynthesis.speak(u);}catch(e){}}
+try{speechSynthesis.onvoiceschanged=function(){VOICE=null;}}catch(e){}
+function cls(){try{return localStorage.getItem('cg_mode')==='class';}catch(e){return false;}}
+function mochFeed(q,a,why){
+ try{var o=JSON.parse(localStorage.getItem('cg_moch'))||{};var k=(q||'').slice(0,60);if(!k)return;
+  o[k]={q:q,a:a,why:why||'',src:'cuerpo',due:Math.floor(Date.now()/864e5),iv:0};localStorage.setItem('cg_moch',JSON.stringify(o));}catch(e){}
+}
+var app=document.getElementById('app'),LI=0,Q=null;
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
+function nav(){return '<div class="nav"><a onclick="LI=0;home()">🫀 El Cuerpo</a><a href="duelo.html">⚡ El Duelo</a><a href="/">🗺️ El Camino</a></div>';}
+function imgOrPlaceholder(L,dotsHTML){
+ var h='<div class="mapwrap">';
+ h+='<img src="'+L.img+'" alt="'+esc(L.n)+'" onerror="this.style.display=\'none\';var p=this.parentNode.querySelector(\'.ph\');if(p)p.style.display=\'flex\';">';
+ h+='<div class="ph" style="display:none"><div class="pem">'+L.emoji+'</div><b>Drop the image here</b><div style="font-size:12px;margin-top:6px">Save the '+esc(L.sub)+' art as<br><code>'+L.img+'</code><br>beside cuerpo.html — the dots already work.</div></div>';
+ h+=dotsHTML;
+ h+='</div>';
+ return h;
+}
+function home(){
+ var L=LAYERS[LI];
+ var h=nav();
+ h+='<div class="hero"><div class="htop">EL CAMINO GRANDE · UN DESVÍO</div><h1>El Cuerpo</h1><p>Your body, as a map. Tap a glowing dot to hear a region — la cabeza, el brazo, la mano, la pierna — then zoom in to learn every part.</p></div>';
+ h+='<div class="gcard">';
+ if(LAYERS.length>1){h+='<div class="layerbar">';LAYERS.forEach(function(x,i){h+='<div class="lb'+(i===LI?' on':'')+'" onclick="LI='+i+';home()">'+x.emoji+' '+esc(x.n)+'</div>';});h+='</div>';}
+ var dots='';
+ L.regions.forEach(function(r,i){
+  dots+='<button class="dot '+L.cls+'" style="left:'+r.dx+'%;top:'+r.dy+'%" onclick="spk(REGION(\''+L.id+'\','+i+').n,0.8);regionView('+LI+','+i+')"></button>';
+ });
+ h+=imgOrPlaceholder(L,dots);
+ h+='<div class="creditln">Ilustración original de El Camino Grande. Tap a dot to zoom in.</div>';
+ h+='<div class="spot" style="margin-top:12px">Tap a dot to hear the big region, then zoom into everything it holds — and hit 🎯 Tócalo to let your ears do the pointing. The 🎒 button on any part packs it into your Mochila.</div>';
+ h+='<a class="gbtn" style="text-decoration:none;text-align:center;background:linear-gradient(140deg,#6b4226,#4a2c17)" href="musica.html">🎵 Sing it first: "Cabeza, Hombros, Rodillas, Pies" &rarr;</a>';
+ h+='<div class="tnote" style="background:#fdf6e3;border-color:#ecd9a8;color:#5c4a22">🎁 <b>Coming on the road:</b> in Stage 5 these words meet their verb — <b>me duele la cabeza</b> works exactly like me gusta, just with pain instead of pleasure.</div>';
+ if(cls())h+='<div class="tnote">🧭 <b>Guide note:</b> play Simón dice on video — you call parts, the student touches them. Then flip it. Full-body TPR, zero prep, and the muscle/bone layers are gold for older or science-minded students.</div>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function REGION(lid,i){var L=LAYERS.filter(function(x){return x.id===lid;})[0];return L.regions[i];}
+function regionView(li,ri){
+ var L=LAYERS[li],r=L.regions[ri];
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="LI='+li+';home()">← '+esc(L.n)+'</button><h1>'+esc(r.n)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="font-size:12.5px;color:var(--mut);font-weight:700;margin-bottom:8px">'+esc(r.en)+' · tap a dot to hear + label it</div>';
+ var dots='';
+ r.parts.forEach(function(p,j){dots+='<button class="dot '+L.cls+'" id="d'+j+'" style="left:'+p[2]+'%;top:'+p[3]+'%" onclick="partTap('+li+','+ri+','+j+')"></button>';});
+ dots+='<div id="lbz"></div>';
+ h+=imgOrPlaceholder(L,dots);
+ h+='<div style="margin-top:12px">';
+ r.parts.forEach(function(p,j){
+  h+='<span class="chip '+L.cls+'"><b>'+esc(p[0])+'</b> · '+esc(p[1])+' <button class="say" onclick="spk(LAYERS['+li+'].regions['+ri+'].parts['+j+'][0],0.75)">🔊</button><button class="say" onclick="packPart('+li+','+ri+','+j+',this)">🎒</button></span>';
+ });
+ h+='</div>';
+ h+='<button class="gbtn" style="background:linear-gradient(140deg,#54306b,#3a2440)" onclick="quizStart('+li+','+ri+')">🎯 Tócalo — hear it, tap it</button>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function packPart(li,ri,j,btn){
+ var p=LAYERS[li].regions[ri].parts[j];
+ mochFeed('¿Cómo se dice "'+p[1].split(' (')[0]+'"?',p[0],'From the body map · '+LAYERS[li].regions[ri].n);
+ if(btn){btn.textContent='✓';btn.disabled=true;}
+}
+function partTap(li,ri,j){
+ var p=LAYERS[li].regions[ri].parts[j];
+ spk(p[0],0.8);
+ var z=document.getElementById('lbz');
+ if(z)z.innerHTML='<div class="lbl" style="left:'+p[2]+'%;top:'+p[3]+'%">'+esc(p[0])+' · '+esc(p[1].split(' (')[0])+'</div>';
+}
+/* ---------- 🎯 Tócalo ---------- */
+function quizStart(li,ri){
+ var r=LAYERS[li].regions[ri];
+ Q={li:li,ri:ri,seq:shuffle(r.parts.map(function(_,j){return j;})).slice(0,Math.min(6,r.parts.length)),i:0,score:0};
+ quizRound();
+}
+function quizRound(){
+ if(Q.i>=Q.seq.length)return quizEnd();
+ var L=LAYERS[Q.li],r=L.regions[Q.ri],tj=Q.seq[Q.i],p=r.parts[tj];
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="regionView('+Q.li+','+Q.ri+')">✕ Exit</button><h1>🎯 '+(Q.i+1)+' / '+Q.seq.length+'</h1></div>';
+ h+='<div class="gcard"><div class="qbig">👂 Toca lo que oyes <button class="say" onclick="spk(\'Toca \'+LAYERS['+Q.li+'].regions['+Q.ri+'].parts['+tj+'][0],0.75)">🔁</button></div>';
+ var dots='';
+ r.parts.forEach(function(pp,j){dots+='<button class="dot '+L.cls+'" id="d'+j+'" style="left:'+pp[2]+'%;top:'+pp[3]+'%" onclick="quizTap('+j+')"></button>';});
+ h+=imgOrPlaceholder(L,dots);
+ h+='<div style="margin-top:10px;text-align:center;font-weight:800" id="qfb">✓ '+Q.score+'</div></div>';
+ app.innerHTML=h;
+ setTimeout(function(){spk('Toca '+p[0],0.75);},350);window.scrollTo(0,0);
+}
+function quizTap(j){
+ var L=LAYERS[Q.li],r=L.regions[Q.ri],tj=Q.seq[Q.i],p=r.parts[tj];
+ var el=document.getElementById('d'+j);
+ if(j===tj){Q.score++;if(el)el.classList.add('ok');spk('¡Sí! '+p[0],0.9);setTimeout(function(){Q.i++;quizRound();},700);}
+ else{
+  if(el)el.classList.add('no');var right=document.getElementById('d'+tj);if(right)right.classList.add('ok');
+  mochFeed('Body map: where is "'+p[1].split(' (')[0]+'"?',p[0],'Touch your own '+p[1].split(' (')[0]+' while you say it — the body remembers.');
+  var fb=document.getElementById('qfb');if(fb)fb.innerHTML='✗ Eso es '+esc(r.parts[j][0])+' — the green dot is '+esc(p[0]);
+  setTimeout(function(){Q.i++;quizRound();},1400);
+ }
+}
+function quizEnd(){
+ var r=LAYERS[Q.li].regions[Q.ri];
+ var h=nav()+'<div class="gcard" style="text-align:center"><h2>'+(Q.score>=Q.seq.length-1?'🏆':'🫀')+' '+Q.score+' / '+Q.seq.length+'</h2>';
+ h+='<p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin:8px 0">'+(Q.score>=Q.seq.length-1?'Your ears point straight — '+esc(r.n)+' is mapped.':'Misses went to your 🎒 Mochila. Touch each part on YOURSELF as you hear it — the body is the best flashcard ever printed.')+'</p>';
+ h+='<button class="gbtn" onclick="quizStart('+Q.li+','+Q.ri+')">Otra vez →</button><button class="gbtn ghost" onclick="regionView('+Q.li+','+Q.ri+')">Back to '+esc(r.n)+'</button><button class="gbtn ghost" onclick="LI='+Q.li+';home()">Whole body</button></div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>

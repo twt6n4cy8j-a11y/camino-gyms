@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>El Duelo · El Camino Grande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cobalt:#2456a6;--cobalt2:#1c4488;--saffron:#e8a33d;--saffron2:#d18f2a;--plaster:#faf3ea;--card:#fffdf7;--ink:#33202e;--ink2:#5c4a55;--mut:#9b8a93;--line:#e8dccb;--green:#2f8a5b;--red:#c0392b;--plum:#54306b}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:var(--plaster);color:var(--ink);min-height:100vh}
+#app{max-width:560px;margin:0 auto;padding:14px 14px 90px}
+.nav{display:flex;gap:14px;padding:6px 2px 14px;font-size:13px;font-weight:800;color:var(--mut)}
+.nav a{cursor:pointer;color:var(--cobalt);text-decoration:none}
+h1,h2{font-family:'Fraunces',serif}
+.hero{background:linear-gradient(140deg,#8a2f2f,#5c1f1f);border-radius:22px;padding:22px 20px;color:#fff8ef;margin-bottom:16px}
+.hero .htop{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.75;text-transform:uppercase}
+.hero h1{font-size:26px;margin:4px 0 6px}
+.hero p{font-size:14px;opacity:.92;line-height:1.5}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 15px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px -5px rgba(51,32,46,.15)}
+.card:active{transform:scale(.98)}
+.card .em{font-size:26px}
+.card b{font-family:'Fraunces',serif;font-size:15.5px}
+.cmeta{font-size:12px;color:var(--mut);font-weight:700;margin-top:2px}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px -6px rgba(51,32,46,.18)}
+.famhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.famhead h1{font-size:20px;flex:1}
+.quit{background:none;border:1.5px solid var(--line);border-radius:99px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2);font-family:'Nunito Sans',sans-serif}
+.timerbar{height:10px;background:#f0e7d6;border-radius:99px;overflow:hidden;margin-bottom:10px}
+.timerbar div{height:100%;background:linear-gradient(90deg,var(--saffron),#c0392b);border-radius:99px;transition:width .2s linear}
+.duelhead{display:flex;justify-content:space-between;align-items:center;font-weight:800;margin-bottom:8px}
+.duelscore{font-family:'Fraunces',serif;font-size:22px}
+.combo{font-size:12px;color:var(--saffron2)}
+.dq{font-family:'Fraunces',serif;font-size:22px;text-align:center;margin:14px 0;line-height:1.35}
+.opt{display:block;width:100%;background:#f6f1e7;border:1.5px solid var(--line);border-radius:14px;padding:13px;margin-top:9px;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:16.5px;cursor:pointer;text-align:center;color:var(--ink)}
+.opt.ok{background:#e2f2e9;border-color:var(--green)}
+.opt.no{background:#fbe9e7;border-color:var(--red)}
+.gbtn{display:block;width:100%;background:linear-gradient(140deg,var(--cobalt),var(--cobalt2));color:#fff;border:none;border-radius:14px;padding:12px;font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;margin-top:12px}
+.gbtn.ghost{background:none;border:1.5px solid var(--line);color:var(--ink2)}
+.spot{background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#5c4a22;margin-bottom:12px}
+.spot b{color:#8a6d1f}
+.dob{background:#f6f1e7;border:1.5px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:8px}
+.dob b{font-family:'Fraunces',serif;font-size:16px;color:var(--cobalt)}
+.dob .two{font-size:13.5px;color:var(--ink2);line-height:1.55;margin-top:3px}
+.say{background:none;border:1.5px solid var(--line);border-radius:99px;padding:3px 9px;cursor:pointer;font-size:13px;margin-left:6px}
+.tnote{margin-top:10px;background:#f3eef8;border:1.5px solid #ddcfe9;border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.6;color:#4a3a56}
+.childhdr{font-size:12px;letter-spacing:1.4px;font-weight:800;color:var(--mut);text-transform:uppercase;margin:16px 4px 8px}
+
+/* La Sobremesa tokens */
+:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* EL DUELO · the 60-second sprint arena — a desvío of El Camino Grande
+   Headline deck: LOS DOBLES — the metaphor miracle. */
+
+var DOBLES=[
+{es:'la estrella',en1:'star in the sky',en2:'star of the show',fam:'world'},
+{es:'el ratón',en1:'mouse (the animal)',en2:'mouse (on your desk)',fam:'tech'},
+{es:'la red',en1:'net (for fishing)',en2:'network / the web',fam:'tech'},
+{es:'la hoja',en1:'leaf (on a tree)',en2:'sheet/leaf of paper',fam:'world'},
+{es:'el segundo',en1:'second (2nd in line)',en2:'second (tick of the clock)',fam:'world'},
+{es:'la banda',en1:'band (the musicians)',en2:'band (a strip or ribbon)',fam:'world'},
+{es:'la corona',en1:'crown (on a monarch)',en2:'crown (on a tooth)',fam:'world'},
+{es:'la planta',en1:'plant (green, in a pot)',en2:'plant (a factory)',fam:'world'},
+{es:'la corriente',en1:'current (river, electricity)',en2:'current (this month · la cuenta corriente = checking account)',fam:'world'},
+{es:'la clave',en1:'key (to the mystery)',en2:'key/clef (in music)',fam:'world'},
+{es:'la fuente',en1:'fountain (in the plaza)',en2:'source (of information)',fam:'world'},
+{es:'el ala',en1:'wing (of a bird)',en2:'wing (of a plane or building)',fam:'world'},
+{es:'la capital / el capital',en1:'capital (the city) — LA',en2:'capital (the money) — EL',fam:'world'},
+{es:'el derecho / la derecha',en1:'right (a human right) — EL',en2:'right (turn right) — LA',fam:'world'},
+{es:'el interés',en1:'interest (in a topic)',en2:'interest (on a loan)',fam:'world'},
+{es:'el carácter',en1:'character (personality)',en2:'character (a typed symbol)',fam:'world'},
+{es:'general / el general',en1:'general (overall, in general)',en2:'a general (in the army)',fam:'world'},
+{es:'el punto',en1:'point (a dot)',en2:'point (a score)',fam:'world'},
+{es:'la línea',en1:'line (you draw)',en2:'line (phone line: línea telefónica)',fam:'world'},
+{es:'el orden / la orden',en1:'order (the sequence) — EL',en2:'order (a command — and your taco order) — LA',fam:'world'},
+{es:'el final / la final',en1:'the ending (of the movie) — EL',en2:'the final (the championship game) — LA',fam:'world'},
+{es:'la lengua',en1:'tongue (in your mouth)',en2:'tongue = a language (lengua materna)',fam:'body'},
+{es:'la boca',en1:'mouth (on your face)',en2:'mouth (of a river)',fam:'body'},
+{es:'el pie',en1:'foot (in your shoe)',en2:'foot (of the mountain, of the page)',fam:'body'},
+{es:'el ojo',en1:'eye (that blinks)',en2:'eye (of the needle, of the hurricane)',fam:'body'},
+{es:'el corazón',en1:'heart (that beats)',en2:'heart (of the city)',fam:'body'},
+{es:'la cabeza',en1:'head (on your shoulders)',en2:'head (of the family)',fam:'body'},
+{es:'el brazo',en1:'arm (that waves)',en2:'arm (of the chair, of the river)',fam:'body'},
+{es:'la mano',en1:'hand (with five fingers)',en2:'hand (of cards) · second-hand',fam:'body'}
+];
+var CUERPO=[
+['la cabeza','head'],['el pelo','hair'],['los ojos','eyes'],['la nariz','nose'],['la boca','mouth'],['las orejas','ears'],['los dientes','teeth'],['la lengua','tongue'],['el corazón','heart'],['el estómago','stomach'],['el brazo','arm'],['la mano','hand'],['el dedo','finger'],['la pierna','leg'],['el pie','foot'],['la espalda','back']];
+var GENERO=['el libro','la casa','el problema','la mano','el día','la noche','el mapa','la ciudad','el corazón','la flor','el viaje','la gente','el idioma','la foto','el agua (¡fem!)','la moto','el clima','la sal','el tema','la luz'];
+var SERESTAR=[
+{q:'Ella ___ doctora.',a:'es',why:'Profession = ID card = ser.'},
+{q:'El café ___ frío.',a:'está',why:'Condition right now = estar.'},
+{q:'Nosotros ___ en Cuba.',a:'estamos',why:'Location of people/things = estar.'},
+{q:'La pirámide ___ enorme.',a:'es',why:'Essential trait = ser.'},
+{q:'Yo ___ cansado.',a:'estoy',why:'How you feel today = estar.'},
+{q:'Hoy ___ sábado.',a:'es',why:'Dates and days = ser.'},
+{q:'La sopa ___ deliciosa hoy.',a:'está',why:'Tastes great right now = estar.'},
+{q:'Mis padres ___ de México.',a:'son',why:'Origin = ser.'},
+{q:'¿Dónde ___ el baño?',a:'está',why:'Location = estar, always.'},
+{q:'Son las dos y ___ nublado.',a:'está',why:'Sky condition now = estar.'},
+{q:'Ella ___ muy contenta hoy.',a:'está',why:'Emotion today = estar.'},
+{q:'El concierto ___ en el teatro.',a:'es',why:'EVENTS take ser for location — the famous exception.'}
+];
+function numEs(n){
+ n=Math.round(n);
+ var U=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+ var T=['','','veinte','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+ if(n<30)return U[n];
+ if(n<100){var t=Math.floor(n/10),u=n%10;return T[t]+(u?' y '+U[u]:'');}
+ if(n===100)return 'cien';
+ var h=Math.floor(n/100),r=n%100;
+ var H=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+ return H[h]+(r?' '+numEs(r):'');
+}
+/* ---------- voice ---------- */
+var VOICE=null;
+function esVoices(){try{return speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});}catch(e){return [];}}
+function vScore(v){var s=0;if(/enhanced|premium|natural/i.test(v.name))s+=40;if(/es[-_](MX|US|419)/i.test(v.lang))s+=8;return s;}
+function spk(t,rate){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);if(!VOICE){var vs=esVoices();vs.sort(function(a,b){return vScore(b)-vScore(a);});VOICE=vs[0]||null;}if(VOICE)u.voice=VOICE;u.lang=(VOICE&&VOICE.lang)||'es-MX';u.rate=rate||0.9;speechSynthesis.speak(u);}catch(e){}}
+
+function mochFeed(q,a,why){
+ try{
+  var o=JSON.parse(localStorage.getItem('cg_moch'))||{};
+  var k=(q||'').slice(0,60);if(!k)return;
+  o[k]={q:q,a:a,why:why||'',src:'duelo',due:Math.floor(Date.now()/864e5),iv:0};
+  localStorage.setItem('cg_moch',JSON.stringify(o));
+ }catch(e){}
+}
+function bestLoad(){try{return JSON.parse(localStorage.getItem('du_best'))||{};}catch(e){return {};}}
+function bestSave(o){try{localStorage.setItem('du_best',JSON.stringify(o));}catch(e){}}
+function cls(){try{return localStorage.getItem('cg_mode')==='class';}catch(e){return false;}}
+
+var app=document.getElementById('app'),D=null,TICK=null;
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
+function nav(){return '<div class="nav"><a onclick="home()">⚡ El Duelo</a><a href="/">🗺️ El Camino</a></div>';}
+function home(){
+ clearInterval(TICK);
+ var B=bestLoad();
+ var h=nav();
+ h+='<div class="hero"><div class="htop">EL CAMINO GRANDE · UN DESVÍO</div><h1>El Duelo</h1><p>Sixty seconds. One deck. As many right answers as your reflexes allow. Speed is the last skill — when the answer arrives before the thought, it\'s truly yours.</p></div>';
+ h+='<div class="card" onclick="duelStart(\'dobles\')"><span class="em">🎭</span><div style="flex:1"><b>Los Dobles</b><div class="cmeta">The metaphor miracle: two meanings, both languages'+(B.dobles?' · best '+B.dobles:'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="duelStart(\'genero\')"><span class="em">⚧</span><div style="flex:1"><b>Género relámpago</b><div class="cmeta">el or la — lightning round'+(B.genero?' · best '+B.genero:'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="duelStart(\'serestar\')"><span class="em">🎭</span><div style="flex:1"><b>¿Ser o estar?</b><div class="cmeta">The eternal question, at speed'+(B.serestar?' · best '+B.serestar:'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="duelStart(\'cuerpo\')"><span class="em">🫀</span><div style="flex:1"><b>El Cuerpo</b><div class="cmeta">16 body parts · study the 🫀 body map first (cuerpo.html)'+(B.cuerpo?' · best '+B.cuerpo:'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="duelStart(\'numeros\')"><span class="em">🔢</span><div style="flex:1"><b>Números flash</b><div class="cmeta">See digits, pick the Spanish'+(B.numeros?' · best '+B.numeros:'')+'</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="card" onclick="doblesStudy()"><span class="em">📖</span><div style="flex:1"><b>Study: Los Dobles</b><div class="cmeta">Browse the collection before you duel it</div></div><span style="color:var(--mut)">›</span></div>';
+ h+='<div class="spot" style="margin-top:14px"><b>Los Dobles — the metaphor miracle:</b> the cognate miracle gave you thousands of words for free because the ROOTS transferred. This deck is its secret sibling: the METAPHORS transferred too. English stretched "star" to mean the celebrity; Spanish stretched estrella the exact same way. Learn one word, get two meanings — in both languages.</div>';
+ if(cls())h+='<div class="tnote">🧭 <b>Guide note:</b> duels make perfect class closers — two minutes, loud, competitive. Play guide-vs-student on the same deck and let them beat you once a month. For Los Dobles, the body-metaphor family (la boca del río, el pie de la montaña) is a whiteboard goldmine: draw the river with a mouth.</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function dobPack(i,btn){
+ var d=DOBLES[i];
+ mochFeed('Doble: '+d.es+' — its TWO meanings?',d.en1+'  AND  '+d.en2,'The metaphor miracle: English carries the same double.');
+ if(btn){btn.textContent='✓';btn.disabled=true;}
+}
+function doblesStudy(){
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← El Duelo</button><h1>🎭 Los Dobles</h1></div>';
+ h+='<div class="gcard"><div class="spot">Same word, same double meaning: when English bends a word two ways, Spanish bends it the same two ways. The metaphor crossed the ocean with the word — read these once and they\'re yours twice.</div>';
+ var fams=[['tech','💻 The modern doubles'],['world','🌍 Things with two lives'],['body','🫀 The body, mapping the world']];
+ fams.forEach(function(f){
+  var items=DOBLES.filter(function(d){return d.fam===f[0];});
+  if(!items.length)return;
+  h+='<div class="childhdr">'+f[1]+'</div>';
+  items.forEach(function(d){
+   var di=DOBLES.indexOf(d);
+   h+='<div class="dob"><b>'+esc(d.es)+'</b><button class="say" onclick="spk(\''+d.es.replace(/'/g,'')+'\',0.8)">🔊</button><button class="say" onclick="dobPack('+di+',this)">🎒</button><div class="two">1 · '+esc(d.en1)+'<br>2 · '+esc(d.en2)+'</div></div>';
+  });
+ });
+ h+='<div class="spot" style="margin-top:10px">You already carry these double meanings in English — Spanish just borrowed the same ones. And a bonus family where the ARTICLE carries the meaning, four flips strong: <b>la capital</b> (city) / <b>el capital</b> (money) · <b>el derecho</b> (a human right) / <b>la derecha</b> (turn right) · <b>el orden</b> (the sequence) / <b>la orden</b> (the command — and la orden de tacos) · <b>el final</b> (the ending) / <b>la final</b> (the championship). Gender doing real work. One more life for free: <b>siga derecho</b> = go straight ahead.</div>';
+ h+='<button class="gbtn" onclick="duelStart(\'dobles\')">⚡ Duel this deck →</button></div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+/* ---------- the duel ---------- */
+function qGen(deck){
+ if(deck==='dobles'){
+  var d=DOBLES[Math.floor(Math.random()*DOBLES.length)];
+  var meaning=Math.random()<0.5?d.en1:d.en2;
+  var wrong=shuffle(DOBLES.filter(function(x){return x.es!==d.es;})).slice(0,2);
+  return {q:'“'+meaning+'”',opts:shuffle([{t:d.es,ok:true},{t:wrong[0].es,ok:false},{t:wrong[1].es,ok:false}]),a:d.es,why:d.es+' = '+d.en1+' AND '+d.en2};
+ }
+ if(deck==='genero'){
+  var w=GENERO[Math.floor(Math.random()*GENERO.length)];
+  var art=w.split(' ')[0],noun=w.slice(w.indexOf(' ')+1);
+  return {q:'___ '+noun,opts:shuffle([{t:'el',ok:art==='el'},{t:'la',ok:art==='la'}]),a:art,why:w};
+ }
+ if(deck==='serestar'){
+  var it=SERESTAR[Math.floor(Math.random()*SERESTAR.length)];
+  var forms=['es','está','son','están','estoy','soy','estamos','somos'];
+  var alt=it.a.indexOf('es')===0||it.a==='son'||it.a==='soy'||it.a==='somos'?
+   (it.a==='es'?'está':it.a==='son'?'están':it.a==='soy'?'estoy':'estamos'):
+   (it.a==='está'?'es':it.a==='están'?'son':it.a==='estoy'?'soy':'somos');
+  return {q:it.q,opts:shuffle([{t:it.a,ok:true},{t:alt,ok:false}]),a:it.a,why:it.why};
+ }
+ if(deck==='cuerpo'){
+  var b=CUERPO[Math.floor(Math.random()*CUERPO.length)];
+  var wr=shuffle(CUERPO.filter(function(x){return x[0]!==b[0];})).slice(0,2);
+  return {q:'“'+b[1]+'”',opts:shuffle([{t:b[0],ok:true},{t:wr[0][0],ok:false},{t:wr[1][0],ok:false}]),a:b[0],why:b[0]+' = '+b[1]+' — the article rides along free.'};
+ }
+ // numeros
+ var n=Math.floor(Math.random()*999)+1;
+ var d1=n>10?n-10:n+10,d2=n<990?n+ (n>=100?100:(n>=30?1:11)):n-100;
+ if(d1===n)d1=n+3; if(d2===n||d2===d1)d2=n+7;
+ return {q:String(n),opts:shuffle([{t:numEs(n),ok:true},{t:numEs(Math.abs(d1)),ok:false},{t:numEs(Math.abs(d2)),ok:false}]),a:numEs(n),why:n+' = '+numEs(n)};
+}
+function duelStart(deck){
+ clearInterval(TICK);
+ D={deck:deck,score:0,combo:0,maxcombo:0,t:60,over:false};
+ TICK=setInterval(function(){
+  D.t--;
+  var bar=document.getElementById('tbar');
+  if(bar)bar.style.width=(D.t/60*100)+'%';
+  var tl=document.getElementById('tleft');
+  if(tl)tl.innerHTML=D.t+'s';
+  if(D.t<=0)duelEnd();
+ },1000);
+ duelQ();
+}
+function duelQ(){
+ if(D.over)return;
+ D.cur=qGen(D.deck);
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">✕ Quit</button><h1>⚡ El Duelo</h1></div>';
+ h+='<div class="gcard"><div class="duelhead"><span class="duelscore">'+D.score+'</span><span id="tleft">'+D.t+'s</span></div>';
+ h+='<div class="timerbar"><div id="tbar" style="width:'+(D.t/60*100)+'%"></div></div>';
+ h+=(D.combo>=3?'<div class="combo" style="text-align:center">🔥 combo ×'+D.combo+'</div>':'');
+ h+='<div class="dq">'+esc(D.cur.q)+'</div>';
+ D.cur.opts.forEach(function(o,j){h+='<button class="opt" id="dp'+j+'" onclick="duelPick('+j+')">'+esc(o.t)+'</button>';});
+ h+='</div>';
+ app.innerHTML=h;
+}
+function duelPick(j){
+ if(D.over)return;
+ var ok=D.cur.opts[j].ok;
+ if(ok){D.score++;D.combo++;if(D.combo>D.maxcombo)D.maxcombo=D.combo;duelQ();}
+ else{
+  D.combo=0;
+  mochFeed(D.cur.q,D.cur.a,D.cur.why);
+  var el=document.getElementById('dp'+j);if(el)el.classList.add('no');
+  D.cur.opts.forEach(function(o,k){if(o.ok){var e2=document.getElementById('dp'+k);if(e2)e2.classList.add('ok');}});
+  setTimeout(function(){duelQ();},650);
+ }
+}
+function duelEnd(){
+ clearInterval(TICK);D.over=true;
+ var B=bestLoad(),prev=B[D.deck]||0,nb=D.score>prev;
+ if(nb){B[D.deck]=D.score;bestSave(B);}
+ var h=nav()+'<div class="gcard" style="text-align:center"><h2>⚡ Time!</h2><div style="font-size:46px;font-weight:800;font-family:Fraunces,serif;margin:6px 0">'+D.score+'</div>';
+ h+='<p style="font-size:13.5px;color:var(--ink2)">'+(nb?'🏆 New personal best!':'Best: '+Math.max(prev,D.score))+(D.maxcombo>=5?' · longest combo ×'+D.maxcombo:'')+'</p>';
+ h+='<p style="font-size:13px;color:var(--mut);margin-top:4px">Misses went to your 🎒 Mochila.</p>';
+ h+='<button class="gbtn" onclick="duelStart(\''+D.deck+'\')">Again →</button><button class="gbtn ghost" onclick="home()">Choose a deck</button></div>';
+ app.innerHTML=h;
+}
+home();
+</script>
+</body>
+</html>

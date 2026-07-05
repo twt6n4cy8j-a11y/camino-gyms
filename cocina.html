@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>La Cocina · El Camino Grande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cobalt:#2456a6;--cobalt2:#1c4488;--saffron:#e8a33d;--saffron2:#d18f2a;--plaster:#faf3ea;--card:#fffdf7;--ink:#33202e;--ink2:#5c4a55;--mut:#9b8a93;--line:#e8dccb;--green:#2f8a5b;--plum:#54306b;--terra:#c96f4a}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;background:var(--plaster);color:var(--ink);min-height:100vh}
+#app{max-width:560px;margin:0 auto;padding:14px 14px 90px}
+.nav{display:flex;gap:14px;padding:6px 2px 14px;font-size:13px;font-weight:800;color:var(--mut)}
+.nav a{cursor:pointer;color:var(--cobalt);text-decoration:none}
+h1,h2{font-family:'Fraunces',serif}
+.hero{background:linear-gradient(140deg,var(--terra),#a4552f);border-radius:22px;padding:22px 20px;color:#fff8ef;margin-bottom:16px}
+.hero .htop{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.78;text-transform:uppercase}
+.hero h1{font-size:26px;margin:4px 0 6px}
+.hero p{font-size:14px;opacity:.94;line-height:1.5}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px -5px rgba(51,32,46,.15)}
+.card:active{transform:scale(.98)}
+.card .em{font-size:26px}
+.card b{font-family:'Fraunces',serif;font-size:15.5px}
+.cmeta{font-size:12px;color:var(--mut);font-weight:700;margin-top:2px}
+.badge{display:inline-block;background:#e4ecf9;color:var(--cobalt);border-radius:99px;padding:2px 9px;font-size:11px;font-weight:800;margin-right:5px}
+.gcard{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px -6px rgba(51,32,46,.18)}
+.famhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.famhead h1{font-size:20px;flex:1}
+.quit{background:none;border:1.5px solid var(--line);border-radius:99px;padding:6px 13px;font-weight:800;font-size:12.5px;cursor:pointer;color:var(--ink2);font-family:'Nunito Sans',sans-serif}
+.spot{background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#5c4a22;margin-bottom:12px}
+.spot b{color:#8a6d1f}
+.childhdr{font-size:12px;letter-spacing:1.4px;font-weight:800;color:var(--mut);text-transform:uppercase;margin:14px 4px 8px}
+.ing{display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px dashed var(--line)}
+.ing .es{flex:1;font-size:15px;font-weight:700}
+.ing .en{font-size:12.5px;color:var(--mut)}
+.lline{display:flex;align-items:center;gap:8px;padding:9px 4px;border-bottom:1px dashed var(--line);cursor:pointer}
+.lline .num{width:26px;height:26px;border-radius:99px;background:var(--terra);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lline .es{flex:1;font-size:15.5px;font-weight:700;line-height:1.45}
+.lgl{display:none;font-size:12.5px;color:var(--mut);padding:0 4px 8px 38px;font-style:italic}
+.lgl.on{display:block}
+.say{background:none;border:1.5px solid var(--line);border-radius:99px;padding:3px 9px;cursor:pointer;font-size:13px}
+.chip{display:inline-block;background:#f2ead9;border-radius:99px;padding:4px 11px;margin:0 5px 7px 0;font-size:12.5px;font-weight:700}
+.chip b{color:var(--cobalt)}
+.chipbtn{cursor:pointer}
+.factc{margin-top:10px;background:#fdf6e3;border:1.5px solid #ecd9a8;border-radius:14px;padding:11px 14px;font-size:13.5px;line-height:1.65;color:#5c4a22}
+.tnote{margin-top:10px;background:#f3eef8;border:1.5px solid #ddcfe9;border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.6;color:#4a3a56}
+.gbtn{display:block;width:100%;background:linear-gradient(140deg,var(--cobalt),var(--cobalt2));color:#fff;border:none;border-radius:14px;padding:12px;font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;margin-top:10px}
+.gbtn.ghost{background:none;border:1.5px solid var(--line);color:var(--ink2)}
+.atl{display:inline-block;background:#e9f3ee;color:#25573e;border-radius:99px;padding:3px 11px;font-weight:800;font-size:12px;text-decoration:none;margin-left:6px}
+.legal{font-size:11.5px;color:var(--mut);line-height:1.6;margin:22px 4px;text-align:center}
+
+/* La Sobremesa tokens */
+:root{
+  --ink:#33202e;--ink2:#5c4759;--mut:#8a7386;
+  --plaster:#faf3ea;--plaster2:#f3e6d7;--card:#fffdf9;
+  --cobalt:#2456a6;--cobalt2:#1a4488;
+  --saffron:#e8a33d;--saffron2:#d98c1f;--sunhi:#ffd88a;
+  --green:#2f8a5b;--greenbg:#e5f5ec;--red:#c8503f;--redbg:#fcebe7;--sky:#eaf1fb;
+  --shadow:0 1px 2px rgba(51,32,46,.05),0 10px 30px -12px rgba(51,32,46,.18);
+  --shadow-sm:0 1px 2px rgba(51,32,46,.05),0 4px 14px -6px rgba(51,32,46,.12);
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* LA COCINA · cook-along kitchen — a pueblo of El Camino Grande
+   Grammar spine: recipes narrated in the NOSOTROS PRESENT
+   (cortamos, mezclamos, servimos) — Stage-2-legal, and exactly
+   how people narrate cooking anyway. Level law applies to every step. */
+
+var VERBOS=[['cortamos','we cut'],['mezclamos','we mix'],['añadimos','we add'],['calentamos','we heat'],['cocinamos','we cook'],['servimos','we serve'],['lavamos','we wash'],['pelamos','we peel'],['probamos','we taste'],['esperamos','we wait']];
+
+var RECETAS=[
+{id:'guac',t:'Guacamole',flag:'🇲🇽',key:'mx',lv:'A1',time:'10 min',serves:'para 4 personas',
+ intro:'The world\'s greatest no-cook recipe — and your first full dish narrated entirely in Spanish you already own.',
+ ing:[['3 aguacates','3 avocados'],['1 tomate','1 tomato'],['media cebolla','half an onion'],['1 limón','1 lime'],['cilantro','cilantro'],['sal','salt']],
+ steps:[
+ ['Cortamos los aguacates.','We cut the avocados.'],
+ ['Mezclamos el aguacate en un bol.','We mash/mix the avocado in a bowl.'],
+ ['Cortamos el tomate y la cebolla en trocitos.','We cut the tomato and onion into little pieces.'],
+ ['Añadimos el tomate, la cebolla y el cilantro.','We add the tomato, onion, and cilantro.'],
+ ['Añadimos el jugo de un limón y un poco de sal.','We add the juice of one lime and a little salt.'],
+ ['Probamos. ¿Está perfecto? ¡Servimos con totopos!','We taste. Is it perfect? We serve with tortilla chips!']],
+ vocab:[['el aguacate','avocado (from Nahuatl āhuacatl)'],['los trocitos','little pieces (-ito!)'],['el jugo','juice'],['los totopos','tortilla chips (MX)']],
+ fact:'Guacamole is older than the arrival of Europeans in the Americas — the Mexica were mashing āhuacamōlli (avocado sauce) centuries before anyone wrote it down. Every bowl you make continues a very long tradition.',
+ note:'THE first cook-along: six steps, zero heat, all present tense. Assign it as a real mission — student cooks, narrates each step aloud in Spanish, sends you a photo of the result. Comprehensible input you can eat.'},
+{id:'pico',t:'Pico de gallo',flag:'🇲🇽',key:'mx',lv:'A1',time:'10 min',serves:'para 4 personas',
+ intro:'Guacamole\'s crunchy cousin — the same six verbs, a new result. Repetition disguised as salsa.',
+ ing:[['3 tomates','3 tomatoes'],['media cebolla','half an onion'],['1 chile (opcional)','1 chili (optional)'],['1 limón','1 lime'],['cilantro','cilantro'],['sal','salt']],
+ steps:[
+ ['Lavamos los tomates y el cilantro.','We wash the tomatoes and the cilantro.'],
+ ['Cortamos los tomates en trocitos.','We cut the tomatoes into little pieces.'],
+ ['Cortamos la cebolla y el chile.','We cut the onion and the chili.'],
+ ['Mezclamos todo en un bol.','We mix everything in a bowl.'],
+ ['Añadimos el jugo de limón y la sal.','We add the lime juice and the salt.'],
+ ['Esperamos diez minutos. ¡Los sabores son mejores juntos!','We wait ten minutes. The flavors are better together!']],
+ vocab:[['lavamos','we wash'],['todo','everything'],['los sabores','the flavors'],['juntos','together']],
+ fact:'The name means "rooster\'s beak" — one story says people once ate it pinched between thumb and finger, pecking like a rooster. Nobody is completely sure, which is very Mexican of the story.',
+ note:'Teach guac and pico back-to-back: 80% shared verbs, new nouns only. That overlap IS the lesson — the student feels the nosotros machine generalizing.'},
+{id:'arepas',t:'Arepas',flag:'🇻🇪🇨🇴',key:'ve',lv:'A2',time:'30 min',serves:'para 4 arepas',
+ intro:'The daily bread of two countries — a griddle cake with a pocket for anything you love.',
+ ing:[['2 tazas de harina de maíz precocida','2 cups precooked corn flour (masarepa)'],['2 tazas y media de agua tibia','2½ cups warm water'],['1 cucharadita de sal','1 teaspoon of salt'],['queso (opcional)','cheese (optional)']],
+ steps:[
+ ['Mezclamos el agua y la sal en un bol.','We mix the water and salt in a bowl.'],
+ ['Añadimos la harina poco a poco.','We add the flour little by little.'],
+ ['Mezclamos con las manos. La masa está lista cuando está suave.','We mix with our hands. The dough is ready when it is smooth.'],
+ ['Formamos bolas y después discos.','We form balls and then discs.'],
+ ['Calentamos una sartén y cocinamos las arepas: cinco minutos por lado.','We heat a pan and cook the arepas: five minutes per side.'],
+ ['Están listas cuando están doradas. Abrimos y servimos con queso.','They are ready when they are golden. We open and serve with cheese.']],
+ vocab:[['la harina','flour'],['la masa','dough'],['la sartén','frying pan'],['dorado/a','golden'],['por lado','per side']],
+ fact:'Venezuela and Colombia both claim the arepa, and the truth is older than both: indigenous peoples of the region were grinding maize into griddle cakes long before either country existed. It is shared heritage — which is why we fly both flags.',
+ note:'The estar showcase: la masa ESTÁ lista, ESTÁN doradas — conditions changing in real time, exactly what estar is for. Have the student narrate the pan: ¿cómo está la arepa? Está caliente… está dorada… ¡está perfecta!'},
+{id:'gallo',t:'Gallo pinto',flag:'🇨🇷🇳🇮',key:'cr',lv:'A2',time:'20 min',serves:'para 4 personas',
+ intro:'Breakfast of champions from Costa Rica AND Nicaragua — rice and beans that taste like a friendly border dispute.',
+ ing:[['2 tazas de arroz cocido','2 cups cooked rice'],['1 taza y media de frijoles','1½ cups beans'],['media cebolla','half an onion'],['medio pimiento','half a bell pepper'],['cilantro','cilantro'],['aceite','oil'],['salsa inglesa (al gusto)','Worcestershire-style sauce (to taste)']],
+ steps:[
+ ['Cortamos la cebolla y el pimiento.','We cut the onion and the pepper.'],
+ ['Calentamos el aceite en una sartén grande.','We heat the oil in a big pan.'],
+ ['Cocinamos la cebolla y el pimiento dos minutos.','We cook the onion and pepper for two minutes.'],
+ ['Añadimos los frijoles con un poco de su líquido.','We add the beans with a little of their liquid.'],
+ ['Añadimos el arroz y mezclamos todo.','We add the rice and mix everything.'],
+ ['Cocinamos cinco minutos más. Servimos con cilantro. ¡Pura vida!','We cook five more minutes. We serve with cilantro. Pura vida!']],
+ vocab:[['el arroz','rice'],['los frijoles','beans'],['el pimiento','bell pepper'],['al gusto','to taste'],['cocido','cooked']],
+ fact:'Costa Rica and Nicaragua both insist gallo pinto is theirs, and the rivalry is mostly a love language — Nicaragua\'s version leans red beans, Costa Rica\'s black. The name means "spotted rooster," for the speckled look of rice and beans together.',
+ note:'The numbers-in-time recipe: dos minutos, cinco minutos, cinco minutos más — kitchen timers are number drills. Ask ¿cuántos minutos? at every step.'},
+{id:'agua',t:'Agua fresca de sandía',flag:'🇲🇽',key:'mx',lv:'A1',time:'10 min',serves:'para 6 vasos',
+ intro:'Watermelon, water, a squeeze of lime — the taste of a Mexican summer in three verbs.',
+ ing:[['4 tazas de sandía','4 cups of watermelon'],['3 tazas de agua fría','3 cups of cold water'],['1 limón','1 lime'],['azúcar (al gusto)','sugar (to taste)'],['hielo','ice']],
+ steps:[
+ ['Cortamos la sandía en trozos.','We cut the watermelon into chunks.'],
+ ['Mezclamos la sandía y el agua en la licuadora.','We blend the watermelon and water in the blender.'],
+ ['Añadimos el jugo de limón y el azúcar.','We add the lime juice and the sugar.'],
+ ['Probamos. ¿Está dulce? ¡Perfecto!','We taste. Is it sweet? Perfect!'],
+ ['Servimos con mucho hielo.','We serve with lots of ice.']],
+ vocab:[['la sandía','watermelon'],['la licuadora','blender'],['el hielo','ice'],['dulce','sweet'],['el vaso','glass']],
+ fact:'Aguas frescas — "fresh waters" — are Mexico\'s everyday genius: fruit, water, and restraint. Sold from big glass barrels (vitroleras) at every market, in flavors from jamaica to horchata. Your Oaxaca reading already ordered one.',
+ note:'The shortest recipe in the kitchen: perfect for the youngest students or the first-ever cook-along. Bonus tie: agua is that famous trap noun — EL agua, but LAS aguas frescas. Let them find it.'},
+{id:'tortilla',t:'Tortilla española',flag:'🇪🇸',key:'es',lv:'A2',time:'35 min',serves:'para 4 personas',
+ intro:'Spain\'s national comfort food: potatoes, eggs, onion, patience. The flip is the rite of passage.',
+ ing:[['5 huevos','5 eggs'],['4 papas medianas','4 medium potatoes'],['1 cebolla','1 onion'],['aceite de oliva','olive oil'],['sal','salt']],
+ steps:[
+ ['Pelamos las papas y la cebolla.','We peel the potatoes and the onion.'],
+ ['Cortamos las papas en rodajas finas.','We cut the potatoes into thin slices.'],
+ ['Calentamos el aceite y cocinamos las papas y la cebolla quince minutos.','We heat the oil and cook the potatoes and onion for fifteen minutes.'],
+ ['Mezclamos los huevos en un bol grande con sal.','We beat the eggs in a big bowl with salt.'],
+ ['Añadimos las papas a los huevos y mezclamos.','We add the potatoes to the eggs and mix.'],
+ ['Cocinamos todo en la sartén. Después de cinco minutos — ¡el momento famoso! — damos la vuelta con un plato.','We cook everything in the pan. After five minutes — the famous moment! — we flip it with a plate.'],
+ ['Cocinamos tres minutos más. Está lista cuando está dorada.','We cook three more minutes. It is ready when it is golden.']],
+ vocab:[['el huevo','egg'],['la papa / la patata','potato (LATAM / Spain)'],['las rodajas','slices'],['dar la vuelta','to flip'],['fino/a','thin']],
+ fact:'In Spain it\'s la patata; almost everywhere in Latin America it\'s la papa — from Quechua, the language of the Andes where the potato was first cultivated thousands of years ago. Spain\'s most Spanish dish is built on an Andean gift.',
+ note:'The flip is theater — build it up all lesson. Language payoffs: rodajas finas (adjective agreement), quince/cinco/tres minutos (numbers), and the papa/patata split as a live Acento-page callback.'},
+{id:'choco',t:'Chocolate caliente mexicano',flag:'🇲🇽',key:'mx',lv:'A1',time:'10 min',serves:'para 2 tazas',
+ intro:'Where chocolate began. Water or milk, a tablet of Mexican chocolate, and the molinillo\'s whirl.',
+ ing:[['2 tazas de leche (o agua)','2 cups of milk (or water)'],['1 tableta de chocolate mexicano','1 tablet of Mexican chocolate'],['canela (opcional)','cinnamon (optional)']],
+ steps:[
+ ['Calentamos la leche en una olla.','We heat the milk in a pot.'],
+ ['Añadimos el chocolate.','We add the chocolate.'],
+ ['Mezclamos y mezclamos — ¡la espuma es importante!','We whisk and whisk — the foam is important!'],
+ ['Probamos. ¿Está caliente? ¿Está dulce?','We taste. Is it hot? Is it sweet?'],
+ ['Servimos en tazas grandes.','We serve in big cups.']],
+ vocab:[['la leche','milk'],['la olla','pot'],['la espuma','foam'],['la taza','cup'],['la canela','cinnamon']],
+ fact:'Chocolate is a Mexican word from a Mexican gift: the Mexica drank xocolatl — bitter, spiced, foamy — and prized cacao enough to use the beans as money. The wooden molinillo whisk, spun between the palms, is still how abuelas raise the foam.',
+ note:'Pair with the Stage 1 briefing\'s chocolate moment and the Oaxaca reading (chocolate en el zócalo). Smallest possible mission with the biggest atmosphere. ¿Está caliente? ¿Está dulce? = estar drilling itself.'},
+{id:'pupusas',t:'Pupusas',flag:'🇸🇻',key:'sv',lv:'A2',time:'45 min',serves:'para 8 pupusas',
+ intro:'El Salvador\'s national treasure: stuffed corn flatbreads with their own national holiday. The boss recipe of this kitchen.',
+ ing:[['3 tazas de harina de maíz','3 cups of corn flour (masa harina)'],['2 tazas de agua tibia','2 cups warm water'],['2 tazas de queso','2 cups of cheese'],['frijoles refritos (opcional)','refried beans (optional)'],['sal','salt']],
+ steps:[
+ ['Mezclamos la harina, el agua y la sal. La masa está lista cuando está suave.','We mix the flour, water, and salt. The dough is ready when it is smooth.'],
+ ['Formamos una bola pequeña.','We form a small ball.'],
+ ['Hacemos un hueco con el dedo y añadimos el queso.','We make a hole with a finger and add the cheese.'],
+ ['Cerramos la bola y formamos un disco plano. ¡Con cuidado!','We close the ball and form a flat disc. Carefully!'],
+ ['Calentamos la sartén y cocinamos cada pupusa: cuatro minutos por lado.','We heat the pan and cook each pupusa: four minutes per side.'],
+ ['Servimos con curtido y salsa. En El Salvador, las pupusas se comen con las manos.','We serve with curtido and salsa. In El Salvador, pupusas are eaten with the hands.']],
+ vocab:[['el hueco','the hole/hollow'],['el dedo','finger'],['plano/a','flat'],['con cuidado','carefully'],['el curtido','pickled cabbage slaw']],
+ fact:'Pupusas are so central to Salvadoran identity that the country declared a national Pupusa Day (the second Sunday of November). The word likely comes from Pipil, the Nahuat language of El Salvador\'s indigenous people.',
+ note:'The graduation cook: more steps, real technique (the hueco!), and a hands-on class if you and the student ever cook on video together. The final line quietly plants "se comen" — the se of Stage 6+, arriving as flavor, not grammar.'}
+];
+
+/* ---------- voice ---------- */
+var VOICE=null;
+function esVoices(){try{return speechSynthesis.getVoices().filter(function(v){return /^es/i.test(v.lang);});}catch(e){return [];}}
+function vScore(v){var s=0;if(/enhanced|premium|natural/i.test(v.name))s+=40;if(/es[-_](MX|US|419)/i.test(v.lang))s+=8;return s;}
+function spk(t,rate){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);if(!VOICE){var vs=esVoices();vs.sort(function(a,b){return vScore(b)-vScore(a);});VOICE=vs[0]||null;}if(VOICE)u.voice=VOICE;u.lang=(VOICE&&VOICE.lang)||'es-MX';u.rate=rate||0.9;speechSynthesis.speak(u);}catch(e){}}
+try{speechSynthesis.onvoiceschanged=function(){VOICE=null;}}catch(e){}
+function cls(){try{return localStorage.getItem('cg_mode')==='class';}catch(e){return false;}}
+function mochFeed(q,a,why){
+ try{
+  var o=JSON.parse(localStorage.getItem('cg_moch'))||{};
+  var k=(q||'').slice(0,60);if(!k)return;
+  o[k]={q:q,a:a,why:why||'',src:'cocina',due:Math.floor(Date.now()/864e5),iv:0};
+  localStorage.setItem('cg_moch',JSON.stringify(o));
+ }catch(e){}
+}
+function coPack(ri,vi,btn){
+ var r=RECETAS[ri],v=r.vocab[vi];
+ mochFeed('¿Cómo se dice "'+v[1].split(' (')[0]+'"?',v[0],'From the kitchen: '+r.t+'.');
+ if(btn){btn.textContent='✓';btn.disabled=true;}
+}
+function dLoad(){try{return JSON.parse(localStorage.getItem('co_done'))||{};}catch(e){return {};}}
+function dSave(o){try{localStorage.setItem('co_done',JSON.stringify(o));}catch(e){}}
+
+var app=document.getElementById('app');
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function nav(){return '<div class="nav"><a onclick="home()">🍳 La Cocina</a><a href="/">🗺️ El Camino</a><a href="countries.html">🌎 El Atlas</a></div>';}
+function home(){
+ var d=dLoad();
+ var h=nav();
+ h+='<div class="hero"><div class="htop">EL CAMINO GRANDE · UN PUEBLO</div><h1>La Cocina</h1><p>Cook real dishes, narrated in Spanish you already own. Every recipe speaks in nosotros — cortamos, mezclamos, servimos — because cooking together is how the language was always meant to be learned.</p></div>';
+ h+='<div class="spot"><b>The nosotros trick:</b> recipes here use "we" — cortamos la cebolla, we cut the onion. It\'s Stage-2 grammar, it\'s how people narrate cooking everywhere, and after one recipe you\'ll own a verb machine that works on every -ar verb in the language.</div>';
+ h+='<div class="childhdr">🔪 The kitchen verbs</div><div style="margin-bottom:12px">';
+ VERBOS.forEach(function(v){h+='<span class="chip chipbtn" onclick="spk(\''+v[0]+'\',0.8)"><b>'+v[0]+'</b> · '+v[1]+' 🔊</span>';});
+ h+='</div>';
+ h+='<div class="childhdr">📖 The recipes</div>';
+ RECETAS.forEach(function(r,i){
+  h+='<div class="card" onclick="recView('+i+')"><span class="em">'+r.flag+'</span><div style="flex:1"><b>'+esc(r.t)+'</b><div class="cmeta"><span class="badge">'+r.lv+'</span>'+r.time+' · '+esc(r.serves)+'</div></div>'+(d[r.id]?'<span class="badge" style="background:#e2f2e9;color:#2f8a5b">✓ cooked</span>':'<span style="color:var(--mut)">›</span>')+'</div>';
+ });
+ if(cls())h+='<div class="tnote">🧭 <b>Guide note:</b> "Cook this, in Spanish, this week" is the best homework in this platform — pin a recipe via Misiones and ask for a photo of the result next class. In-session: read the steps together, student repeats each aloud, you handle the why-questions. The kitchen is a classroom with snacks.</div>';
+ h+='<div class="legal">Recipes are traditional and simplified for cooking-while-learning. La Cocina is free, outside any paywall, always.</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function recView(i){
+ var r=RECETAS[i],d=dLoad();
+ var h=nav()+'<div class="famhead"><button class="quit" onclick="home()">← La Cocina</button><h1>'+r.flag+' '+esc(r.t)+'</h1></div>';
+ h+='<div class="gcard"><div class="cmeta" style="margin-bottom:8px"><span class="badge">'+r.lv+'</span>'+r.time+' · '+esc(r.serves)+' <a class="atl" href="countries.html#'+r.key+'">'+r.flag+' El Atlas →</a></div>';
+ h+='<div class="spot">'+esc(r.intro)+'</div>';
+ h+='<div class="childhdr">🧺 Los ingredientes</div>';
+ r.ing.forEach(function(g){
+  h+='<div class="ing"><span class="es">'+esc(g[0])+'</span><button class="say" onclick="spk(RECETAS['+i+'].ing['+r.ing.indexOf(g)+'][0],0.7)">🔊</button><span class="en">'+esc(g[1])+'</span></div>';
+ });
+ h+='<div class="childhdr" style="margin-top:16px">👩‍🍳 Los pasos · tap for English</div>';
+ h+='<button class="gbtn ghost" style="margin:2px 0 8px" onclick="spk(RECETAS['+i+'].steps.map(function(s){return s[0];}).join(\' \'),0.62)">🐢 Hear the whole recipe, slow</button>';
+ r.steps.forEach(function(st,j){
+  h+='<div class="lline" onclick="var g=document.getElementById(\'g'+j+'\');g.classList.toggle(\'on\')"><span class="num">'+(j+1)+'</span><span class="es">'+esc(st[0])+'</span><button class="say" onclick="event.stopPropagation();spk(RECETAS['+i+'].steps['+j+'][0],0.62)">🐢</button><button class="say" onclick="event.stopPropagation();spk(RECETAS['+i+'].steps['+j+'][0])">🔊</button></div>';
+  h+='<div class="lgl" id="g'+j+'">'+esc(st[1])+'</div>';
+ });
+ h+='<div style="margin-top:12px">';
+ r.vocab.forEach(function(v,vi){h+='<span class="chip"><b>'+esc(v[0])+'</b> · '+esc(v[1])+' <button class="say" style="padding:1px 7px" onclick="coPack('+i+','+vi+',this)">🎒</button></span>';});
+ h+='</div>';
+ h+='<div class="factc">✨ '+esc(r.fact)+'</div>';
+ if(cls())h+='<div class="tnote">🧭 '+esc(r.note)+'</div>';
+ h+='<button class="gbtn" onclick="var d=dLoad();d[\''+r.id+'\']=!d[\''+r.id+'\'];dSave(d);recView('+i+')">'+(d[r.id]?'✓ Cooked it — tap to unmark':'I cooked it! 🎉')+'</button>';
+ h+='</div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+home();
+</script>
+</body>
+</html>
