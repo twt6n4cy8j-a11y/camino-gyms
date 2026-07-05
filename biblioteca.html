@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Biblioteca · Spanish with [Your Name]</title>
+<title>La Biblioteca · El Camino Grande</title><!-- BIBLIOTECA-V3-COLLECTIONS -->
 <style>
 :root{--ink:#15233B;--inktx:#1B2A4A;--teal:#2F8F83;--gold:#C8881A;--soft:#EFF3F9;--line:#D7DEEA;--muted:#5E6E88;--bg:#F4F6FA;--paper:#fff;}
 *{box-sizing:border-box}
@@ -154,14 +154,15 @@ function workTile(id,wk,W,accent){var cover=W.cov||'';
  var badge=(W.type==='novela'?'Novela':'Relato')+' · '+W.chapters.length+(W.chapters.length===1?' cap.':' caps.')+(W.wip?' · en progreso':'');
  return '<div class="tile" onclick="openWork(\''+id+'\','+wk+')">'+tileCover(cover,W.title,accent)+'<div class="tname">'+W.title+'</div><div class="tsub">'+badge+'</div></div>';
 }
-function storyGrid(id){
- BK=null;BKID=null;hideGloss();var b=LIB[id];var accent=(LV[b.level]||{}).c;
+async function storyGrid(id){
+ BK=null;BKID=null;hideGloss();await hydrate(id);var b=LIB[id];var accent=(LV[b.level]||{}).c;
  var hc=b.cover?('<div class="ghcov" style="background-image:url('+b.cover+')"></div>'):('<div class="ghcov" style="background:linear-gradient(150deg,'+accent+',#1b2230)">'+(b.cov||'📚')+'</div>');
  var h='<div class="rdtop"><button class="btn ghost" onclick="catalog()">← Biblioteca</button></div>';
  h+='<div class="ghdr">'+hc+'<div><h1>'+b.title+'</h1><div class="ghau">'+b.author+'</div></div></div>';
  h+='<p class="sub" style="margin:12px 2px 18px">'+b.blurb+'</p>';
  if(b.works){h+='<div class="grid">'+b.works.map(function(W,i){return workTile(id,i,W,accent);}).join('')+'</div>';}
- else{h+='<div class="grid">'+b.chapters.map(function(ch,i){return storyTile(id,i,ch,accent);}).join('')+'</div>';}
+ else if(b.chapters){h+='<div class="grid">'+b.chapters.map(function(ch,i){return storyTile(id,i,ch,accent);}).join('')+'</div>';}
+ else{h+='<p class="sub">No se pudo cargar. Intenta de nuevo.</p>';}
  app.innerHTML=h;window.scrollTo(0,0);
 }
 /* ---- reader ---- */
