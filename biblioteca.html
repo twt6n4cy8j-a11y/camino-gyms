@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La Biblioteca · El Camino Grande</title><!-- BIBLIOTECA-V3-COLLECTIONS -->
+<title>Biblioteca · Spanish with [Your Name]</title>
 <style>
 :root{--ink:#15233B;--inktx:#1B2A4A;--teal:#2F8F83;--gold:#C8881A;--soft:#EFF3F9;--line:#D7DEEA;--muted:#5E6E88;--bg:#F4F6FA;--paper:#fff;}
 *{box-sizing:border-box}
@@ -128,8 +128,10 @@ function applyTheme(){document.body.className='';var t=getTheme();if(t!=='light'
 function progKey(id){return 'lib_'+id+'_ch';}
 
 /* ---- catalog (cover-tile redesign) ---- */
+function flatImg(p){return p?String(p).split('/').pop():'';}
 function tileCover(cover,title,accent){
- if(cover) return '<div class="tcov" style="background-image:url('+cover+')"></div>';
+ cover=flatImg(cover);
+ if(cover) return '<div class="tcov" style="background-image:url('+flatImg(cover)+')"></div>';
  return '<div class="tcov tph" style="background:linear-gradient(150deg,'+(accent||'#5D4037')+',#1b2230)"><span>'+title+'</span></div>';
 }
 function bookCard(id){var b=LIB[id];var accent=(LV[b.level]||{}).c;var open=b.coll?'storyGrid':'openBook';
@@ -156,7 +158,7 @@ function workTile(id,wk,W,accent){var cover=W.cov||'';
 }
 async function storyGrid(id){
  BK=null;BKID=null;hideGloss();await hydrate(id);var b=LIB[id];var accent=(LV[b.level]||{}).c;
- var hc=b.cover?('<div class="ghcov" style="background-image:url('+b.cover+')"></div>'):('<div class="ghcov" style="background:linear-gradient(150deg,'+accent+',#1b2230)">'+(b.cov||'📚')+'</div>');
+ var hc=b.cover?('<div class="ghcov" style="background-image:url('+flatImg(b.cover)+')"></div>'):('<div class="ghcov" style="background:linear-gradient(150deg,'+accent+',#1b2230)">'+(b.cov||'📚')+'</div>');
  var h='<div class="rdtop"><button class="btn ghost" onclick="catalog()">← Biblioteca</button></div>';
  h+='<div class="ghdr">'+hc+'<div><h1>'+b.title+'</h1><div class="ghau">'+b.author+'</div></div></div>';
  h+='<p class="sub" style="margin:12px 2px 18px">'+b.blurb+'</p>';
