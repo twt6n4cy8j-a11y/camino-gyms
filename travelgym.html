@@ -45,6 +45,16 @@ h1{font-size:1.5rem;font-weight:900;margin:0;letter-spacing:-.02em}
 .turn .en{opacity:.7;font-size:.82rem;margin-top:3px}
 .fade{animation:fade .35s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+/* --- Unified El Camino Grande tool header (self-contained) --- */
+.cg-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;margin:0 0 18px;background:#faf3ea;border-bottom:1px solid #e8dccb;box-sizing:border-box;}
+.cg-brand{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none;}
+.cg-compass{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#2456a6;color:#fff;font-size:15px;flex:none;}
+.cg-word{font-family:'Fraunces',serif;font-weight:800;font-size:19px;color:#33202e;letter-spacing:.2px;}
+.cg-word b{color:#d18f2a;font-weight:800;}
+.cg-back{font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:14px;color:#5c4a55;cursor:pointer;text-decoration:none;padding:8px 16px;border:1px solid #e8dccb;border-radius:999px;background:#fffdf7;}
+.cg-back:hover{color:#33202e;border-color:#9b8a93;}
 </style></head>
 <body><div class="wrap" id="app"></div>
 <script>
@@ -59,7 +69,7 @@ function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 
 function home(){
-  var h="<header><h1>El Gimnasio del Viajero</h1><div class='sub'>Survive a week abroad \u2014 drill any situation, anytime.</div>";
+  var h="<div class=\'cg-header\'><a class=\'cg-brand\' onclick=\'history.back()\'><span class=\'cg-compass\'>🧭</span><span class=\'cg-word\'>El Camino <b>Grande</b></span></a><a class=\'cg-back\' onclick=\'history.back()\'>← Volver</a></div><header><h1>El Gimnasio del Viajero</h1><div class='sub'>Survive a week abroad \u2014 drill any situation, anytime.</div>";
   h+="<div class='streak'>\ud83d\udd25 <span>"+stats.streak+" streak</span> \u00b7 <span>"+stats.done+" drilled</span></div></header>";
   h+="<div class='grid'>";
   SITS.forEach(function(S,i){
